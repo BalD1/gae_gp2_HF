@@ -3,8 +3,10 @@
 
 #include "pch.h"
 #include <iostream>
+#include "Toto.h"
 
-int main()
+/*
+int main1()
 {
 	printf("0: %c \n", '0');
 	printf("0.5: %4.1f \n", 0.5);
@@ -20,5 +22,19 @@ int main()
 	}
 
 	
+}
+*/
+
+int main()
+{
+	printf("0\n");
+
+	//allocation statique, sur la pile / stack;
+	Toto tStatic;
+
+	printf("%4.2f", tStatic.x);
+
+	//allocation dynamique, sur le tas / heap
+	//Toto* tDynamic = new Toto();
 }
 
