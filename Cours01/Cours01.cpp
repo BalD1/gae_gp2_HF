@@ -4,12 +4,13 @@
 #include "pch.h"
 #include <iostream>
 #include "Toto.h"
+#include "IntArray.hpp"
 
 /*
 int main1()
 {
 	printf("0: %c \n", '0');
-	printf("0.5: %4.1f \n", 0.5); 
+	printf("0.5: %4.1f \n", 0.5);
 	printf("toto: %s \n", "toto");
 
 	printf("1...9x2: ");
@@ -21,14 +22,14 @@ int main1()
 		}
 	}
 
-	
+
 }
 */
 
 /*
 int main()
 {
-	
+
 	printf("0\n");
 
 	//allocation statique, sur la pile / stack;
@@ -38,9 +39,11 @@ int main()
 
 	//allocation dynamique, sur le tas / heap
 	//Toto* tDynamic = new Toto();
-	
+
 }
 */
+
+#pragma region Vecs
 
 struct  Vec
 {
@@ -109,30 +112,76 @@ struct  Vec4
 
 };
 
-struct  IntArray
-{
-	int array[];
+#pragma endregion
 
-	int get(int index)
+#pragma region  fonctionExos
+
+
+
+int monstrlen(const char* chaine)
+{
+	int index = 0;
+	while (chaine[index] != 0)
 	{
-		return array[index];
+		index++;
 	}
-	void set(int index, int value)
+	return index;
+}
+
+int forstrlen(const char* chaine)
+{
+	int length = 1;
+	for (int i = 0; i < length; i++)
 	{
-		array[index] = value;
+		if (chaine[i] != 0)
+		{
+			length++;
+		}
 	}
-};
+
+	return length - 1;
+}
+
+int CountC(const char* maChaine, char c)
+{
+	int res = 0;
+	int len = forstrlen(maChaine);
+
+	for (int i = 0; i < len; i++)
+		if (maChaine[i] == c)
+			res++;
+
+	return res;
+}
+
+
+#pragma endregion
+
+
+
 int main()
 {
+
+#pragma region  incrementation
+
+	/*
 	int tab[] = {0,1,2,3,4 };
 	int * c = &tab[0];
 	*c = 0;
+	*/
 
 	//printf("*c++ : %d \n", *c++);       //incrémente c et prend le contenu
 	//printf("(*c)++ : %d \n", (*c)++);   //prend le contenu de c et incrémente le
 	//printf("*++c : %d \n", *++c);       //incrémente c et prend le contenu
 	//printf("++*c : %d \n", ++*c);		  //prend le contenu de c et incrémente le
+
+#pragma endregion
+
+#pragma region Vecs
+
 	/*
+
+
 	Vec* toto = new Vec();
 
 	toto->y = 67;
@@ -154,11 +203,47 @@ int main()
 	time->printVec();
 	*/
 
+	/*
 	Vec4 time = { 5, 6, 7, 8 };
 	time.printVec();
-	
-	Vec4 timeb = { 12, time.y, time.z * 2, time.w }; 
-	timeb.printVec();
 
+	Vec4 timeb = { 12, time.y, time.z * 2, time.w };
+	timeb.printVec();
+	*/
+
+#pragma endregion
+
+#pragma region  array
+
+	/*
+		IntArray myArray(16);
+
+		for (int i = 0; i < myArray.GetLength(); i++)
+		{
+			myArray.set(i, i * i);
+		}
+
+		myArray.printArray();
+
+
+		printf("value is at : %d", myArray.searchValue(100));
+
+		//IntArray myArray2 = myArray.reverseArray();
+		//myArray2.printArray();
+		*/
+
+#pragma endregion
+
+#pragma region  fonctionsExo
+
+	char searchedChar = 'p';
+	int nbA = CountC("papa", searchedChar);
+
+	printf("Nombre de %c : %d", searchedChar, nbA);
+
+#pragma endregion
+
+
+	return 0;
 }
 
