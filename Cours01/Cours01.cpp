@@ -169,6 +169,8 @@ int CountC(const char* maChaine, char c)
 
 #pragma endregion
 
+#pragma region tests
+
 int* init()
 {
 	int i = 10;			//int normal
@@ -176,6 +178,44 @@ int* init()
 	return adrr;		//return l'adresse
 };
 
+void swap(int* a, int* b)		// swap les valeurs de a et de b sur le tas ?
+{
+	int tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+void bubbleSort(int array[], const int arraySize)
+{
+	int tmp = 0;
+
+	for (int i = 0; i < arraySize - 1; i++)
+	{
+		for (int j = 0; j < arraySize - i - 1; j++)
+		{
+			if (*(array + j) > *(array + (j + 1)))
+			{
+				tmp = *(array + j);
+				*(array + j) = *(array + (j + 1));	//this brûle mes eyes 
+				*(array + (j + 1)) = tmp;
+			}
+		}
+	}
+}
+
+void printArray(int array[], const int arraySize)
+{
+	if (arraySize == 0)
+		return;
+
+	printf("{ \n");
+	for (int i = 0; i < arraySize; i++)
+		printf("%d : %d \n", i, array[i]);
+	printf("} \n");
+
+}
+
+#pragma endregion
 
 int main()
 {
@@ -257,9 +297,39 @@ int main()
 	char searchedChar = 'p';
 	int nbChar = CountC("papa", searchedChar);
 
-	printf("Nombre de %c : %d", searchedChar, nbChar);
+	printf("Nombre de %c : %d \n", searchedChar, nbChar);
+
 	
 #pragma endregion
+
+#pragma region  tests
+
+	int a = 10;
+	int b = 20;
+
+	printf("a = %d  b = %d \n", a, b);
+
+	swap(&a, &b);		// on envoie l'adresse
+
+	printf("a = %d  b = %d \n", a, b);
+
+	const int arraySize = 5;
+
+	int array[arraySize] = { 10, 20, 5, 18, 100 };
+	printf("%d \n", *array);   //array est un pointeur; équivalent de array[0]
+
+	int* arrPoint = array;
+
+	printf("%d \n", *++arrPoint);	//équivalent de array[0 + 1]
+
+	printArray(array, arraySize);
+
+	bubbleSort(array, arraySize);
+
+	printArray(array, arraySize);
+
+#pragma endregion
+
 
 }
 
