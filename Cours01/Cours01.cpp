@@ -128,6 +128,18 @@ int monstrlen(const char* chaine)
 	return index;
 }
 
+int strlenPointer(const char* chaine)
+{
+	int index = 0;
+	while (*chaine != '\0')
+	{
+		chaine++;
+		index++;
+	}
+
+	return index;
+}
+
 int forstrlen(const char* chaine)
 {
 	int length = 1;
@@ -157,6 +169,12 @@ int CountC(const char* maChaine, char c)
 
 #pragma endregion
 
+int* init()
+{
+	int i = 10;			//int normal
+	int* adrr = &i;		//récupère l'adresse
+	return adrr;		//return l'adresse
+};
 
 
 int main()
@@ -235,15 +253,13 @@ int main()
 #pragma endregion
 
 #pragma region  fonctionsExo
-
+	
 	char searchedChar = 'p';
-	int nbA = CountC("papa", searchedChar);
+	int nbChar = CountC("papa", searchedChar);
 
-	printf("Nombre de %c : %d", searchedChar, nbA);
-
+	printf("Nombre de %c : %d", searchedChar, nbChar);
+	
 #pragma endregion
 
-
-	return 0;
 }
 
