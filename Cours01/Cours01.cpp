@@ -5,6 +5,7 @@
 #include <iostream>
 #include "Toto.h"
 #include "IntArray.hpp"
+#include "LinkedList.hpp"
 
 /*
 int main1()
@@ -166,6 +167,29 @@ int CountC(const char* maChaine, char c)
 	return res;
 }
 
+char* strCopy(char *final, const char *source, size_t length)
+{
+	size_t i;
+
+	for (i = 0; i < length && source[i] != '\0'; i++)
+		final[i] = source[i];
+	for (; i < length; i++)
+		final[i] = '\0';
+
+	return final;
+}
+char* strCopy(char *final, const char *source, size_t length, int nbChar)
+{
+	size_t i;
+
+	for (i = 0; i < length && source[i] != '\0' && i < nbChar; i++)
+		final[i] = source[i];
+	for (; i < length; i++)
+		final[i] = '\0';
+
+	return final;
+}
+
 
 #pragma endregion
 
@@ -293,17 +317,22 @@ int main()
 #pragma endregion
 
 #pragma region  fonctionsExo
-	
-	char searchedChar = 'p';
-	int nbChar = CountC("papa", searchedChar);
 
-	printf("Nombre de %c : %d \n", searchedChar, nbChar);
+	MyLinkedList lList = 1;
 
-	
+	lList.AddLast(2);
+	lList.AddLast(5);
+	lList.AddAfter(1, 7);
+	lList.AddFirst(18);
+
+	lList.PrintList();
+
+
 #pragma endregion
 
 #pragma region  tests
 
+	/*
 	int a = 10;
 	int b = 20;
 
@@ -328,7 +357,10 @@ int main()
 
 	printArray(array, arraySize);
 
+	*/
+
 #pragma endregion
+
 
 
 }

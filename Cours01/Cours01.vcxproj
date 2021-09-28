@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="IntArray.hpp" />
+    <ClInclude Include="LinkedList.hpp" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Toto.h" />
   </ItemGroup>
