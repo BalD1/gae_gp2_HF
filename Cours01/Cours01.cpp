@@ -6,6 +6,7 @@
 #include "Toto.h"
 #include "IntArray.hpp"
 #include "LinkedList.hpp"
+#include <SFML/Graphics.hpp>
 
 /*
 int main1()
@@ -318,6 +319,7 @@ int main()
 
 #pragma region  fonctionsExo
 
+	/*
 	MyLinkedList linkedList = 1;
 
 	linkedList.AddFirst(2);
@@ -333,9 +335,72 @@ int main()
 	linkedList.AddAfter(35, 40);
 	printf("%d", linkedList.FindFirst(40));
 
-
-
 	linkedList.PrintList();
+	*/
+
+	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+	sf::RectangleShape rectangle(sf::Vector2f(60,60));
+	sf::RectangleShape armL(sf::Vector2f(40, 20));
+	sf::RectangleShape armR(sf::Vector2f(40, 20));
+	sf::RectangleShape grip(sf::Vector2f(20, 40));
+	sf::RectangleShape garde(sf::Vector2f(30, 10));
+	sf::RectangleShape lame(sf::Vector2f(20, 50));
+	sf::CircleShape feetL(13);
+	sf::CircleShape feetR(13);
+	sf::CircleShape head(20);
+	sf::CircleShape triangle(40, 3);
+	sf::CircleShape pointe(15, 3);
+	sf::CircleShape pommeau(10);
+	sf::err().rdbuf(NULL);
+	lame.setFillColor(sf::Color::White);
+	rectangle.setFillColor(sf::Color::Red);
+	armL.setFillColor(sf::Color::Blue);
+	armR.setFillColor(sf::Color::Blue);
+	feetL.setFillColor(sf::Color::Blue);
+	feetR.setFillColor(sf::Color::Blue);
+	triangle.setFillColor(sf::Color::Blue);
+	grip.setFillColor(sf::Color::Magenta);
+	pommeau.setFillColor(sf::Color::Magenta);
+	garde.setFillColor(sf::Color::Red);
+	pointe.setFillColor(sf::Color::White);
+	head.setFillColor(sf::Color::White);
+	head.move(80, 65);
+	pointe.move(145, 40);
+	lame.move(150, 60);
+	garde.move(145, 110);
+	grip.move(150, 115);
+	pommeau.move(150, 155);
+	rectangle.move(70, 105);
+	armL.move(30, 125);
+	armR.move(130, 125);
+	feetL.move(70, 160);
+	feetR.move(103, 160);
+	triangle.move(60, 5);
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+
+		window.clear();
+		window.draw(rectangle);
+		window.draw(head);
+		window.draw(triangle);
+		window.draw(armL);
+		window.draw(armR);
+		window.draw(feetL);
+		window.draw(feetR);
+		window.draw(grip);
+		window.draw(pommeau);
+		window.draw(garde);
+		window.draw(lame);
+		window.draw(pointe);
+		window.display();
+	}
 
 
 #pragma endregion
