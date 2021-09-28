@@ -318,14 +318,24 @@ int main()
 
 #pragma region  fonctionsExo
 
-	MyLinkedList lList = 1;
+	MyLinkedList linkedList = 1;
 
-	lList.AddLast(2);
-	lList.AddLast(5);
-	lList.AddAfter(1, 7);
-	lList.AddFirst(18);
+	linkedList.AddFirst(2);
+	linkedList.AddLast(3);
+	linkedList.AddLast(5);
+	linkedList.AddLast(2);
+	linkedList.AddLast(10);
+	linkedList.AddLast(145);
+	linkedList.AddLast(35);
+	linkedList.AddLast(78);
+	linkedList.AddLast(78);
+	linkedList.AddFirst(78);
+	linkedList.AddAfter(35, 40);
+	printf("%d", linkedList.FindFirst(40));
 
-	lList.PrintList();
+
+
+	linkedList.PrintList();
 
 
 #pragma endregion
