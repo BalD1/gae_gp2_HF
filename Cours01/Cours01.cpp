@@ -242,6 +242,7 @@ void printArray(int array[], const int arraySize)
 
 #pragma endregion
 
+
 int main()
 {
 
@@ -319,24 +320,14 @@ int main()
 
 #pragma region  fonctionsExo
 
-	/*
-	MyLinkedList linkedList = 1;
+	MyLinkedList linkedList = { 1, 2, 20, 10, 100 };
 
-	linkedList.AddFirst(2);
-	linkedList.AddLast(3);
-	linkedList.AddLast(5);
-	linkedList.AddLast(2);
-	linkedList.AddLast(10);
-	linkedList.AddLast(145);
-	linkedList.AddLast(35);
-	linkedList.AddLast(78);
-	linkedList.AddLast(78);
-	linkedList.AddFirst(78);
-	linkedList.AddAfter(35, 40);
-	printf("%d", linkedList.FindFirst(40));
 
 	linkedList.PrintList();
-	*/
+	
+
+	/*
+#pragma region Napoleon
 
 	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
 	sf::RectangleShape rectangle(sf::Vector2f(60,60));
@@ -402,6 +393,8 @@ int main()
 		window.display();
 	}
 
+#pragma endregion
+*/
 
 #pragma endregion
 
@@ -435,7 +428,6 @@ int main()
 	*/
 
 #pragma endregion
-
 
 
 }

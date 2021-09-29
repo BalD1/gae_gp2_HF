@@ -1,5 +1,7 @@
 #pragma once
 
+#include <initializer_list>
+
 class  MyLinkedList
 {
 public:
@@ -20,14 +22,28 @@ private:
 
 
 public:
-	MyLinkedList(int firstData)
+
+	MyLinkedList(std::initializer_list<int> a_args)
 	{
-		Node* firstNode = new Node(firstData);
+		Node* newNode = new Node(0);
+		for (auto i : a_args)
+		{
+			if (head == NULL)
+			{
+				newNode = new Node(i);
 
-		head = firstNode;
-		tail = firstNode;
+				head = newNode;
+				tail = newNode;
+			}
+			else
+			{
+				newNode->next = new Node(i);
+				newNode = newNode->next;
+			}
+		}
 	}
-
+	
+	
 	/// <summary>
 	/// Returns length of the LinkedList
 	/// </summary>
@@ -81,8 +97,12 @@ public:
 		{
 			checkNode = checkNode->next;
 		}
+		if (checkNode->data == searchedData)
+			SwapNodes(newNode, checkNode);
+		else
+		{
 
-		SwapNodes(newNode, checkNode);
+		}
 	}
 	void AddAfter(Node* searchedNode, int newData)
 	{
