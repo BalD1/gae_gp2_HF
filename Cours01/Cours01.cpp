@@ -321,8 +321,12 @@ int main()
 
 #pragma region  fonctionsExo
 
-	MyLinkedList linkedList = { 1, 2, 20, 10, 100 };
+	MyLinkedList linkedList = { 5, 1, 120, 587, 132 };
 
+	linkedList.PrintList();
+	linkedList.Sort();
+	linkedList.PrintList();
+	linkedList.Sort(false);
 	linkedList.PrintList();
 
 	MyBinaryHeap binaryHeap = { 5, 0, 3, 10, 7, 8, 6 };

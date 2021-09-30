@@ -1,3 +1,4 @@
 ﻿  Cours01.cpp
-d:\program files (data)\win\users\student\documents\github\gae_gp2_hf\cours01\cours01.cpp(204): warning C4172: retourne l'adresse d'une variable locale ou : i temporaire
-  Cours01.vcxproj -> D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\Cours01\x64\Debug\Cours01.exe
+d:\github\a bit dark\gae_gp2_hf\cours01\cours01.cpp(203): warning C4172: retourne l'adresse d'une variable locale ou : i temporaire
+  LINK : D:\GitHub\A bit dark\gae_gp2_HF\Cours01\x64\Debug\Cours01.exe introuvable ou non généré par la dernière édition de liens incrémentielle ; édition de liens complète en cours
+LINK : fatal error LNK1104: impossible d'ouvrir le fichier 'sfml-graphics.lib'
