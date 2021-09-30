@@ -244,6 +244,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="binaryHeap.hpp" />
     <ClInclude Include="IntArray.hpp" />
     <ClInclude Include="LinkedList.hpp" />
     <ClInclude Include="pch.h" />

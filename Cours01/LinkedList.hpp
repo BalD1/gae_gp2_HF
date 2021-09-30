@@ -23,6 +23,12 @@ private:
 
 public:
 
+	MyLinkedList(int firstVal)
+	{
+		Node* newNode = new Node(firstVal);
+		head = newNode;
+		tail = newNode;
+	}
 	MyLinkedList(std::initializer_list<int> a_args)
 	{
 		Node* newNode = new Node(0);
