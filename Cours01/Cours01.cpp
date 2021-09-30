@@ -326,10 +326,11 @@ int main()
 	linkedList.PrintList();
 	
 
-	/*
-#pragma region Napoleon
+	
+#pragma region SFML
 
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+	sf::RenderWindow window(sf::VideoMode(200, 200, 64), "test");
+	/*
 	sf::RectangleShape rectangle(sf::Vector2f(60,60));
 	sf::RectangleShape armL(sf::Vector2f(40, 20));
 	sf::RectangleShape armR(sf::Vector2f(40, 20));
@@ -342,7 +343,14 @@ int main()
 	sf::CircleShape triangle(40, 3);
 	sf::CircleShape pointe(15, 3);
 	sf::CircleShape pommeau(10);
+	*/
+	sf::RectangleShape shape;
+	shape.setSize(sf::Vector2f(200, 100));
+	shape.setFillColor(sf::Color::Magenta);
+	shape.setPosition(sf::Vector2f(window.getSize().x / 4, window.getSize().y / 4));
 	sf::err().rdbuf(NULL);
+	shape.move(50, 50);
+	/*
 	lame.setFillColor(sf::Color::White);
 	rectangle.setFillColor(sf::Color::Red);
 	armL.setFillColor(sf::Color::Blue);
@@ -367,6 +375,7 @@ int main()
 	feetL.move(70, 160);
 	feetR.move(103, 160);
 	triangle.move(60, 5);
+	*/
 
 	while (window.isOpen())
 	{
@@ -377,7 +386,21 @@ int main()
 				window.close();
 		}
 
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+			shape.move(sf::Vector2f(-0.1f, 0));
+		
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+			shape.move(sf::Vector2f(0.1f, 0));
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+			shape.move(sf::Vector2f(0, -0.1f));
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+			shape.move(sf::Vector2f(0., 0.1f));
+
 		window.clear();
+		window.draw(shape);
+		/*
 		window.draw(rectangle);
 		window.draw(head);
 		window.draw(triangle);
@@ -390,11 +413,12 @@ int main()
 		window.draw(garde);
 		window.draw(lame);
 		window.draw(pointe);
+		*/
 		window.display();
 	}
 
 #pragma endregion
-*/
+
 
 #pragma endregion
 
