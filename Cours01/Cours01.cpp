@@ -257,15 +257,12 @@ void printArray(int array[], const int arraySize)
 
 static int cmp(const void * v0, const void * v1)
 {
-	if (*(int*)v0 < *(int*)v1) return -1;
-	if (*(int*)v0 > *(int*)v1) return 1;
-	return 0;
+	return *(int*)v0 - *(int*)v1;
 }
 static int inverseCmp(const void * v0, const void * v1)
 {
-	if (*(int*)v0 > *(int*)v1) return -1;
-	if (*(int*)v0 < *(int*)v1) return 1;
-	return 0;
+	return *(int*)v1 - *(int*)v0;
+
 }
 
 void IntArray::qsort()
@@ -364,6 +361,7 @@ int main()
 	}
 	toto.qsort();
 	toto.printArray();
+	printf("\n");
 	toto.inverseQSort();
 	toto.printArray();
 
