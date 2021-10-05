@@ -7,7 +7,7 @@
 #include "IntArray.hpp"
 #include "LinkedList.hpp"
 #include "binaryHeap.hpp"
-#include <SFML/Graphics.hpp>
+//#include <SFML/Graphics.hpp>
 
 /*
 int main1()
@@ -169,29 +169,41 @@ int CountC(const char* maChaine, char c)
 	return res;
 }
 
-char* strCopy(char *final, const char *source, size_t length)
+void strCopy(char* final, const char *source)
 {
-	size_t i;
+	int len = 0;
+	for (len = 0; source[len] != '\0'; len++)
+		final[len] = source[len];
+	final[len] = 0;
 
-	for (i = 0; i < length && source[i] != '\0'; i++)
-		final[i] = source[i];
-	for (; i < length; i++)
-		final[i] = '\0';
 
-	return final;
 }
-char* strCopy(char *final, const char *source, size_t length, int nbChar)
+void strCopy(char* final, const char *source, int nbChar)
 {
-	size_t i;
-
-	for (i = 0; i < length && source[i] != '\0' && i < nbChar; i++)
-		final[i] = source[i];
-	for (; i < length; i++)
-		final[i] = '\0';
-
-	return final;
+	int len = 0;
+	for (len = 0; source[len] != '\0' && len < nbChar; len++)
+		final[len] = source[len];
+	final[len] = 0;
 }
-
+void strCopyFast(char* dst, const char* src)
+{
+	while (*src)
+	{
+		*dst = *src;
+		dst++;
+		src++;
+	}
+}void strCopyFast(char* dst, const char* src, int nbChar)
+{
+	while (*src && nbChar > 0)
+	{
+		*dst = *src;
+		dst++;
+		src++;
+		nbChar--;
+	}
+	*dst = 0;
+}
 
 #pragma endregion
 
@@ -321,6 +333,12 @@ int main()
 
 #pragma region  fonctionsExo
 
+	char chaine[] = { "cc je suis une chaine de characteres" };
+	char chaine2[250] = "";
+	strCopyFast(chaine2, chaine, 5);
+	printf("%s", chaine2);
+
+	/*
 	MyLinkedList linkedList = { 5, 1, 120, 587, 132 };
 
 	linkedList.PrintList();
@@ -334,7 +352,7 @@ int main()
 	binaryHeap.printTree();
 	
 	printf("%d", binaryHeap.FindMin());
-	
+	*/
 
 	
 #pragma region SFML
