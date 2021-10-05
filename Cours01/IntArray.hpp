@@ -1,15 +1,15 @@
 #pragma once
 
 class IntArray {
-public :
+public:
 	int* data = nullptr;
-	int size ;
+	int size;
 
 public:
 
 	IntArray()
 	{
-		data = new int(size = 65536);
+		data = new int[size = 65536];
 	}
 
 	IntArray(int size)
@@ -21,9 +21,9 @@ public:
 
 	~IntArray()
 	{
-		delete [] data;
+		delete[] data;
 	}
-	
+
 	void CheckBounds(int idx)
 	{
 		if (idx < 0 || idx >= size)
@@ -48,6 +48,48 @@ public:
 		CheckBounds(idx);
 		return data[idx];
 	};
+
+
+	void resize(int newSize)
+	{
+		if (size >= newSize)
+			return;
+		data = (int*)realloc(data, newSize * sizeof(int));
+		memset(data + size, 0, (newSize - size) * sizeof(int));
+		size = newSize;
+	}
+
+	void insert(int value)
+	{
+		int index = 0;
+		while ((index < size) && (data[index] < value))
+			index++;
+		insertAt(index, value);
+	}
+
+	void insertAt(int index, int value)
+	{
+		if (index < 0)
+			return;
+
+		int oldSize = size;
+		int toResize;
+
+		if (index > size)
+			toResize = index - size + 1;
+		else
+			toResize = 1;
+
+		resize(size + toResize);
+		//resize(std::max<int>(index+1, size+1));
+
+		for ( ; oldSize >= index; oldSize--)
+		{
+			data[oldSize] = data[oldSize - 1];
+		}
+
+		data[index] = value;
+	}
 
 	void printArray()
 	{

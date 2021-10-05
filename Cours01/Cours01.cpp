@@ -333,27 +333,13 @@ int main()
 
 #pragma region  fonctionsExo
 
-	char chaine[] = { "cc je suis une chaine de characteres" };
-	char chaine2[250] = "";
-	strCopyFast(chaine2, chaine, 5);
-	printf("%s", chaine2);
+	IntArray toto(10);
+	for (int i = 0; i < 10; i++)
+		toto.set(i, i);
+	toto.insert(0);
+	toto.printArray();
 
-	/*
-	MyLinkedList linkedList = { 5, 1, 120, 587, 132 };
-
-	linkedList.PrintList();
-	linkedList.Sort();
-	linkedList.PrintList();
-	linkedList.Sort(false);
-	linkedList.PrintList();
-
-	MyBinaryHeap binaryHeap = { 5, 0, 3, 10, 7, 8, 6 };
-
-	binaryHeap.printTree();
 	
-	printf("%d", binaryHeap.FindMin());
-	*/
-
 	
 #pragma region SFML
 
