@@ -255,6 +255,28 @@ void printArray(int array[], const int arraySize)
 
 #pragma endregion
 
+static int cmp(const void * v0, const void * v1)
+{
+	if (*(int*)v0 < *(int*)v1) return -1;
+	if (*(int*)v0 > *(int*)v1) return 1;
+	return 0;
+}
+static int inverseCmp(const void * v0, const void * v1)
+{
+	if (*(int*)v0 > *(int*)v1) return -1;
+	if (*(int*)v0 < *(int*)v1) return 1;
+	return 0;
+}
+
+void IntArray::qsort()
+{
+	::qsort(data, size, sizeof(int), cmp);
+
+}
+void IntArray::inverseQSort()
+{
+	::qsort(data, size, sizeof(int), inverseCmp);
+}
 
 int main()
 {
@@ -334,13 +356,19 @@ int main()
 #pragma region  fonctionsExo
 
 	IntArray toto(10);
+	int ran = rand() % 100 + 1;
 	for (int i = 0; i < 10; i++)
-		toto.set(i, i);
-	toto.insert(0);
+	{
+		ran = rand() % 100 + 1;
+		toto.set(i, ran);
+	}
+	toto.qsort();
+	toto.printArray();
+	toto.inverseQSort();
 	toto.printArray();
 
-	
-	
+
+
 #pragma region SFML
 
 	/*
@@ -369,7 +397,7 @@ int main()
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
 			shape.move(sf::Vector2f(-0.5f, 0));
-		
+
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
 			shape.move(sf::Vector2f(0.5f, 0));
 

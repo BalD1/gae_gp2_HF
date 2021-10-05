@@ -91,6 +91,9 @@ public:
 		data[index] = value;
 	}
 
+	void qsort();
+	void inverseQSort();
+
 	void printArray()
 	{
 		for (int i = 0; i < size; i++)
