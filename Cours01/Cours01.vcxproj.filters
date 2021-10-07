@@ -30,6 +30,9 @@
     <ClInclude Include="binaryHeap.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="IntList.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

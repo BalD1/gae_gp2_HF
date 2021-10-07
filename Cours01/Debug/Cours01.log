@@ -1,0 +1,4 @@
+﻿  Cours01.cpp
+d:\program files (data)\win\users\student\documents\github\gae_gp2_hf\cours01\intlist.hpp(5): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+d:\program files (data)\win\users\student\documents\github\gae_gp2_hf\cours01\cours01.cpp(217): warning C4172: retourne l'adresse d'une variable locale ou : i temporaire
+  Cours01.vcxproj -> D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\Cours01\Debug\Cours01.exe

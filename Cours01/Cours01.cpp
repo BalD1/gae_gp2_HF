@@ -7,6 +7,7 @@
 #include "IntArray.hpp"
 #include "LinkedList.hpp"
 #include "binaryHeap.hpp"
+#include "IntList.hpp"
 //#include <SFML/Graphics.hpp>
 
 /*
@@ -352,19 +353,31 @@ int main()
 
 #pragma region  fonctionsExo
 
-	IntArray toto(10);
-	int ran = rand() % 100 + 1;
-	for (int i = 0; i < 10; i++)
-	{
-		ran = rand() % 100 + 1;
-		toto.set(i, ran);
-	}
-	toto.qsort();
-	toto.printArray();
-	printf("\n");
-	toto.inverseQSort();
-	toto.printArray();
 
+	IntList* tata = (IntList*)malloc(sizeof(IntList));
+	tata->next = nullptr;
+	tata->value = 70;
+	tata = appendFirst(tata, 66);
+	tata = appendFirst(tata, 65);
+	tata = appendLast(tata, 88);
+	tata = appendLast(tata, 89);
+	tata = remove(tata, 70);
+	tata = remove(tata, 65);
+
+	tata = appendLast(tata, 89);
+	tata = appendLast(tata, 89);
+	tata = appendLast(tata, 89);
+	tata = remove(tata, 89, true);
+	printList(tata);
+
+	/*
+	if (length(tata) != 1) throw "alarm?";
+
+	remove(tata, 66);
+
+	if (length(tata) != 0) throw "alarm?";
+
+	*/
 
 
 #pragma region SFML

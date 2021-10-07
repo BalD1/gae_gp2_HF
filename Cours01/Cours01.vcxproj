@@ -144,7 +144,8 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\GitHub\A bit dark\gae_gp2_HF\SFML</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-audio.lib;sfml-main.lib</AdditionalDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
   </ItemDefinitionGroup>
@@ -201,7 +202,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\GitHub\A bit dark\gae_gp2_HF\SFML</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-audio.lib;sfml-main.lib</AdditionalDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
   </ItemDefinitionGroup>
@@ -249,6 +251,7 @@
   <ItemGroup>
     <ClInclude Include="binaryHeap.hpp" />
     <ClInclude Include="IntArray.hpp" />
+    <ClInclude Include="IntList.hpp" />
     <ClInclude Include="LinkedList.hpp" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Toto.h" />
