@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "int64array.hpp"
+#include "tools.hpp"
 
 #pragma region  rec str
 
@@ -104,6 +105,7 @@ void recStrCat(const char* src, char* dst)
 int main()
 {
 	printf("-------- recursive str \n\n");
+
 #pragma region  rec str len
 
 	int len = recStrlen("bonjour");
@@ -133,18 +135,38 @@ int main()
 
 #pragma region int array
 
-	Int64Array* intArray = new Int64Array(100);
+	Int64Array* intArray = new Int64Array(10);
 
-	for (int i = 0; i <= 100; i++)
+	for (int i = 0; i < 11; i++)
 		intArray->set(i, i);
 
-	intArray->pushfront(50);
-	intArray->pushfront(70);
-	intArray->pushfront(90);
 
-	intArray->insert(50, 1000);
- 
+	int64_t tt[] = { 207317, 42, 1, 666 };
+
+	int size = sizeof(tt) / sizeof(int64_t);
+	Int64Array* intArray2 = new Int64Array(3);
+
+	intArray2->append_sorted(tt, size);
+
+	Int64Array* intArray3 = new Int64Array();
+
+	intArray3->insertionSort(tt, size);
+
 	intArray->printArray();
+	int searchedVal = 5;
+	printf("index of %d : %d\n\n", searchedVal, intArray->binary_search(searchedVal));
+
+	srand(0);
+	Int64Array* intArray4 = new Int64Array();
+
+	for (int i = 0; i < 100; i++)
+	{
+		intArray4->set(i, i);
+	}
+	double t0 = getTimeStamp(); 
+	printf("index : %d \n", intArray4->binary_search(55));
+	double t1 = getTimeStamp();
+	printf("time : %lfs\n", (t1 - t0));
 
 #pragma endregion
 
