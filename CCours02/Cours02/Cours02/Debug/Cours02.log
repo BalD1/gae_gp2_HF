@@ -1,0 +1,6 @@
+﻿  Cours02.cpp
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\CCours02\Cours02\Cours02\int64array.hpp(119,11): warning C4477: 'printf' : la chaîne de format '%d' nécessite un argument de type 'int', mais l'argument variadique 2 est de type 'int64_t'
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\CCours02\Cours02\Cours02\int64array.hpp(119,11): message : utilisez '%lld' dans la chaîne de format
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\CCours02\Cours02\Cours02\int64array.hpp(119,11): message : utilisez '%I64d' dans la chaîne de format
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\CCours02\Cours02\Cours02\Cours02.cpp(36): warning C4715: 'recStrCmp' : les chemins de contrôle ne retournent pas tous une valeur
+  Cours02.vcxproj -> D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\CCours02\Cours02\Debug\Cours02.exe
