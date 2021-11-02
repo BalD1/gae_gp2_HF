@@ -141,6 +141,10 @@
   <ItemGroup>
     <ClCompile Include="Cours03.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="List.hpp" />
+    <ClInclude Include="Tree.hpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
