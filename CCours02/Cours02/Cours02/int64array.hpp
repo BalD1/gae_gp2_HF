@@ -60,10 +60,12 @@ public:
 
 	int binary_search(int64_t value);
 
+	int binary_searchIter(int64_t value);
+
 
 protected:
 	void shift_from_to(int target, int index);
 
-	int get_pos_of(int64_t value, int index);
+	int _binary_search(int64_t value, int index, int max);
 
 };

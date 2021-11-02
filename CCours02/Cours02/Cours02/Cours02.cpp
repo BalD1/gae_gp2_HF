@@ -153,20 +153,10 @@ int main()
 	intArray3->insertionSort(tt, size);
 
 	intArray->printArray();
-	int searchedVal = 5;
-	printf("index of %d : %d\n\n", searchedVal, intArray->binary_search(searchedVal));
-
-	srand(0);
-	Int64Array* intArray4 = new Int64Array();
-
-	for (int i = 0; i < 100; i++)
-	{
-		intArray4->set(i, i);
-	}
-	double t0 = getTimeStamp(); 
-	printf("index : %d \n", intArray4->binary_search(55));
-	double t1 = getTimeStamp();
-	printf("time : %lfs\n", (t1 - t0));
+	int64_t searchedVal = 1;
+	printf("searching %d", searchedVal);
+	int pos = intArray->binary_search(searchedVal);
+	printf("index of %d : %d\n\n", searchedVal, pos);
 
 #pragma endregion
 

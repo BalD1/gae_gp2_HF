@@ -1,11 +1,14 @@
 ﻿  Int64Array.cpp
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\CCours02\Cours02\Cours02\Int64Array.cpp(49,17): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\CCours02\Cours02\Cours02\Int64Array.cpp(180,10): warning C4477: 'printf' : la chaîne de format '%d' nécessite un argument de type 'int', mais l'argument variadique 2 est de type 'int64_t'
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\CCours02\Cours02\Cours02\Int64Array.cpp(180,10): message : utilisez '%lld' dans la chaîne de format
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\CCours02\Cours02\Cours02\Int64Array.cpp(180,10): message : utilisez '%I64d' dans la chaîne de format
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\CCours02\Cours02\Cours02\Int64Array.cpp(49,17): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\CCours02\Cours02\Cours02\Int64Array.cpp(191,9): warning C4477: 'printf' : la chaîne de format '%d' nécessite un argument de type 'int', mais l'argument variadique 1 est de type 'int64_t'
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\CCours02\Cours02\Cours02\Int64Array.cpp(191,9): message : utilisez '%lld' dans la chaîne de format
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\CCours02\Cours02\Cours02\Int64Array.cpp(191,9): message : utilisez '%I64d' dans la chaîne de format
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\CCours02\Cours02\Cours02\Int64Array.cpp(214,10): warning C4477: 'printf' : la chaîne de format '%d' nécessite un argument de type 'int', mais l'argument variadique 2 est de type 'int64_t'
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\CCours02\Cours02\Cours02\Int64Array.cpp(214,10): message : utilisez '%lld' dans la chaîne de format
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\CCours02\Cours02\Cours02\Int64Array.cpp(214,10): message : utilisez '%I64d' dans la chaîne de format
   Génération de code en cours
-  0 of 38 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  3 of 29 functions (10.3%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   Fin de la génération du code
-  Cours02.vcxproj -> D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\CCours02\Cours02\Release\Cours02.exe
+  Cours02.vcxproj -> D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\CCours02\Cours02\Release\Cours02.exe

@@ -168,9 +168,42 @@ void Int64Array::load(const int64_t* arr, int size)
 
 int Int64Array::binary_search(int64_t value)
 {
-	return get_pos_of(value, curSize / 2);
+	return _binary_search(value, 0, curSize - 1);
+}
 
-	return -1;
+int Int64Array::binary_searchIter(int64_t value)
+{
+	int low = 0;
+	int high = curSize + 1;
+	for (;;)
+	{
+		if (low >= high)
+			return -1;
+		if (data[low] == value)
+			return low;
+		if (data[high] == value)
+			return high;
+	}
+}
+
+int Int64Array::_binary_search(int64_t value, int low, int max)
+{
+	if (max < low)
+		return -1;
+
+	if (data[low] == value)
+		return low;
+	if (data[max] == value)
+		return max;
+
+	int mid = (low + max) >> 1;
+	if (data[mid] == value)
+		return mid;
+
+	if (value < data[mid])
+		return _binary_search(value, low + 1, mid - 1);
+
+	return _binary_search(value, mid + 1, max - 1);
 }
 
 void Int64Array::printArray(int pos)
@@ -199,17 +232,6 @@ void Int64Array::shift_from_to(int target, int index)
 	return;
 }
 
-int Int64Array::get_pos_of(int64_t value, int index)
-{
-	if (data[index] == value)
-		return index;
-	if (index <= 0 || index >= curSize - 1)
-		return -1;
 
-	if (data[index] > value)
-		return get_pos_of(value, index / 2);
 
-	if (data[index] < value)
-		return get_pos_of(value, ((index + curSize) / 2));
 
-}
