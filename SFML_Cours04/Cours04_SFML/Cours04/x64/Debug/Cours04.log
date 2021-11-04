@@ -1,0 +1,20 @@
+﻿  Cours04.cpp
+D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours04_SFML\Cours04\Cours04.cpp(11,76): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours04_SFML\Cours04\Cours04.cpp(11,52): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+  Cours04.vcxproj -> D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours04_SFML\x64\Debug\Cours04.exe

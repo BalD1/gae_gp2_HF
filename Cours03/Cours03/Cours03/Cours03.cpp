@@ -7,7 +7,6 @@
 
 int main()
 {
-	//LinkedList()
 	Tree<float>* tf = new Tree<float>(66.0f);
 	Tree<std::string>* ts = new Tree<std::string>("sapin");
 
