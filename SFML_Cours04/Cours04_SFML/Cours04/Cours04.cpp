@@ -1,86 +1,126 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
+#include "Shape.hpp"
+#include "Utility.hpp"
+
+#pragma region Variables
+
+#pragma region Player
+
+sf::CircleShape playerHead;
+sf::CircleShape eyeL;
+sf::CircleShape eyeR;
+sf::RectangleShape playerHP;
+sf::RectangleShape canon;
+
+float playerSpeed = 5;
+float invincibilityCD = 1;
+float inv_Timer = 0;
+float fireCD = 0.5f;
+float f_Timer = 0;
+
+#pragma endregion
+
+#pragma region Enemy
+
+sf::CircleShape enemy;
+sf::RectangleShape enemyHP;
+float enemySpeed = 2;
+
+#pragma endregion
+
+sf::Vector2f windowCenter;
+sf::Vector2i mousePos;
+
+std::vector<sf::CircleShape> projVec;
+int projectilesNum = 10;
+
+bool anyProjectileFired;
+bool gameEnd;
+
+#pragma endregion
+
+void ProcessInputs();
+void CanonRotation();
+void Movements(sf::Vector2f dir);
+void Movements(float dirX, float dirY);
+void EnemyMovements();
+void Fire();
+void ProjectilesBehaviour();
+void SetProjectile(sf::CircleShape* projectile);
+
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1280, 720, 64), "wesh la mif c'est moi la fenetre de ouf");
 	window.setFramerateLimit(60);
 	window.setVerticalSyncEnabled(true);
 
-	sf::Vector2f windowCenter = sf::Vector2f(window.getSize().x / 3, window.getSize().y / 4);
+	windowCenter = sf::Vector2f(window.getSize().x / 3, window.getSize().y / 4);
 
-	sf::CircleShape mouseShape(5);
-	mouseShape.setFillColor(sf::Color::Magenta);
+	gameEnd = false;
+	anyProjectileFired = false;
+	sf::err().rdbuf(NULL);
 
+#pragma region Player
 
-	sf::CircleShape enemy(20);
-	enemy.setFillColor(sf::Color::Red);	
-	enemy.setPosition(windowCenter);
-	enemy.move(500, 200);
-	sf::RectangleShape enemyHP(sf::Vector2f(100, 20));
-	enemyHP.setFillColor(sf::Color::Red);
-	sf::Vector2f enemyHPOffset = sf::Vector2f(-25, -25);
-	enemyHP.setPosition(enemy.getPosition() + enemyHPOffset);
-	float enemySpeed = 2;
+	playerHead = SetCircle(100, sf::Color::White, windowCenter);
+	playerHead.move(100, 100);
 
-	sf::CircleShape player(100);
-	player.setFillColor(sf::Color::White);
-	player.setPosition(windowCenter);
-	player.move(100, 100);
-	sf::RectangleShape playerHP(sf::Vector2f(200, 40));
-	playerHP.setFillColor(sf::Color::Red);
 	sf::Vector2f playerHPOffset = sf::Vector2f(-25, -50);
-	playerHP.setPosition(player.getPosition() + playerHPOffset);
-	float playerSpeed = 5;
-	float invincibilityTime = 1;
-	float invincibilityTimer = invincibilityTime;
+	playerHP = SetRectangle(200, 40, sf::Color::Red, playerHead.getPosition() + playerHPOffset);
 
-	sf::CircleShape eyeL(20);
-	eyeL.setFillColor(sf::Color::Blue);
-	eyeL.setPosition(windowCenter);
+	inv_Timer = invincibilityCD;
+
+	eyeL = SetCircle(20, sf::Color::Blue, windowCenter);
 	eyeL.move(130, 140);
 	
-	sf::CircleShape eyeR(20);
-	eyeR.setFillColor(sf::Color::Blue);
-	eyeR.setPosition(windowCenter);
+	eyeR = SetCircle(20, sf::Color::Blue, windowCenter);
 	eyeR.move(220, 140);
 
-	sf::RectangleShape canon(sf::Vector2f(100, 20));
-	canon.setFillColor(sf::Color::Red);
-	canon.setPosition(windowCenter);
+	canon = SetRectangle(100, 20, sf::Color::Red, windowCenter);
 	canon.move(100, 210);
 
-	sf::RectangleShape canonFirePoint(sf::Vector2f(10,20));
-	canonFirePoint.setFillColor(sf::Color::Blue);
-	sf::Vector2f firePointOffset = canon.getPosition();
-	firePointOffset.x ;
-	firePointOffset.y += 90;
-	canonFirePoint.setPosition(firePointOffset);
+#pragma endregion
 
+#pragma region  Enemy
 
-	sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+	enemy = SetCircle(20, sf::Color::Red, windowCenter);
+	enemy.move(500, 200);
 
-	sf::CircleShape projectile(10);
-	projectile.setFillColor(sf::Color::Transparent);
+	sf::Vector2f enemyHPOffset = sf::Vector2f(-25, -25);
+	enemyHP = SetRectangle(100, 20, sf::Color::Red, enemy.getPosition() + enemyHPOffset);
+	enemySpeed = 2;
 
-	sf::Font font;
-	sf::Text title;
-	if (!font.loadFromFile("Cybrpnuk2.ttf"));
+#pragma endregion
+
+	mousePos = sf::Mouse::getPosition(window);
+
+	for (int i = 0; i < projectilesNum; i++)
+	{
+		sf::CircleShape c(0);
+		c = SetCircle(10, sf::Color::Transparent, Vector2zero());
+		projVec.push_back(c);
+	}
+
+#pragma region Texts
+
+	sf::Font cybrpnukFont;
+	if (!cybrpnukFont.loadFromFile("Cybrpnuk2.ttf"));
 	{
 
 	}
+	sf::Text title = SetText(50, "CYBERPUNK 2077", sf::Color::Yellow, cybrpnukFont);
+	title.setFont(cybrpnukFont);
 
-	title.setFont(font);
-	title.setString("CYBERPUNK 2077");
-	title.setCharacterSize(50);
-	title.setFillColor(sf::Color::Yellow);
-
-	sf::Text endText;
-	endText.setFont(font);
-	endText.setCharacterSize(70);
-	endText.setFillColor(sf::Color::Yellow);
+	sf::Text endText = SetText(70, "", sf::Color::Yellow, cybrpnukFont);
+	endText.setFont(cybrpnukFont);
 	endText.setPosition(sf::Vector2f(windowCenter.x - 200, windowCenter.y + 100));
-	bool gameEnd = false;
+
+#pragma endregion
+
+	gameEnd = false;
+	anyProjectileFired = false;
 
 	sf::Clock clock;
 	while (window.isOpen())
@@ -96,85 +136,177 @@ int main()
 
 		}
 
+		if (!gameEnd)
+		{
+			mousePos = sf::Mouse::getPosition(window);
 
-		mousePos = sf::Mouse::getPosition(window);
-		mouseShape.setPosition(mousePos.x, mousePos.y);
+			CanonRotation();
 
-		sf::Vector2f offset = canon.getPosition();
+			EnemyMovements();
+
+			enemyHP.setPosition(enemy.getPosition() + enemyHPOffset);
+			playerHP.setPosition(playerHead.getPosition() + playerHPOffset);
+
+			ProcessInputs();
+			if (anyProjectileFired)
+				ProjectilesBehaviour();
+
+			if (f_Timer > 0)
+				f_Timer -= elapsed.asSeconds();
+			if (inv_Timer > 0)
+			{
+				inv_Timer -= elapsed.asSeconds();
+			}
+			else
+			{
+				if (enemy.getGlobalBounds().intersects(playerHead.getGlobalBounds()))
+				{
+					inv_Timer = invincibilityCD;
+					playerHP.setScale(playerHP.getScale().x - 0.2f, 1);
+
+					if (playerHP.getScale().x <= 0.01f)
+					{
+						playerHead.setFillColor(sf::Color::Transparent);
+						canon.setFillColor(sf::Color::Transparent);
+						eyeL.setFillColor(sf::Color::Transparent);
+						eyeR.setFillColor(sf::Color::Transparent);
+						gameEnd = true;
+					}
+				}
+			}
+		}
+		else
+		{
+			if (enemy.getFillColor() == sf::Color::Transparent)
+				endText.setString("LOL YOU WIN GG LE REUF");
+			else if (playerHead.getFillColor() == sf::Color::Transparent)
+				endText.setString("PTDR YOU LOSE LE NULOS");
+		}
+
+
+		window.clear();
+
+#pragma region Draws
+
+		window.draw(playerHead);
+		window.draw(eyeL);
+		window.draw(eyeR);
+		window.draw(playerHP);
+		window.draw(enemy);
+		window.draw(enemyHP);
+		for (int i = 0; i < projectilesNum; i++)
+		{
+			window.draw(projVec[i]);
+		}
+		window.draw(canon);
+		window.draw(title);
+
+		if (gameEnd)
+			window.draw(endText);
+
+#pragma endregion
+
+		window.display();
+	}
+
+}
+
+
+void ProcessInputs()
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+		Movements(-1, 0);
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+		Movements(1, 0);
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+		Movements(0, -1);
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+		Movements(0, 1);
+
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Button(0)))
+	{
+		if (f_Timer <= 0)
+			Fire();
+	}
+}
+void CanonRotation()
+{		sf::Vector2f offset = canon.getPosition();
 		offset.x -= mousePos.x;
 		offset.y -= mousePos.y;
 
 		float angle = atan2(-offset.y, -offset.x) * (360 / (3.14 * 2));
 		canon.setRotation(angle);
+}
+void Movements(sf::Vector2f dir)
+{
+	sf::Vector2f movement = MultVectors(dir, playerSpeed);
+	playerHead.move(movement);
+	canon.move(movement);
+	eyeL.move(movement);
+	eyeR.move(movement);
+}
+void Movements(float dirX, float dirY)
+{
+	sf::Vector2f movement = MultVectors(sf::Vector2f(dirX, dirY), playerSpeed);
+	playerHead.move(movement);
+	canon.move(movement);
+	eyeL.move(movement);
+	eyeR.move(movement);
+}
 
-		firePointOffset = canon.getPosition();
-		firePointOffset.x += 90.0f;
-		canonFirePoint.setPosition(firePointOffset);
-		canonFirePoint.setRotation(angle);
+void EnemyMovements()
+{
+	sf::Vector2f difference = (playerHead.getPosition() - enemy.getPosition());
 
-		sf::Vector2f difference = (player.getPosition() - enemy.getPosition());
+	float length = sqrt((difference.x * difference.x) + (difference.y * difference.y));
+	sf::Vector2f direction = DivVectors(difference, length);
 
-		float length = sqrt((difference.x * difference.x) + (difference.y * difference.y));
-		sf::Vector2f direction = sf::Vector2f(difference.x / length, difference.y / length);
+	enemy.move(direction.x * enemySpeed, direction.y * enemySpeed);
+}
 
-		enemy.move(direction.x * enemySpeed, direction.y * enemySpeed);
-		enemyHP.setPosition(enemy.getPosition() + enemyHPOffset);
-		playerHP.setPosition(player.getPosition() + playerHPOffset);
+void Fire()
+{
+	f_Timer = fireCD;
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+	if (anyProjectileFired)
+	{
+		for (int i = 0; i < projectilesNum; i++)
 		{
-			player.move(sf::Vector2f(-playerSpeed, 0));
-			canon.move(sf::Vector2f(-playerSpeed, 0));
-			eyeR.move(sf::Vector2f(-playerSpeed, 0));
-			eyeL.move(sf::Vector2f(-playerSpeed, 0));
-			canonFirePoint.move(sf::Vector2f(-playerSpeed, 0));
+			if (projVec[i].getFillColor() == sf::Color::Transparent)
+			{
+				SetProjectile(&projVec[i]);
+				return;
+			}
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
-		{
-			player.move(sf::Vector2f(playerSpeed, 0));
-			canon.move(sf::Vector2f(playerSpeed, 0));
-			eyeL.move(sf::Vector2f(playerSpeed, 0));
-			eyeR.move(sf::Vector2f(playerSpeed, 0));
-			canonFirePoint.move(sf::Vector2f(playerSpeed, 0));
-		}
+		sf::CircleShape newProj(0);
+		newProj = SetCircle(10, sf::Color::Transparent, Vector2zero());
+		SetProjectile(&newProj);
+		projVec.push_back(newProj);
+		projectilesNum += 1;
+	}
+	else
+	{
+		SetProjectile(&projVec[0]);
+		anyProjectileFired = true;
+	}
+}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+void ProjectilesBehaviour()
+{
+	for (int i = 0; i < projectilesNum; i++)
+	{
+		if (projVec[i].getFillColor() != sf::Color::Transparent)
 		{
-			player.move(sf::Vector2f(0, -playerSpeed));
-			canon.move(sf::Vector2f(0, -playerSpeed));
-			eyeL.move(sf::Vector2f(0, -playerSpeed));
-			eyeR.move(sf::Vector2f(0, -playerSpeed));
-			canonFirePoint.move(sf::Vector2f(0, -playerSpeed));
-		}
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
-		{
-			player.move(sf::Vector2f(0., playerSpeed));
-			canon.move(sf::Vector2f(0., playerSpeed));
-			eyeL.move(sf::Vector2f(0., playerSpeed));
-			eyeR.move(sf::Vector2f(0., playerSpeed));
-			canonFirePoint.move(sf::Vector2f(0., playerSpeed));
-		}
-
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Button(0)))
-		{
-			projectile.setFillColor(sf::Color::Green);
-			projectile.setRotation(canon.getRotation());
-			projectile.setPosition(canon.getPosition());
-		}
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
-			window.close();
-
-		if (projectile.getFillColor() != sf::Color::Transparent)
-		{
-			float projRad = 3.14 / 180 * projectile.getRotation();
+			float projRad = 3.14 / 180 * projVec[i].getRotation();
 			float x = 10.0f * cos(projRad);
 			float y = 10.0f * sin(projRad);
-			projectile.move(x, y);
+			projVec[i].move(x, y);
 
-			if (projectile.getGlobalBounds().intersects(enemy.getGlobalBounds()))
+			if (projVec[i].getGlobalBounds().intersects(enemy.getGlobalBounds()))
 			{
 				if (enemyHP.getScale().x == 1)
 					enemyHP.setScale(sf::Vector2f(0.5f, 1));
@@ -182,58 +314,25 @@ int main()
 				{
 					enemy.setFillColor(sf::Color::Transparent);
 					enemyHP.setFillColor(sf::Color::Transparent);
-					endText.setString("LOL YOU WIN GG LE REUF");
 					gameEnd = true;
 				}
 
-				projectile.setFillColor(sf::Color::Transparent);
+				projVec[i].setFillColor(sf::Color::Transparent);
 			}
-		}
-		if (enemy.getFillColor() != sf::Color::Transparent && player.getFillColor() != sf::Color::Transparent)
-		{
-			if (invincibilityTimer > 0)
+			sf::Vector2f projPos = projVec[i].getPosition();
+			if (projPos.x < 0 || projPos.x > 1280 ||
+				projPos.y < 0 || projPos.y > 720)
 			{
-				invincibilityTimer -= elapsed.asSeconds();
-			}
-			else
-			{
-				if (enemy.getGlobalBounds().intersects(player.getGlobalBounds()))
-				{
-					invincibilityTimer = invincibilityTime;
-					playerHP.setScale(playerHP.getScale().x - 0.2f, 1);
-
-					if (playerHP.getScale().x <= 0.01f)
-					{
-						player.setFillColor(sf::Color::Transparent);
-						canon.setFillColor(sf::Color::Transparent);
-						eyeL.setFillColor(sf::Color::Transparent);
-						eyeR.setFillColor(sf::Color::Transparent);
-						endText.setString("PTDR YOU LOSE LE NULOS");
-						gameEnd = true;
-					}
-				}
+				projVec[i].setFillColor(sf::Color::Transparent);
 			}
 		}
-
-		window.clear();
-		window.draw(player);
-		window.draw(eyeL);
-		window.draw(eyeR);
-		window.draw(playerHP);
-		window.draw(enemy);
-		window.draw(enemyHP);
-		window.draw(projectile);
-		window.draw(canon);
-		window.draw(canonFirePoint);
-		window.draw(title);
-		window.draw(mouseShape);
-
-		if (gameEnd)
-		{
-			window.draw(endText);
-		}
-		
-		window.display();
 	}
 
+}
+
+void SetProjectile(sf::CircleShape *projectile)
+{
+	projectile->setFillColor(sf::Color::Green);
+	projectile->setRotation(canon.getRotation());
+	projectile->setPosition(canon.getPosition());
 }
