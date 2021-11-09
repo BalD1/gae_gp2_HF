@@ -3,6 +3,7 @@
 
 #include "Shape.hpp"
 #include "Utility.hpp"
+#include "Particles.hpp"
 
 #pragma region Variables
 
@@ -35,6 +36,7 @@ sf::Vector2f windowSize;
 sf::Vector2i mousePos;
 
 std::vector<sf::CircleShape> projVec;
+std::vector<Particles> particles;
 int projectilesNum = 10;
 
 bool anyProjectileFired;
@@ -42,20 +44,22 @@ bool gameEnd;
 
 #pragma endregion
 
-void ProcessInputs();
+void ProcessInputs(sf::RenderWindow& window);
 void CanonRotation();
 void Movements(sf::Vector2f dir);
 void Movements(float dirX, float dirY);
 void EnemyMovements();
-void Fire();
+void Fire(sf::RenderWindow& window);
 void ProjectilesBehaviour();
 void SetProjectile(sf::CircleShape* projectile);
 void DrawGround(sf::RenderWindow& window);
 void DrawMountain(sf::RenderWindow& window);
+void CreateParticles(sf::RenderWindow& window, sf::Vector2f pos);
 
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1280, 720, 64), "wesh la mif c'est moi la fenetre de ouf");
+
 	window.setFramerateLimit(60);
 	window.setVerticalSyncEnabled(true);
 	windowSize = sf::Vector2f(window.getSize().x, window.getSize().y);
@@ -151,7 +155,7 @@ int main()
 			enemyHP.setPosition(enemy.getPosition() + enemyHPOffset);
 			playerHP.setPosition(playerHead.getPosition() + playerHPOffset);
 
-			ProcessInputs();
+			ProcessInputs(window);
 			if (anyProjectileFired)
 				ProjectilesBehaviour();
 
@@ -208,6 +212,15 @@ int main()
 		window.draw(canon);
 		//window.draw(title);
 
+		if (particles.size() > 0)
+		{
+			for (Particles p : particles)
+			{
+				p.Update(elapsed.asSeconds());
+				p.DrawParticles(window);
+			}
+		}
+
 		if (gameEnd)
 			window.draw(endText);
 
@@ -218,7 +231,7 @@ int main()
 
 }
 
-void ProcessInputs()
+void ProcessInputs(sf::RenderWindow& window)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
 		Movements(-1, 0);
@@ -237,7 +250,7 @@ void ProcessInputs()
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Button(0)))
 	{
 		if (f_Timer <= 0)
-			Fire();
+			Fire(window);
 	}
 }
 void CanonRotation()
@@ -275,7 +288,7 @@ void EnemyMovements()
 	enemy.move(direction.x * enemySpeed, direction.y * enemySpeed);
 }
 
-void Fire()
+void Fire(sf::RenderWindow& window)
 {
 	f_Timer = fireCD;
 
@@ -286,6 +299,7 @@ void Fire()
 			if (projVec[i].getFillColor() == sf::Color::Transparent)
 			{
 				SetProjectile(&projVec[i]);
+				CreateParticles(window, canon.getPosition());
 				return;
 			}
 		}
@@ -293,12 +307,14 @@ void Fire()
 		sf::CircleShape newProj(0);
 		newProj = SetCircle(10, sf::Color::Transparent, Vector2zero());
 		SetProjectile(&newProj);
+		CreateParticles(window, canon.getPosition());
 		projVec.push_back(newProj);
 		projectilesNum += 1;
 	}
 	else
 	{
 		SetProjectile(&projVec[0]);
+		CreateParticles(window, canon.getPosition());
 		anyProjectileFired = true;
 	}
 }
@@ -368,8 +384,6 @@ void DrawMountain(sf::RenderWindow& window)
 	sf::Color mountainColor = sf::Color(sf::Uint8(200), sf::Uint8(99), sf::Uint8(70));
 	float baseLine = 610 - 32;
 
-
-
 	sf::Vector2f a(0, baseLine);
 	sf::Vector2f b(400, baseLine - 330);
 	sf::Vector2f c(800, baseLine - 400);
@@ -400,4 +414,10 @@ void DrawMountain(sf::RenderWindow& window)
 		vArr.append(sf::Vertex(sf::Vector2f(x, y), mountainColor));
 	}
 	window.draw(vArr);
+}
+
+void CreateParticles(sf::RenderWindow& window, sf::Vector2f pos)
+{
+	Particles p(pos, 1);
+	particles.push_back(p);
 }
