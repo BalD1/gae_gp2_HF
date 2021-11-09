@@ -3,6 +3,7 @@
 
 #include "Shape.hpp"
 #include "Utility.hpp"
+#include "Entity.hpp"
 
 #pragma region Variables
 
@@ -22,19 +23,12 @@ float f_Timer = 0;
 
 #pragma endregion
 
-#pragma region Enemy
-
-sf::CircleShape enemy;
-sf::RectangleShape enemyHP;
-float enemySpeed = 2;
-
-#pragma endregion
-
 sf::Vector2f windowCenter;
 sf::Vector2f windowSize;
 sf::Vector2i mousePos;
 
 std::vector<sf::CircleShape> projVec;
+sf::Vector2f projDir;
 int projectilesNum = 10;
 
 bool anyProjectileFired;
@@ -46,7 +40,6 @@ void ProcessInputs(sf::RenderWindow& window);
 void CanonRotation();
 void Movements(sf::Vector2f dir);
 void Movements(float dirX, float dirY);
-void EnemyMovements();
 void Fire(sf::RenderWindow& window);
 void ProjectilesBehaviour();
 void SetProjectile(sf::CircleShape* projectile);
@@ -85,17 +78,6 @@ int main()
 
 	canon = SetRectangle(60, 20, sf::Color::Red, sf::Vector2f(0, 370));
 	canon.move(100, 210);
-
-#pragma endregion
-
-#pragma region  Enemy
-
-	enemy = SetCircle(20, sf::Color::Red, windowCenter);
-	enemy.move(500, 200);
-
-	sf::Vector2f enemyHPOffset = sf::Vector2f(-25, -25);
-	enemyHP = SetRectangle(100, 20, sf::Color::Red, enemy.getPosition() + enemyHPOffset);
-	enemySpeed = 2;
 
 #pragma endregion
 
@@ -147,9 +129,6 @@ int main()
 
 			CanonRotation();
 
-			//EnemyMovements();
-
-			enemyHP.setPosition(enemy.getPosition() + enemyHPOffset);
 			playerHP.setPosition(playerHead.getPosition() + playerHPOffset);
 
 			ProcessInputs(window);
@@ -162,30 +141,6 @@ int main()
 			{
 				inv_Timer -= elapsed.asSeconds();
 			}
-			else
-			{
-				if (enemy.getGlobalBounds().intersects(playerHead.getGlobalBounds()))
-				{
-					inv_Timer = invincibilityCD;
-					playerHP.setScale(playerHP.getScale().x - 0.2f, 1);
-
-					if (playerHP.getScale().x <= 0.01f)
-					{
-						playerHead.setFillColor(sf::Color::Transparent);
-						canon.setFillColor(sf::Color::Transparent);
-						eyeL.setFillColor(sf::Color::Transparent);
-						eyeR.setFillColor(sf::Color::Transparent);
-						gameEnd = true;
-					}
-				}
-			}
-		}
-		else
-		{
-			if (enemy.getFillColor() == sf::Color::Transparent)
-				endText.setString("LOL YOU WIN GG LE REUF");
-			else if (playerHead.getFillColor() == sf::Color::Transparent)
-				endText.setString("PTDR YOU LOSE LE NULOS");
 		}
 
 
@@ -200,14 +155,12 @@ int main()
 		window.draw(eyeL);
 		window.draw(eyeR);
 		window.draw(playerHP);
-		window.draw(enemy);
-		window.draw(enemyHP);
 		for (int i = 0; i < projectilesNum; i++)
 		{
 			window.draw(projVec[i]);
 		}
 		window.draw(canon);
-		window.draw(title);
+		//window.draw(title);
 
 		if (gameEnd)
 			window.draw(endText);
@@ -267,16 +220,6 @@ void Movements(float dirX, float dirY)
 	eyeR.move(movement);
 }
 
-void EnemyMovements()
-{
-	sf::Vector2f difference = (playerHead.getPosition() - enemy.getPosition());
-
-	float length = sqrt((difference.x * difference.x) + (difference.y * difference.y));
-	sf::Vector2f direction = DivVectors(difference, length);
-
-	enemy.move(direction.x * enemySpeed, direction.y * enemySpeed);
-}
-
 void Fire(sf::RenderWindow& window)
 {
 	f_Timer = fireCD;
@@ -305,6 +248,8 @@ void Fire(sf::RenderWindow& window)
 	}
 }
 
+
+// refaire projectiles
 void ProjectilesBehaviour()
 {
 	for (int i = 0; i < projectilesNum; i++)
@@ -316,24 +261,23 @@ void ProjectilesBehaviour()
 			float y = 10.0f * sin(projRad);
 			projVec[i].move(x, y);
 
-			if (projVec[i].getGlobalBounds().intersects(enemy.getGlobalBounds()))
+			/*
+			if (projVec[i].getGlobalBounds().intersects())
 			{
-				if (enemyHP.getScale().x == 1)
-					enemyHP.setScale(sf::Vector2f(0.5f, 1));
-				else
-				{
-					enemy.setFillColor(sf::Color::Transparent);
-					enemyHP.setFillColor(sf::Color::Transparent);
-					gameEnd = true;
-				}
-
 				projVec[i].setFillColor(sf::Color::Transparent);
 			}
+			*/
 			sf::Vector2f projPos = projVec[i].getPosition();
-			if (projPos.x < 0 || projPos.x > 1280 ||
-				projPos.y < 0 || projPos.y > 720)
+			if (projPos.x < 0 || projPos.x > 1280)
 			{
-				projVec[i].setFillColor(sf::Color::Transparent);
+
+			}
+			if (projPos.y < 0 || projPos.y > 720)
+			{
+				
+				float rot = projVec[i].getRotation();
+				projVec[i].setRotation(rot * -1);
+				
 			}
 		}
 	}

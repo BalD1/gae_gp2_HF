@@ -1,1 +1,44 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Platform.targets(67,5): error MSB8020: Les outils de génération pour v142 (ensemble d'outils de plateforme = 'v142') sont introuvables. Pour générer à l'aide des outils de génération v142, installez les outils de génération v142. Vous avez également la possibilité de mettre à niveau les outils Visual Studio actuels en sélectionnant le menu Projet ou en cliquant avec le bouton droit sur la solution, puis en sélectionnant "Recibler la solution".
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: Le répertoire intermédiaire (x64\Debug\) contient des fichiers partagés provenant d'un autre projet (Cours04.vcxproj). Cela peut entraîner un comportement de nettoyage et de regénération incorrect.
+  Cours05.cpp
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Shape.hpp(7,23): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Utility.hpp(89,13): warning C4244: 'return' : conversion de 'double' en 'float', perte possible de données
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(54,64): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(54,44): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(56,73): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(56,49): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(95,50): warning C4390: ';' : une instruction contrôlée a été trouvée vide ; est-ce ce que vous souhaitiez ?
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(202,14): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(258,18): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+  Cours04.vcxproj -> D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\x64\Debug\Cours05.exe

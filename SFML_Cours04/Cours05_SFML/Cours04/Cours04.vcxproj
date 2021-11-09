@@ -155,6 +155,7 @@
     <ClCompile Include="Cours05.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Entity.hpp" />
     <ClInclude Include="Shape.hpp" />
     <ClInclude Include="Utility.hpp" />
   </ItemGroup>

@@ -70,6 +70,17 @@ sf::Vector2f DivVectors(sf::Vector2f a, float b)
 	return a;
 }
 
+sf::Vector2f NormalizeVector(sf::Vector2f vector)
+{
+
+	return vector;
+}
+
+sf::Vector2f Reflect(sf::Vector2f a)
+{
+	return a;
+}
+
 #pragma endregion
 
 float catmul(float p0, float p1, float p2, float p3, float t)
