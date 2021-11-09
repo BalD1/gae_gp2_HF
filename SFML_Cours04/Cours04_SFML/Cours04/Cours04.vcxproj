@@ -154,6 +154,7 @@
     <ClCompile Include="Cours04.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Catmul.hpp" />
     <ClInclude Include="Curve.hpp" />
     <ClInclude Include="Shape.hpp" />
     <ClInclude Include="Utility.hpp" />
