@@ -2,39 +2,9 @@
 
 #include <SFML/Graphics.hpp>
 
-sf::CircleShape SetCircle(int size, sf::Color color, sf::Vector2f pos)
-{
-	sf::CircleShape tmpC(size);
-	tmpC.setFillColor(color);
-	tmpC.setPosition(pos);
+sf::CircleShape SetCircle(const int size, const sf::Color color, const sf::Vector2f pos);
 
-	return tmpC;
-}
+sf::RectangleShape SetRectangle(const sf::Vector2f size, const sf::Color color, const sf::Vector2f pos);
+sf::RectangleShape SetRectangle(const float sizeX, const float sizeY, const sf::Color color, const sf::Vector2f pos);
 
-sf::RectangleShape SetRectangle(sf::Vector2f size, sf::Color color, sf::Vector2f pos)
-{
-	sf::RectangleShape tmpR(size);
-	tmpR.setFillColor(color);
-	tmpR.setPosition(pos);
-
-	return tmpR;
-}
-sf::RectangleShape SetRectangle(float sizeX, float sizeY, sf::Color color, sf::Vector2f pos)
-{
-	sf::RectangleShape tmpR(sf::Vector2f(sizeX, sizeY));
-	tmpR.setFillColor(color);
-	tmpR.setPosition(pos);
-
-	return tmpR;
-}
-
-sf::Text SetText(int size, std::string txt, sf::Color color, sf::Font font)
-{
-	sf::Text t;
-	t.setCharacterSize(size);
-	t.setString(txt);
-	t.setFillColor(color);
-	t.setFont(font);
-
-	return t;
-}
+sf::Text SetText(const int size, const std::string txt, const sf::Color color, const sf::Font font);

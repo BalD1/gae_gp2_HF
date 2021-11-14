@@ -4,22 +4,16 @@
 #include "Shape.hpp"
 #include "Utility.hpp"
 #include "Entity.hpp"
+#include "Player.hpp"
+#include "Weapon.hpp"
+#include "Projectile.hpp"
 
 #pragma region Variables
 
 #pragma region Player
 
-sf::CircleShape playerHead;
-sf::CircleShape eyeL;
-sf::CircleShape eyeR;
-sf::RectangleShape playerHP;
-sf::RectangleShape canon;
-
-float playerSpeed = 5;
-float invincibilityCD = 1;
-float inv_Timer = 0;
-float fireCD = 0.5f;
-float f_Timer = 0;
+Player* _player;
+Weapon* _gun;
 
 #pragma endregion
 
@@ -27,22 +21,11 @@ sf::Vector2f windowCenter;
 sf::Vector2f windowSize;
 sf::Vector2i mousePos;
 
-std::vector<sf::CircleShape> projVec;
-sf::Vector2f projDir;
-int projectilesNum = 10;
-
-bool anyProjectileFired;
 bool gameEnd;
 
 #pragma endregion
 
 void ProcessInputs(sf::RenderWindow& window);
-void CanonRotation();
-void Movements(sf::Vector2f dir);
-void Movements(float dirX, float dirY);
-void Fire(sf::RenderWindow& window);
-void ProjectilesBehaviour();
-void SetProjectile(sf::CircleShape* projectile);
 void DrawGround(sf::RenderWindow& window);
 void DrawMountain(sf::RenderWindow& window);
 
@@ -53,42 +36,44 @@ int main()
 	window.setFramerateLimit(60);
 	window.setVerticalSyncEnabled(true);
 	windowSize = sf::Vector2f(window.getSize().x, window.getSize().y);
-
-	windowCenter = sf::Vector2f(window.getSize().x / 3, window.getSize().y / 4);
+	windowCenter = sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2);
 
 	gameEnd = false;
-	anyProjectileFired = false;
+
+	Projectile projectiles;
+
 	sf::err().rdbuf(NULL);
 
 #pragma region Player
 
-	playerHead = SetCircle(60, sf::Color::White, sf::Vector2f(0, 410));
-	playerHead.move(100, 100);
+	sf::Texture playerTexture;
+	if (!playerTexture.loadFromFile("Assets/player.png"))
+	{
+		std::cout << "Could not load player texture";
+		return 0;
+	}
 
-	sf::Vector2f playerHPOffset = sf::Vector2f(-25, -50);
-	playerHP = SetRectangle(200, 40, sf::Color::Red, playerHead.getPosition() + playerHPOffset);
+	Player player = Player(playerTexture, Vector2zero());
+	_player = &player;
+	_player->setPosition(windowCenter.x, 580);
+	_player->setSpeed(3);
+		
+	sf::Texture gunTexture;	
+	if (!gunTexture.loadFromFile("Assets/gun.png"))
+	{
+		std::cout << "Could not load gun texture";
+		return 0;
+	}
 
-	inv_Timer = invincibilityCD;
+	Weapon gun = Weapon(gunTexture, 1, 10, player.getPosition(), *_player);
+	_gun = &gun;
+	_gun->setOffset(50, 20);
 
-	eyeL = SetCircle(12, sf::Color::Blue, sf::Vector2f(0, 410));
-	eyeL.move(130, 140);
 
-	eyeR = SetCircle(12, sf::Color::Blue, sf::Vector2f(-40, 410));
-	eyeR.move(220, 140);
-
-	canon = SetRectangle(60, 20, sf::Color::Red, sf::Vector2f(0, 370));
-	canon.move(100, 210);
 
 #pragma endregion
 
 	mousePos = sf::Mouse::getPosition(window);
-
-	for (int i = 0; i < projectilesNum; i++)
-	{
-		sf::CircleShape c(0);
-		c = SetCircle(10, sf::Color::Transparent, Vector2zero());
-		projVec.push_back(c);
-	}
 
 #pragma region Texts
 
@@ -107,7 +92,6 @@ int main()
 #pragma endregion
 
 	gameEnd = false;
-	anyProjectileFired = false;
 
 	sf::Clock clock;
 	while (window.isOpen())
@@ -126,23 +110,22 @@ int main()
 		if (!gameEnd)
 		{
 			mousePos = sf::Mouse::getPosition(window);
-
-			CanonRotation();
-
-			playerHP.setPosition(playerHead.getPosition() + playerHPOffset);
-
+			_gun->lookAt(mousePos.x, mousePos.y);
 			ProcessInputs(window);
-			if (anyProjectileFired)
-				ProjectilesBehaviour();
 
-			if (f_Timer > 0)
-				f_Timer -= elapsed.asSeconds();
-			if (inv_Timer > 0)
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && projectiles.projectilesNumber <= 0)
 			{
-				inv_Timer -= elapsed.asSeconds();
+				sf::Vector2f aimDir = (sf::Vector2f)mousePos;
+				aimDir.x -= _gun->getPosition().x;
+				aimDir.y -= _gun->getPosition().y;
+
+				_gun->fire(&projectiles, NormalizeVector(aimDir));
 			}
 		}
 
+		_player->update(elapsed.asSeconds());
+		_gun->update(elapsed.asSeconds());
+		projectiles.update(elapsed.asSeconds());
 
 		window.clear();
 
@@ -151,15 +134,9 @@ int main()
 		DrawGround(window);
 		DrawMountain(window);
 
-		window.draw(playerHead);
-		window.draw(eyeL);
-		window.draw(eyeR);
-		window.draw(playerHP);
-		for (int i = 0; i < projectilesNum; i++)
-		{
-			window.draw(projVec[i]);
-		}
-		window.draw(canon);
+		_player->render(window, true);
+		_gun->render(window, true);
+		projectiles.render(window, true);
 		//window.draw(title);
 
 		if (gameEnd)
@@ -174,52 +151,17 @@ int main()
 
 void ProcessInputs(sf::RenderWindow& window)
 {
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
-		Movements(-1, 0);
+		_player->move(-1, 0);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
-		Movements(1, 0);
+		_player->move(1, 0);
 
-	/*
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
-		Movements(0, -1);
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
-		Movements(0, 1);
-		*/
-
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Button(0)))
-	{
-		if (f_Timer <= 0)
-			Fire(window);
-	}
 }
-void CanonRotation()
-{
-	sf::Vector2f offset = canon.getPosition();
-	offset.x -= mousePos.x;
-	offset.y -= mousePos.y;
+//sf::Vector2f movement = MultVectors(dir, playerSpeed);
 
-	float angle = atan2(-offset.y, -offset.x) * (360 / (3.14 * 2));
-	canon.setRotation(angle);
-}
-void Movements(sf::Vector2f dir)
-{
-	sf::Vector2f movement = MultVectors(dir, playerSpeed);
-	playerHead.move(movement);
-	canon.move(movement);
-	eyeL.move(movement);
-	eyeR.move(movement);
-}
-void Movements(float dirX, float dirY)
-{
-	sf::Vector2f movement = MultVectors(sf::Vector2f(dirX, dirY), playerSpeed);
-	playerHead.move(movement);
-	canon.move(movement);
-	eyeL.move(movement);
-	eyeR.move(movement);
-}
-
+/*
 void Fire(sf::RenderWindow& window)
 {
 	f_Timer = fireCD;
@@ -261,12 +203,7 @@ void ProjectilesBehaviour()
 			float y = 10.0f * sin(projRad);
 			projVec[i].move(x, y);
 
-			/*
-			if (projVec[i].getGlobalBounds().intersects())
-			{
-				projVec[i].setFillColor(sf::Color::Transparent);
-			}
-			*/
+
 			sf::Vector2f projPos = projVec[i].getPosition();
 			if (projPos.x < 0 || projPos.x > 1280)
 			{
@@ -290,6 +227,7 @@ void SetProjectile(sf::CircleShape* projectile)
 	projectile->setRotation(canon.getRotation());
 	projectile->setPosition(canon.getPosition());
 }
+*/
 
 void DrawGround(sf::RenderWindow& window)
 {

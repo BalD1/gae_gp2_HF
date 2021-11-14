@@ -153,11 +153,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Cours05.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Hitbox.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="Shape.cpp" />
+    <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.hpp" />
+    <ClInclude Include="Hitbox.hpp" />
+    <ClInclude Include="Player.hpp" />
+    <ClInclude Include="Projectile.hpp" />
     <ClInclude Include="Shape.hpp" />
     <ClInclude Include="Utility.hpp" />
+    <ClInclude Include="Weapon.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
