@@ -106,12 +106,11 @@ int main()
 	{
 
 	}
-	sf::Text title = SetText(50, "CYBERPUNK 2077", sf::Color::Yellow, cybrpnukFont);
-	//title.setFont(cybrpnukFont);
 
-	sf::Text endText = SetText(70, "", sf::Color::Yellow, cybrpnukFont);
-	endText.setFont(cybrpnukFont);
-	endText.setPosition(sf::Vector2f(windowCenter.x - 200, windowCenter.y + 100));
+	int score = 0;
+	sf::Text scoreTxt = SetText(50, "score : " + std::to_string(score), sf::Color::Yellow, cybrpnukFont);
+	scoreTxt.setFont(cybrpnukFont);
+	scoreTxt.setPosition(Vector2zero());
 
 #pragma endregion
 
@@ -158,7 +157,12 @@ int main()
 					{
 						projContainer.bounce(0, bricks[i]->getPosition());
 						bricks[i]->kill();
+						score += 10;
+						scoreTxt.setString("score : " + std::to_string(score));
 					}
+					else if (projContainer.projectiles[0].data()->hitbox->intersects(_player->spr->getGlobalBounds()))
+						projContainer.bounce(0, _player->getPosition());
+
 				}
 			}
 		}
@@ -179,10 +183,8 @@ int main()
 		}
 
 		projContainer.render(window, true);
-		//window.draw(title);
 
-		if (gameEnd)
-			window.draw(endText);
+		window.draw(scoreTxt);
 
 #pragma endregion
 

@@ -37,15 +37,17 @@ D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\
               T=float
           ]
 D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(64,42): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(134,37): warning C4244: 'argument' : conversion de 'T' en 'const float', perte possible de données
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(133,37): warning C4244: 'argument' : conversion de 'T' en 'const float', perte possible de données
           with
           [
               T=int
           ]
-D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(134,25): warning C4244: 'argument' : conversion de 'T' en 'const float', perte possible de données
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(133,25): warning C4244: 'argument' : conversion de 'T' en 'const float', perte possible de données
           with
           [
               T=int
           ]
 D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(105,50): warning C4390: ';' : une instruction contrôlée a été trouvée vide ; est-ce ce que vous souhaitiez ?
+  Projectile.cpp
+  Génération de code en cours...
   Cours04.vcxproj -> D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\x64\Debug\Cours05.exe
