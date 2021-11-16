@@ -18,9 +18,12 @@ sf::Vector2f MultVectors(sf::Vector2f a, float b);
 sf::Vector2f DivVectors(sf::Vector2f a, sf::Vector2f b);
 sf::Vector2f DivVectors(sf::Vector2f a, float b);
 
+float Dot(sf::Vector2f a, sf::Vector2f b);
+float Norm(sf::Vector2f vector);
 sf::Vector2f NormalizeVector(sf::Vector2f vector);
 
-sf::Vector2f Reflect(sf::Vector2f a);
+sf::Vector2f Project(sf::Vector2f a, const sf::Vector2f b);
+sf::Vector2f Reflect(sf::Vector2f a, sf::Vector2f b);
 
 #pragma endregion
 

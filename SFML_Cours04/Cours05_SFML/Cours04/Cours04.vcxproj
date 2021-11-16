@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Cours05.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Hitbox.cpp" />
@@ -160,8 +161,10 @@
     <ClCompile Include="Shape.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="Weapon.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Brick.hpp" />
     <ClInclude Include="Entity.hpp" />
     <ClInclude Include="Hitbox.hpp" />
     <ClInclude Include="Player.hpp" />
@@ -169,6 +172,7 @@
     <ClInclude Include="Shape.hpp" />
     <ClInclude Include="Utility.hpp" />
     <ClInclude Include="Weapon.hpp" />
+    <ClInclude Include="World.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

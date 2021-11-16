@@ -48,6 +48,8 @@ public:
 	void move(const sf::Vector2f pos);
 	void move(const float x, const float y);
 
+	void kill();
+
 
 #pragma endregion
 };

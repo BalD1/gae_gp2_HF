@@ -21,6 +21,7 @@ Player::Player(sf::Texture& _texture, float posX, float posY)
 
 Player::~Player()
 {
+
 }
 
 void Player::update(const float& dt)

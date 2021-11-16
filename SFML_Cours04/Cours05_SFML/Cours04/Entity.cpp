@@ -4,8 +4,8 @@
 
 void Entity::init()
 {
-	this->hitbox = NULL;
-	this->spr = NULL;
+	this->hitbox = nullptr;
+	this->spr = nullptr;
 }
 
 Entity::Entity()
@@ -15,8 +15,6 @@ Entity::Entity()
 
 Entity::~Entity()
 {
-	delete this->spr;
-	delete this->hitbox;
 }
 
 void Entity::createHitbox(sf::Sprite& sprite, float offsetX, float offsetY, float width, float height)
@@ -78,3 +76,8 @@ void Entity::move(const sf::Vector2f pos)
 {
 	this->spr->move(x * speed, y * speed);
 }
+
+ void Entity::kill()
+ {
+
+ }

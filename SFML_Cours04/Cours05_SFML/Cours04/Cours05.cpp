@@ -7,6 +7,8 @@
 #include "Player.hpp"
 #include "Weapon.hpp"
 #include "Projectile.hpp"
+#include "Brick.hpp"
+#include "World.hpp"
 
 #pragma region Variables
 
@@ -31,6 +33,9 @@ void DrawMountain(sf::RenderWindow& window);
 
 int main()
 {
+
+#pragma region Set window
+
 	sf::RenderWindow window(sf::VideoMode(1280, 720, 64), "wesh la mif c'est moi la fenetre de ouf");
 
 	window.setFramerateLimit(60);
@@ -38,9 +43,25 @@ int main()
 	windowSize = sf::Vector2f(window.getSize().x, window.getSize().y);
 	windowCenter = sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2);
 
+#pragma endregion
+
 	gameEnd = false;
 
 	Projectile projectiles;
+
+	sf::Texture brickTexture;
+	if (!brickTexture.loadFromFile("Assets/brick.png"))
+	{
+		std::cout << "Could not load brick texture";
+		return 0;
+	}
+
+	std::vector<Brick>* bricks = new std::vector<Brick>;
+	Brick* b = new Brick(brickTexture, windowCenter);
+	Brick* b1 = new Brick(brickTexture, Vector2zero());
+	std::cout << b->spr << '\n';
+
+	bricks->push_back(*b);
 
 	sf::err().rdbuf(NULL);
 
@@ -91,14 +112,11 @@ int main()
 
 #pragma endregion
 
-	gameEnd = false;
-
 	sf::Clock clock;
 	while (window.isOpen())
 	{
 		sf::Time elapsed = clock.getElapsedTime();
 		clock.restart();
-
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -127,6 +145,18 @@ int main()
 		_gun->update(elapsed.asSeconds());
 		projectiles.update(elapsed.asSeconds());
 
+		if (projectiles.projectilesNumber > 0)
+		{
+			for (int i = 0; i < bricks->size(); i++)
+			{
+				if (bricks[i].data()->hitbox->intersects(projectiles.projectiles[0].data()->spr.getGlobalBounds()))
+				{
+					bricks->pop_back();
+					projectiles.bounce(0, bricks[i].data()->getPosition());
+				}
+			}
+		}
+
 		window.clear();
 
 #pragma region Draws
@@ -136,6 +166,12 @@ int main()
 
 		_player->render(window, true);
 		_gun->render(window, true);
+		for (int i = 0; i < bricks->size(); i++)
+		{
+			bricks[i].data()->render(window, true);
+		}
+		b1->render(window, true);
+
 		projectiles.render(window, true);
 		//window.draw(title);
 
@@ -159,75 +195,6 @@ void ProcessInputs(sf::RenderWindow& window)
 		_player->move(1, 0);
 
 }
-//sf::Vector2f movement = MultVectors(dir, playerSpeed);
-
-/*
-void Fire(sf::RenderWindow& window)
-{
-	f_Timer = fireCD;
-
-	if (anyProjectileFired)
-	{
-		for (int i = 0; i < projectilesNum; i++)
-		{
-			if (projVec[i].getFillColor() == sf::Color::Transparent)
-			{
-				SetProjectile(&projVec[i]);
-				return;
-			}
-		}
-
-		sf::CircleShape newProj(0);
-		newProj = SetCircle(10, sf::Color::Transparent, Vector2zero());
-		SetProjectile(&newProj);
-		projVec.push_back(newProj);
-		projectilesNum += 1;
-	}
-	else
-	{
-		SetProjectile(&projVec[0]);
-		anyProjectileFired = true;
-	}
-}
-
-
-// refaire projectiles
-void ProjectilesBehaviour()
-{
-	for (int i = 0; i < projectilesNum; i++)
-	{
-		if (projVec[i].getFillColor() != sf::Color::Transparent)
-		{
-			float projRad = 3.14 / 180 * projVec[i].getRotation();
-			float x = 10.0f * cos(projRad);
-			float y = 10.0f * sin(projRad);
-			projVec[i].move(x, y);
-
-
-			sf::Vector2f projPos = projVec[i].getPosition();
-			if (projPos.x < 0 || projPos.x > 1280)
-			{
-
-			}
-			if (projPos.y < 0 || projPos.y > 720)
-			{
-				
-				float rot = projVec[i].getRotation();
-				projVec[i].setRotation(rot * -1);
-				
-			}
-		}
-	}
-
-}
-
-void SetProjectile(sf::CircleShape* projectile)
-{
-	projectile->setFillColor(sf::Color::Green);
-	projectile->setRotation(canon.getRotation());
-	projectile->setPosition(canon.getPosition());
-}
-*/
 
 void DrawGround(sf::RenderWindow& window)
 {

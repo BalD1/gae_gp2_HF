@@ -1,3 +1,50 @@
-﻿D:\Visual Studio\2019\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: Le répertoire intermédiaire (x64\Debug\) contient des fichiers partagés provenant d'un autre projet (Cours04.vcxproj). Cela peut entraîner un comportement de nettoyage et de regénération incorrect.
-  Projectile.cpp
-  Cours04.vcxproj -> D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\x64\Debug\Cours05.exe
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: Le répertoire intermédiaire (x64\Debug\) contient des fichiers partagés provenant d'un autre projet (Cours04.vcxproj). Cela peut entraîner un comportement de nettoyage et de regénération incorrect.
+  Cours05.cpp
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(43,64): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(43,44): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(44,73): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(44,49): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(131,37): warning C4244: 'argument' : conversion de 'T' en 'const float', perte possible de données
+          with
+          [
+              T=int
+          ]
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(131,25): warning C4244: 'argument' : conversion de 'T' en 'const float', perte possible de données
+          with
+          [
+              T=int
+          ]
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(102,50): warning C4390: ';' : une instruction contrôlée a été trouvée vide ; est-ce ce que vous souhaitiez ?
+  Cours04.vcxproj -> D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\x64\Debug\Cours05.exe

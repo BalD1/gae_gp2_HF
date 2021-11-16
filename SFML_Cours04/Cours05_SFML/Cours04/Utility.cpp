@@ -73,14 +73,32 @@ sf::Vector2f DivVectors(sf::Vector2f a, float b)
 	return a;
 }
 
+float Dot(sf::Vector2f a, sf::Vector2f b)
+{
+	return a.x * b.x + a.y * b.y;
+}
+
+float Norm(sf::Vector2f vector)
+{
+	return sqrt(pow(vector.x, 2) + pow(vector.y, 2));
+}
+
 sf::Vector2f NormalizeVector(sf::Vector2f vector)
 {
-	vector = DivVectors(vector, sqrt(pow(vector.x, 2) + pow(vector.y, 2)));
+	vector = DivVectors(vector, Norm(vector));
 	return vector;
 }
 
-sf::Vector2f Reflect(sf::Vector2f a)
+sf::Vector2f Project(sf::Vector2f a, const sf::Vector2f b)
 {
+	a = MultVectors(NormalizeVector(a), Dot(b, a) / Norm(a));
+
+	return a;
+}
+
+sf::Vector2f Reflect(sf::Vector2f a, sf::Vector2f b)
+{
+	a = AddVectors(a, MultVectors(Project(a, b), -2));
 	return a;
 }
 

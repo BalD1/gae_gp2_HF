@@ -1,6 +1,7 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include "Hitbox.hpp"
+#include "Utility.hpp"
 #include <iostream>
 
 class Projectile
@@ -37,12 +38,14 @@ public:
 	void update(const float& dt);
 	void render(sf::RenderWindow& target, bool showHitbox);
 
-	void move(int idx);
+	void move(int idx, const float& dt);
 	void setPosition(int idx, const sf::Vector2f pos);
 	void setPosition(int idx, const float x, const float y);
 	sf::Vector2f getPosition(int idx);
 
-	void bounce();
+	void inverseDirection(int idx, sf::Vector2f _dir);
+
+	void bounce(int idx, const sf::Vector2f target);
 
 private:
 
