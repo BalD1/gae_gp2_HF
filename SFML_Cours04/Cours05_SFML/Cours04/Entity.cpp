@@ -79,5 +79,10 @@ void Entity::move(const sf::Vector2f pos)
 
  void Entity::kill()
  {
+	 alive = false;
+ }
 
+ void Entity::revive()
+ {
+	 alive = true;
  }

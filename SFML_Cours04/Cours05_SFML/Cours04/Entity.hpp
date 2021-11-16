@@ -22,6 +22,8 @@ public:
 	float invincibility_CD = 1;
 	float invincibility_Timer = 0;
 
+	bool alive = true;
+
 	std::string tag = "";
 
 #pragma endregion
@@ -49,6 +51,7 @@ public:
 	void move(const float x, const float y);
 
 	void kill();
+	void revive();
 
 
 #pragma endregion

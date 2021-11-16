@@ -43,7 +43,7 @@ void Weapon::fire(Projectile* _projectiles, sf::Vector2f dir)
 		{
 			std::cout << "Could not load projectile texture";
 		}
-		_projectiles->createProjectile(projectileTexture, this->getPosition(), dir, 300, 1, true);
+		_projectiles->createProjectile(projectileTexture, this->getPosition(), dir, 700, 1, true);
 
 	}
 }

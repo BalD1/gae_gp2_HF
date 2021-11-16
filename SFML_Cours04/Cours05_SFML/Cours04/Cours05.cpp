@@ -47,7 +47,7 @@ int main()
 
 	gameEnd = false;
 
-	Projectile projectiles;
+	Projectile projContainer;
 
 	sf::Texture brickTexture;
 	if (!brickTexture.loadFromFile("Assets/brick.png"))
@@ -56,12 +56,15 @@ int main()
 		return 0;
 	}
 
-	std::vector<Brick>* bricks = new std::vector<Brick>;
-	Brick* b = new Brick(brickTexture, windowCenter);
-	Brick* b1 = new Brick(brickTexture, Vector2zero());
-	std::cout << b->spr << '\n';
+	const int brickLength = 10;
 
-	bricks->push_back(*b);
+	Brick* bricks[brickLength];
+	for (int i = 0; i < brickLength; i++)
+	{
+		Brick* b = new Brick(brickTexture, 100 * i, windowCenter.y);
+		std::cout << i << " : " << b->hitbox << '\n';
+		bricks[i] = b;
+	}
 
 	sf::err().rdbuf(NULL);
 
@@ -131,28 +134,31 @@ int main()
 			_gun->lookAt(mousePos.x, mousePos.y);
 			ProcessInputs(window);
 
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && projectiles.projectilesNumber <= 0)
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && projContainer.projectilesNumber <= 0)
 			{
 				sf::Vector2f aimDir = (sf::Vector2f)mousePos;
 				aimDir.x -= _gun->getPosition().x;
 				aimDir.y -= _gun->getPosition().y;
 
-				_gun->fire(&projectiles, NormalizeVector(aimDir));
+				_gun->fire(&projContainer, NormalizeVector(aimDir));
 			}
 		}
 
 		_player->update(elapsed.asSeconds());
 		_gun->update(elapsed.asSeconds());
-		projectiles.update(elapsed.asSeconds());
+		projContainer.update(elapsed.asSeconds());
 
-		if (projectiles.projectilesNumber > 0)
+		if (projContainer.projectilesNumber > 0)
 		{
-			for (int i = 0; i < bricks->size(); i++)
+			for (int i = 0; i < brickLength; i++)
 			{
-				if (bricks[i].data()->hitbox->intersects(projectiles.projectiles[0].data()->spr.getGlobalBounds()))
+				if (bricks[i]->alive)
 				{
-					bricks->pop_back();
-					projectiles.bounce(0, bricks[i].data()->getPosition());
+					if (bricks[i]->hitbox->intersects(projContainer.projectiles[0].data()->spr.getGlobalBounds()))
+					{
+						projContainer.bounce(0, bricks[i]->getPosition());
+						bricks[i]->kill();
+					}
 				}
 			}
 		}
@@ -166,13 +172,13 @@ int main()
 
 		_player->render(window, true);
 		_gun->render(window, true);
-		for (int i = 0; i < bricks->size(); i++)
+		for (int i = 0; i < brickLength; i++)
 		{
-			bricks[i].data()->render(window, true);
+			if (bricks[i]->alive)
+			bricks[i]->render(window, true);
 		}
-		b1->render(window, true);
 
-		projectiles.render(window, true);
+		projContainer.render(window, true);
 		//window.draw(title);
 
 		if (gameEnd)

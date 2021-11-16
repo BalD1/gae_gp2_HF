@@ -32,6 +32,8 @@ void Brick::update(float dt)
 
 void Brick::render(sf::RenderWindow& target, bool showHitbox)
 {
+	if (this == nullptr)
+		return;
 	target.draw(*this->spr);
 
 	if (showHitbox)
