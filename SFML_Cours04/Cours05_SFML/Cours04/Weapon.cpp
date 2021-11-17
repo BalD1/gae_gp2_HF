@@ -33,18 +33,14 @@ Weapon::~Weapon()
 	delete this->spr;
 }
 
-void Weapon::fire(Projectile* _projectiles, sf::Vector2f dir)
+void Weapon::fire(Projectile* _projectile, sf::Vector2f dir)
 {
 	if (fireTimer <= 0)
 	{
-		fireTimer = fireCD;				
-		sf::Texture projectileTexture;
-		if (!projectileTexture.loadFromFile("Assets/bullet.png"))
-		{
-			std::cout << "Could not load projectile texture";
-		}
-		_projectiles->createProjectile(projectileTexture, this->getPosition(), dir, 700, 1, true);
-
+		fireTimer = fireCD;
+		_projectile->projectileData->direction = dir;
+		_projectile->setActive(true);
+		std::cout << _projectile->isActive();
 	}
 }
 

@@ -47,7 +47,7 @@ int main()
 
 	gameEnd = false;
 
-	Projectile projContainer;
+
 
 	sf::Texture brickTexture;
 	if (!brickTexture.loadFromFile("Assets/brick.png"))
@@ -71,7 +71,7 @@ int main()
 #pragma region Player
 
 	sf::Texture playerTexture;
-	if (!playerTexture.loadFromFile("Assets/player.png"))
+	if (!playerTexture.loadFromFile("Assets/playerpad.png"))
 	{
 		std::cout << "Could not load player texture";
 		return 0;
@@ -79,7 +79,7 @@ int main()
 
 	Player player = Player(playerTexture, Vector2zero());
 	_player = &player;
-	_player->setPosition(windowCenter.x, 580);
+	_player->setPosition(windowCenter.x, 610);
 	_player->setSpeed(3);
 		
 	sf::Texture gunTexture;	
@@ -91,8 +91,14 @@ int main()
 
 	Weapon gun = Weapon(gunTexture, 1, 10, player.getPosition(), *_player);
 	_gun = &gun;
-	_gun->setOffset(50, 20);
+	_gun->setOffset(75, 20);
 
+	sf::Texture projectileTexture;
+	if (!projectileTexture.loadFromFile("Assets/bullet.png"))
+	{
+		std::cout << "Could not load projectile texture";
+	}
+	Projectile* ball = new Projectile(*_player, projectileTexture, _gun->getPosition(), sf::Vector2f(75,-10), Vector2zero(), 300, 1, false);
 
 
 #pragma endregion
@@ -133,35 +139,35 @@ int main()
 			_gun->lookAt(mousePos.x, mousePos.y);
 			ProcessInputs(window);
 
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && projContainer.projectilesNumber <= 0)
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !ball->isActive())
 			{
 				sf::Vector2f aimDir = (sf::Vector2f)mousePos;
 				aimDir.x -= _gun->getPosition().x;
 				aimDir.y -= _gun->getPosition().y;
 
-				_gun->fire(&projContainer, NormalizeVector(aimDir));
+				_gun->fire(ball, NormalizeVector(aimDir));
 			}
 		}
 
 		_player->update(elapsed.asSeconds());
 		_gun->update(elapsed.asSeconds());
-		projContainer.update(elapsed.asSeconds());
+		ball->update(elapsed.asSeconds());
 
-		if (projContainer.projectilesNumber > 0)
+		if (ball->isActive())
 		{
 			for (int i = 0; i < brickLength; i++)
 			{
 				if (bricks[i]->alive)
 				{
-					if (bricks[i]->hitbox->intersects(projContainer.projectiles[0].data()->spr.getGlobalBounds()))
+					if (bricks[i]->hitbox->intersects(ball->projectileData->spr.getGlobalBounds()))
 					{
-						projContainer.bounce(0, bricks[i]->getPosition());
+						ball->bounce(bricks[i]->getPosition());
 						bricks[i]->kill();
 						score += 10;
 						scoreTxt.setString("score : " + std::to_string(score));
 					}
-					else if (projContainer.projectiles[0].data()->hitbox->intersects(_player->spr->getGlobalBounds()))
-						projContainer.bounce(0, _player->getPosition());
+					else if (ball->projectileData->hitbox->intersects(_player->spr->getGlobalBounds()))
+						ball->bounce(_player->getPosition());
 
 				}
 			}
@@ -182,7 +188,7 @@ int main()
 			bricks[i]->render(window, true);
 		}
 
-		projContainer.render(window, true);
+		ball->render(window, true);
 
 		window.draw(scoreTxt);
 

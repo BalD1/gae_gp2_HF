@@ -1,124 +1,128 @@
 #include "Projectile.hpp"
 
-Projectile::Projectile()
-{
-    projectiles = new std::vector<projData>;
+Projectile::Projectile(Entity _attachedEntity, sf::Texture _texture, sf::Vector2f _pos, sf::Vector2f _offset, sf::Vector2f _direction, float _speed, float _damages, bool _active)
+{   
+    projectileData = new Data();
+    projectileData->attachedEntity = _attachedEntity;
+    projectileData->spr = sf::Sprite();
+    projectileData->spr.setTexture(_texture);
+    projectileData->spr.setPosition(_pos);
+
+    projectileData->direction = _direction;
+    projectileData->offset = _offset;
+    projectileData->speed = _speed;
+    projectileData->damages = _damages;
+    projectileData->activeSelf = _active;
+
+    projectileData->hitbox = createHitbox(*projectileData, 0, 0, 10, 10);
 }
 
-void Projectile::createProjectile(sf::Texture _texture, sf::Vector2f _pos, sf::Vector2f _direction, float _speed, float _damages, bool _active)
-{
-    projData p = projData();
-    p.spr = sf::Sprite();
-    p.spr.setTexture(_texture);
-    p.spr.setPosition(_pos);
-
-    p.direction = _direction;
-    p.speed = _speed;
-    p.damages = _damages;
-    p.activeSelf = _active;
-
-    p.hitbox = createHitbox(p, 0, 0, 10, 10);
-
-    projectiles->push_back(p);
-    projectilesNumber += 1;
-}
-
-Hitbox* Projectile::createHitbox(projData projectile, float offsetX, float offsetY, float width, float height)
+Hitbox* Projectile::createHitbox(Data projectile, float offsetX, float offsetY, float width, float height)
 {
     Hitbox* hitbox = new Hitbox(projectile.spr, offsetX, offsetY, width, height);
     return hitbox;
 }
 
-void Projectile::setActive(int idx, bool active)
+void Projectile::setActive(bool active)
 {
-    projectiles[idx].data()->activeSelf = active;
-    if (active)
-    {
-        projectiles[idx].data()->spr.setColor(sf::Color::Red);
-    }
-    else
-    {
-        projectiles[idx].data()->spr.setColor(sf::Color::Transparent);
-    }
+    this->projectileData->activeSelf = active;
 }
-const bool Projectile::isActive(int idx)
+const bool Projectile::isActive()
 {
-    return projectiles[idx].data()->activeSelf;
+    return projectileData->activeSelf;
 }
 
-void Projectile::addIgnoreTag(int idx, std::string tag)
+void Projectile::addIgnoreTag(std::string tag)
 {
-    projectiles[idx].data()->ignoreTags.push_back(tag);
+    projectileData->ignoreTags.push_back(tag);
 }
-void Projectile::addIgnoreTag(int idx, std::initializer_list<std::string> tags)
+void Projectile::addIgnoreTag(std::initializer_list<std::string> tags)
 {
     for (std::string s : tags)
     {
-        projectiles[idx].data()->ignoreTags.push_back(s);
+        projectileData->ignoreTags.push_back(s);
     }
 }
 
 void Projectile::update(const float& dt)
 {
-    for (int i = 0; i < projectilesNumber; i++)
-    {
-        if (projectiles[i].data()->activeSelf)
+        if (projectileData->activeSelf)
         {
-            projectiles[i].data()->hitbox->update();
-            move(i, dt);            
-            if (projectiles[i].data()->spr.getPosition().x < 0 || projectiles[i].data()->spr.getPosition().x > 1280)
+            projectileData->hitbox->update();
+            move(dt);            
+            if (projectileData->spr.getPosition().x < 0 || projectileData->spr.getPosition().x > 1280)
             {
-                inverseDirection(i, sf::Vector2f(-1, 1));
+                inverseDirection(sf::Vector2f(-1, 1));
             }
-            if (projectiles[i].data()->spr.getPosition().y < 0 || projectiles[i].data()->spr.getPosition().y > 720)
+            if (projectileData->spr.getPosition().y < 0 || projectileData->spr.getPosition().y > 720)
             {
-                inverseDirection(i, sf::Vector2f(1, -1));
+                inverseDirection(sf::Vector2f(1, -1));
             }
         }
-    }
+        else
+        {
+            projectileData->spr.setPosition(projectileData->attachedEntity.getPosition() + projectileData->offset);
+            if (projectileData->hitbox)
+            projectileData->hitbox->setPosition(projectileData->spr.getPosition());
+        }
+    
 }
 
 void Projectile::render(sf::RenderWindow& target, bool showHitbox)
 {
-    for (int i = 0; i < projectilesNumber; i++)
-    {
-        target.draw(projectiles[i].data()->spr);
+        target.draw(projectileData->spr);
         if (showHitbox)
-            projectiles[i].data()->hitbox->render(target);
-    }
+            projectileData->hitbox->render(target);
+    
 }
 
-void Projectile::move(int idx, const float& dt)
+void Projectile::move(const float& dt)
 {
-    projectiles[idx].data()->spr.move(projectiles[idx].data()->direction * (projectiles[idx].data()->speed * dt));
-    projectiles[idx].data()->hitbox->setPosition(projectiles[idx].data()->spr.getPosition());
+    projectileData->spr.move(projectileData->direction * (projectileData->speed * dt));
+    projectileData->hitbox->setPosition(projectileData->spr.getPosition());
 }
 
-void Projectile::setPosition(int idx, const sf::Vector2f pos)
+void Projectile::setPosition(const sf::Vector2f pos)
 {
-    projectiles[idx].data()->hitbox->setPosition(pos);
-    projectiles[idx].data()->spr.setPosition(pos);
+    projectileData->hitbox->setPosition(pos);
+    projectileData->spr.setPosition(pos);
 }
-void Projectile::setPosition(int idx, const float x, const float y)
+void Projectile::setPosition(const float x, const float y)
 {
-    projectiles[idx].data()->hitbox->setPosition(x, y);
-    projectiles[idx].data()->spr.setPosition(x, y);
-}
-
-sf::Vector2f Projectile::getPosition(int idx)
-{
-    return projectiles[idx].data()->spr.getPosition();
+    projectileData->hitbox->setPosition(x, y);
+    projectileData->spr.setPosition(x, y);
 }
 
-void Projectile::inverseDirection(int idx, sf::Vector2f _dir)
+sf::Vector2f Projectile::getPosition()
 {
-    projectiles[idx].data()->direction = MultVectors(projectiles[idx].data()->direction, _dir);
+    return projectileData->spr.getPosition();
 }
 
-void Projectile::bounce(int idx, const sf::Vector2f target)
+void Projectile::inverseDirection(sf::Vector2f _dir)
 {
-    sf::Vector2f dir = this->projectiles[idx].data()->direction;
+    projectileData->direction = MultVectors(projectileData->direction, _dir);
+}
+
+void Projectile::bounce(const sf::Vector2f target)
+{
+	sf::Vector2f dir = this->projectileData->direction;
+
+	if (target.x < this->getPosition().x || target.x > this->getPosition().x)
+	{
+		dir.x *= -1;
+		dir.x += rand() % 5 + 1;
+	}
+	if (target.y < this->getPosition().y || target.y > this->getPosition().y)
+	{
+		dir.y *= -1;
+        dir.y += rand() % 5 + 1;
+	}
+
+	dir = NormalizeVector(dir);
+
+	this->projectileData->direction = dir;
+	/*
     dir = Reflect(dir, target);
     dir = NormalizeVector(dir);
-    this->projectiles[idx].data()->direction = dir;
+    */
 }

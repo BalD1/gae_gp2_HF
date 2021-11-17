@@ -5,7 +5,7 @@ Player::Player(sf::Texture& _texture, sf::Vector2f pos)
 	this->spr = new sf::Sprite();
 	this->spr->setTexture(_texture);
 
-	this->createHitbox(*this->spr, 0.0f, 0.0f, 50.0f, 50.0f);
+	this->createHitbox(*this->spr, 0.0f, 0.0f, 150.0f, 25.0f);
 
 	this->setPosition(pos);
 }
@@ -14,7 +14,7 @@ Player::Player(sf::Texture& _texture, float posX, float posY)
 	this->spr = new sf::Sprite();
 	this->spr->setTexture(_texture);
 
-	this->createHitbox(*this->spr, 0.0f, 0.0f, 50.0f, 50.0f);
+	this->createHitbox(*this->spr, 0.0f, 0.0f, 150.0f, 25.0f);
 
 	this->setPosition(posX, posY);
 }
