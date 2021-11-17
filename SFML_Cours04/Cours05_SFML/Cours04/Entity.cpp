@@ -42,6 +42,15 @@ void Entity::setPosition(const float x, const float y)
 	this->spr->setPosition(x, y);
 }
 
+void Entity::setOrigin(const sf::Vector2f pos)
+{
+	this->spr->setOrigin(pos);
+}
+
+void Entity::setOrigin(const float x, const float y)
+{
+}
+
 void Entity::setStats(float _speed, float _invincibilityCD)
 {
 	speed = _speed;

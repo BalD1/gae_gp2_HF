@@ -48,6 +48,18 @@ void Hitbox::setPosition(const float newX, const float newY)
 	this->box.setPosition(newX - this->offsetX, newY - this->offsetY);
 }
 
+void Hitbox::setOffset(const sf::Vector2f _offset)
+{
+	this->offsetX = _offset.x;
+	this->offsetY = _offset.y;
+}
+
+void Hitbox::setOffset(const float _x, const float _y)
+{
+	this->offsetX = _x;
+	this->offsetY = _y;
+}
+
 bool Hitbox::intersects(const sf::FloatRect& target)
 {
 	return this->box.getGlobalBounds().intersects(target);

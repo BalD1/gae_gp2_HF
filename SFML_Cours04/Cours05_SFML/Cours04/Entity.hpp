@@ -40,6 +40,9 @@ public:
 	void setPosition(const sf::Vector2f pos);
 	void setPosition(const float x, const float y);
 
+	void setOrigin(const sf::Vector2f pos);
+	void setOrigin(const float x, const float y);
+
 	void setStats(float _speed, float _invincibilityCD);
 	void setSpeed(float _speed);
 	void setInvincibilityCD(float CD);

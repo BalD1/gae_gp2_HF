@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 #include "Shape.hpp"
 #include "Utility.hpp"
@@ -47,7 +48,26 @@ int main()
 
 	gameEnd = false;
 
+	sf::Music music;
+	if (!music.openFromFile("Assets/Sounds/music.ogg"))
+	{
+		std::cout << "Could not load main music";
+		return 0;
+	}
+	music.setVolume(20);
+	music.setLoop(true);
+	music.play();
+	
 
+	
+	sf::SoundBuffer explosion;
+	if (!explosion.loadFromFile("Assets/Sounds/explosion.wav"))
+	{
+		std::cout << "Could not load explosion sound";
+		return 0;
+	}
+	sf::Sound explosionSound;
+	explosionSound.setBuffer(explosion);
 
 	sf::Texture brickTexture;
 	if (!brickTexture.loadFromFile("Assets/brick.png"))
@@ -77,10 +97,10 @@ int main()
 		return 0;
 	}
 
-	Player player = Player(playerTexture, Vector2zero());
+	Player player = Player(playerTexture, Vector2zero(), true);
 	_player = &player;
-	_player->setPosition(windowCenter.x, 610);
-	_player->setSpeed(3);
+	_player->setPosition(windowCenter.x, 605);
+	_player->setSpeed(5);
 		
 	sf::Texture gunTexture;	
 	if (!gunTexture.loadFromFile("Assets/gun.png"))
@@ -163,6 +183,7 @@ int main()
 					{
 						ball->bounce(bricks[i]->getPosition());
 						bricks[i]->kill();
+						explosionSound.play();
 						score += 10;
 						scoreTxt.setString("score : " + std::to_string(score));
 					}

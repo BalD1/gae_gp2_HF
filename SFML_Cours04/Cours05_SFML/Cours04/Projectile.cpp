@@ -15,6 +15,13 @@ Projectile::Projectile(Entity _attachedEntity, sf::Texture _texture, sf::Vector2
     projectileData->activeSelf = _active;
 
     projectileData->hitbox = createHitbox(*projectileData, 0, 0, 10, 10);
+
+    if (!this->hit.loadFromFile("Assets/Sounds/simplehit.wav"))
+    {
+        std::cout << "Could not load hit sound";
+    }
+    hitSound = new sf::Sound();
+    hitSound->setBuffer(hit);
 }
 
 Hitbox* Projectile::createHitbox(Data projectile, float offsetX, float offsetY, float width, float height)
@@ -25,6 +32,9 @@ Hitbox* Projectile::createHitbox(Data projectile, float offsetX, float offsetY, 
 
 void Projectile::setActive(bool active)
 {
+    if (active)
+        hitSound->play();
+
     this->projectileData->activeSelf = active;
 }
 const bool Projectile::isActive()
@@ -53,10 +63,12 @@ void Projectile::update(const float& dt)
             if (projectileData->spr.getPosition().x < 0 || projectileData->spr.getPosition().x > 1280)
             {
                 inverseDirection(sf::Vector2f(-1, 1));
+                hitSound->play();
             }
             if (projectileData->spr.getPosition().y < 0 || projectileData->spr.getPosition().y > 720)
             {
                 inverseDirection(sf::Vector2f(1, -1));
+                hitSound->play();
             }
         }
         else
@@ -105,24 +117,8 @@ void Projectile::inverseDirection(sf::Vector2f _dir)
 
 void Projectile::bounce(const sf::Vector2f target)
 {
-	sf::Vector2f dir = this->projectileData->direction;
-
-	if (target.x < this->getPosition().x || target.x > this->getPosition().x)
-	{
-		dir.x *= -1;
-		dir.x += rand() % 5 + 1;
-	}
-	if (target.y < this->getPosition().y || target.y > this->getPosition().y)
-	{
-		dir.y *= -1;
-        dir.y += rand() % 5 + 1;
-	}
-
-	dir = NormalizeVector(dir);
-
-	this->projectileData->direction = dir;
-	/*
-    dir = Reflect(dir, target);
+    sf::Vector2f dir = this->projectileData->direction;
+    dir = Reflect(target, dir);
     dir = NormalizeVector(dir);
-    */
+    this->projectileData->direction = dir;
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "SFML/Graphics.hpp"
+#include "SFML/Audio.hpp"
 #include "Hitbox.hpp"
 #include "Utility.hpp"
 #include "Entity.hpp"
@@ -21,6 +22,8 @@ public:
 		float damages = 1;
 		bool activeSelf = false;
 	};
+	sf::SoundBuffer hit;
+	sf::Sound* hitSound = nullptr;
 	Data* projectileData = nullptr;
 
 	Projectile(Entity _attachedEntity, sf::Texture _texture, sf::Vector2f _pos, sf::Vector2f _offset, sf::Vector2f _direction, float _speed, float _damages, bool _active);

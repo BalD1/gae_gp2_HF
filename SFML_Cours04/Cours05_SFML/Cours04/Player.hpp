@@ -10,8 +10,8 @@ public:
 
 #pragma region Funcs
 
-	Player(sf::Texture& _texture, sf::Vector2f pos);
-	Player(sf::Texture& _texture, float posX, float posY);
+	Player(sf::Texture& _texture, sf::Vector2f pos, bool originAtCenter);
+	Player(sf::Texture& _texture, float posX, float posY, bool originAtCenter);
 	~Player();
 
 	void update(const float& dt);
