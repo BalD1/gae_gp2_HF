@@ -1,0 +1,68 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: Le répertoire intermédiaire (x64\Release\) contient des fichiers partagés provenant d'un autre projet (Cours04.vcxproj). Cela peut entraîner un comportement de nettoyage et de regénération incorrect.
+  Brick.cpp
+  Cours05.cpp
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(42,64): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(42,44): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(43,73): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(43,49): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(127,37): warning C4244: 'argument' : conversion de 'T' en 'const float', perte possible de données
+          with
+          [
+              T=int
+          ]
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(127,25): warning C4244: 'argument' : conversion de 'T' en 'const float', perte possible de données
+          with
+          [
+              T=int
+          ]
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(98,50): warning C4390: ';' : une instruction contrôlée a été trouvée vide ; est-ce ce que vous souhaitiez ?
+  Entity.cpp
+  Hitbox.cpp
+  Player.cpp
+  Projectile.cpp
+  Shape.cpp
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Shape.cpp(6,23): warning C4244: 'argument' : conversion de 'const int' en 'float', perte possible de données
+  Utility.cpp
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Utility.cpp(115,13): warning C4244: 'return' : conversion de 'double' en 'float', perte possible de données
+  Weapon.cpp
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Weapon.cpp(85,14): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Weapon.cpp(96,14): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+  Génération de code en cours
+D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\Cours04\Entity.cpp(36): warning C4715: 'Entity::getPosition' : les chemins de contrôle ne retournent pas tous une valeur
+  309 of 322 functions (96.0%) were compiled, the rest were copied from previous compilation.
+    228 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  Fin de la génération du code
+  Cours04.vcxproj -> D:\Programmes(DATA)\Windows\Documents\HussonF\gae_gp2\SFML_Cours04\Cours05_SFML\x64\Release\Cours05.exe
