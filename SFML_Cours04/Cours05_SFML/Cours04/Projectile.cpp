@@ -58,6 +58,7 @@ void Projectile::update(const float& dt)
 {
         if (projectileData->activeSelf)
         {
+            canBounce = true;
             projectileData->hitbox->update();
             move(dt);            
             if (projectileData->spr.getPosition().x < 0 || projectileData->spr.getPosition().x > 1280)
@@ -115,10 +116,25 @@ void Projectile::inverseDirection(sf::Vector2f _dir)
     projectileData->direction = MultVectors(projectileData->direction, _dir);
 }
 
-void Projectile::bounce(const sf::Vector2f target)
+void Projectile::bounceX()
 {
+    if (!canBounce)
+        return;
+
+    canBounce = false;
     sf::Vector2f dir = this->projectileData->direction;
-    dir = Reflect(target, dir);
+    dir.x *= -1.1;
+    dir = NormalizeVector(dir);
+    this->projectileData->direction = dir;
+}
+void Projectile::bounceY()
+{
+    if (!canBounce)
+        return;
+
+    canBounce = false;
+    sf::Vector2f dir = this->projectileData->direction;
+    dir.y *= -1.1;
     dir = NormalizeVector(dir);
     this->projectileData->direction = dir;
 }

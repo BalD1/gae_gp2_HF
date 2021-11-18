@@ -27,6 +27,7 @@ public:
 
 	void setOffset(const sf::Vector2f _offset);
 	void setOffset(const float _x, const float _y);
+	const sf::Vector2f getOffset();
 
 	bool intersects(const sf::FloatRect& target);
 	

@@ -22,6 +22,7 @@ public:
 		float damages = 1;
 		bool activeSelf = false;
 	};
+	bool canBounce = true;
 	sf::SoundBuffer hit;
 	sf::Sound* hitSound = nullptr;
 	Data* projectileData = nullptr;
@@ -46,7 +47,8 @@ public:
 
 	void inverseDirection(sf::Vector2f _dir);
 
-	void bounce(const sf::Vector2f target);
+	void bounceX();
+	void bounceY();
 
 private:
 

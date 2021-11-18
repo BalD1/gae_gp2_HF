@@ -44,6 +44,8 @@ int main()
 	windowSize = sf::Vector2f(window.getSize().x, window.getSize().y);
 	windowCenter = sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2);
 
+	float dt = 0;
+
 #pragma endregion
 
 	gameEnd = false;
@@ -76,14 +78,19 @@ int main()
 		return 0;
 	}
 
-	const int brickLength = 10;
+	const int brickLength = 80;
+	const int brickRows = brickLength / 15;
+	int idx = 0;
 
 	Brick* bricks[brickLength];
-	for (int i = 0; i < brickLength; i++)
+	for (int i = 0; i < brickLength / brickRows; i++)
 	{
-		Brick* b = new Brick(brickTexture, 100 * i, windowCenter.y);
-		std::cout << i << " : " << b->hitbox << '\n';
-		bricks[i] = b;
+		for (int j = 0; j < brickRows; j++)
+		{
+			Brick* b = new Brick(brickTexture, 70 * i + 100, 100 + j * 100);
+			bricks[idx] = b;
+			idx += 1;
+		}
 	}
 
 	sf::err().rdbuf(NULL);
@@ -100,7 +107,7 @@ int main()
 	Player player = Player(playerTexture, Vector2zero(), true);
 	_player = &player;
 	_player->setPosition(windowCenter.x, 605);
-	_player->setSpeed(5);
+	_player->setSpeed(10);
 		
 	sf::Texture gunTexture;	
 	if (!gunTexture.loadFromFile("Assets/gun.png"))
@@ -118,7 +125,7 @@ int main()
 	{
 		std::cout << "Could not load projectile texture";
 	}
-	Projectile* ball = new Projectile(*_player, projectileTexture, _gun->getPosition(), sf::Vector2f(75,-10), Vector2zero(), 300, 1, false);
+	Projectile* ball = new Projectile(*_player, projectileTexture, _gun->getPosition(), sf::Vector2f(75,-10), Vector2zero(), 400, 1, false);
 
 
 #pragma endregion
@@ -159,7 +166,7 @@ int main()
 			_gun->lookAt(mousePos.x, mousePos.y);
 			ProcessInputs(window);
 
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !ball->isActive())
+			if ((sf::Mouse::isButtonPressed(sf::Mouse::Left) || (sf::Joystick::getAxisPosition(0, sf::Joystick::Z) > 1)) && !ball->isActive())
 			{
 				sf::Vector2f aimDir = (sf::Vector2f)mousePos;
 				aimDir.x -= _gun->getPosition().x;
@@ -169,9 +176,16 @@ int main()
 			}
 		}
 
-		_player->update(elapsed.asSeconds());
-		_gun->update(elapsed.asSeconds());
-		ball->update(elapsed.asSeconds());
+		dt = elapsed.asSeconds();
+
+		_player->update(dt);
+		_gun->update(dt);
+		ball->update(dt);
+		for (int i = 0; i < brickLength; i++)
+		{
+			if (bricks[i]->alive)
+				bricks[i]->update(dt);
+		}
 
 		if (ball->isActive())
 		{
@@ -181,15 +195,26 @@ int main()
 				{
 					if (bricks[i]->hitbox->intersects(ball->projectileData->spr.getGlobalBounds()))
 					{
-						ball->bounce(bricks[i]->getPosition());
+						ball->bounceX();
 						bricks[i]->kill();
 						explosionSound.play();
 						score += 10;
 						scoreTxt.setString("score : " + std::to_string(score));
 					}
-					else if (ball->projectileData->hitbox->intersects(_player->spr->getGlobalBounds()))
-						ball->bounce(_player->getPosition());
+					else if (bricks[i]->verticalBox->intersects(ball->projectileData->spr.getGlobalBounds()))
+					{
+						ball->bounceY();
+						bricks[i]->kill();
+						explosionSound.play();
+						score += 10;
+						scoreTxt.setString("score : " + std::to_string(score));
+					}
+					else if (ball->projectileData->hitbox->intersects(_player->spr->getGlobalBounds()) && ball->canBounce)
+					{
+						ball->canBounce = false;
 
+						ball->projectileData->direction.y *= -1;
+					}
 				}
 			}
 		}
@@ -201,15 +226,15 @@ int main()
 		DrawGround(window);
 		DrawMountain(window);
 
-		_player->render(window, true);
-		_gun->render(window, true);
+		_player->render(window, false);
+		_gun->render(window, false);
 		for (int i = 0; i < brickLength; i++)
 		{
 			if (bricks[i]->alive)
-			bricks[i]->render(window, true);
+			bricks[i]->render(window, false);
 		}
 
-		ball->render(window, true);
+		ball->render(window, false);
 
 		window.draw(scoreTxt);
 
@@ -229,6 +254,19 @@ void ProcessInputs(sf::RenderWindow& window)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
 		_player->move(1, 0);
 
+	float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X) / 100;
+	if (x > 0.01 || x < -0.01)
+		_player->move(sf::Joystick::getAxisPosition(0, sf::Joystick::X) / 100, 0);
+
+	sf::Vector2i rAxis;
+	rAxis.x = sf::Joystick::getAxisPosition(0, sf::Joystick::U) / 2;
+	rAxis.y = sf::Joystick::getAxisPosition(0, sf::Joystick::V) / 2;
+	if (!(rAxis.y > 25 || rAxis.y < 0))
+		rAxis.y = 0;
+
+	std::cout << "x : " << rAxis.x << " y : " << rAxis.y << '\n';
+
+	sf::Mouse::setPosition(sf::Mouse::getPosition() + rAxis);
 }
 
 void DrawGround(sf::RenderWindow& window)

@@ -45,7 +45,7 @@ void Hitbox::setPosition(const sf::Vector2f& newPosition)
 void Hitbox::setPosition(const float newX, const float newY)
 {
 	this->box.setPosition(newX, newY);
-	this->box.setPosition(newX - this->offsetX, newY - this->offsetY);
+	this->sprite.setPosition(newX - this->offsetX, newY - this->offsetY);
 }
 
 void Hitbox::setOffset(const sf::Vector2f _offset)
@@ -58,6 +58,11 @@ void Hitbox::setOffset(const float _x, const float _y)
 {
 	this->offsetX = _x;
 	this->offsetY = _y;
+}
+
+const sf::Vector2f Hitbox::getOffset()
+{
+	return sf::Vector2f(this->offsetX, this->offsetY);
 }
 
 bool Hitbox::intersects(const sf::FloatRect& target)
