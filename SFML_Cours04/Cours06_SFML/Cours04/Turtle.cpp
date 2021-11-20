@@ -49,6 +49,23 @@ void Turtle::appendCommand(CommandList::Command* cmd)
 		commands->PushBack(cmd);
 	}
 }
+void Turtle::appendCommand(const CommandList::CommandType _type, const float value)
+{
+	CommandList* _cmd = new CommandList(_type, value);
+	appendCommand(_cmd);
+}
+void Turtle::appendCommand(const char* _type, const float value)
+{
+
+	if (_type == "Advance")
+	{
+		appendCommand(CommandList::CommandType::Advance, value);
+	}
+	else if (_type == "Turn")
+	{
+		appendCommand(CommandList::CommandType::Turn, value);
+	}
+}
 
 CommandList* Turtle::applyCommand(CommandList* cmdList, float dt)
 {
@@ -76,7 +93,10 @@ CommandList* Turtle::applyCommand(CommandList* cmdList, float dt)
 		break;
 
 	case cmdList->Turn:
-		rotate(cmdList->cmd->originalValue, dt);
+		if (cmdList->cmd->originalValue > 0)
+			rotate(1, dt);
+		else
+			rotate(-1, dt);
 		break;
 
 	default:

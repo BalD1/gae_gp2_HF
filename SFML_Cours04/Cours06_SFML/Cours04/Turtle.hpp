@@ -15,7 +15,7 @@ private:
 	sf::Vector2f headOffset;
 
 	float speed = 50;
-	float rotationSpeed = 150;
+	float rotationSpeed = 90;
 
 public:
 
@@ -28,6 +28,8 @@ public:
 
 	void appendCommand(CommandList* cmdList);
 	void appendCommand(CommandList::Command* cmd);
+	void appendCommand(const CommandList::CommandType _type, const float value);
+	void appendCommand(const char* _type, const float value);
 
 	CommandList* applyCommand(CommandList* cmdList, float dt);
 
