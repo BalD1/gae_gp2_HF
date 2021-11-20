@@ -6,6 +6,7 @@
 #include "Utility.hpp"
 #include "Entity.hpp"
 #include "Turtle.hpp"
+#include "LinkedList.hpp"
 
 #pragma region Variables
 
@@ -23,14 +24,6 @@ void ProcessInputs(sf::RenderWindow& window, float dt);
 
 int main()
 {
-
-#pragma region Turtle
-
-	Turtle turtle = Turtle();
-	GV_turtle = &turtle;
-#pragma endregion
-
-
 #pragma region Set window
 
 	sf::RenderWindow window(sf::VideoMode(1280, 720, 64), "wesh la mif c'est moi la fenetre de ouf");
@@ -43,6 +36,16 @@ int main()
 	float dt = 0;
 
 #pragma endregion
+
+#pragma region Turtle
+
+	Turtle turtle = Turtle(GV_windowCenter);
+	GV_turtle = &turtle;
+
+#pragma endregion
+
+
+
 
 
 	gameEnd = false;

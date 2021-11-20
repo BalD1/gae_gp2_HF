@@ -2,6 +2,7 @@
 #include "Entity.hpp"
 #include "SFML/Graphics.hpp"
 #include "Utility.hpp"
+#include "LinkedList.hpp"
 
 class Turtle : public sf::Transform, public sf::Drawable
 {
@@ -9,6 +10,7 @@ private:
 
 	sf::CircleShape* body = nullptr;
 	sf::CircleShape* head = nullptr;
+	sf::CircleShape eyes[2];
 
 	sf::Vector2f headOffset;
 
@@ -29,11 +31,12 @@ public:
 		float currentValue = 0;
 	};
 
-	std::vector<Command> commandList;
+	LinkedList<Command>* commands = nullptr;
+	Command* currCmd = nullptr;
 
 	Transform transform;
 
-	Turtle();
+	Turtle(sf::Vector2f pos);
 	~Turtle();
 
 	void appendCommand(Command* cmd);

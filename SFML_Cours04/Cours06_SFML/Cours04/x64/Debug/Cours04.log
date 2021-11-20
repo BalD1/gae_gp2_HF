@@ -1,6 +1,6 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(491,5): warning MSB8028: Le répertoire intermédiaire (x64\Debug\) contient des fichiers partagés provenant d'un autre projet (Cours04.vcxproj). Cela peut entraîner un comportement de nettoyage et de régénération incorrect.
+﻿D:\Visual Studio\2019\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: Le répertoire intermédiaire (x64\Debug\) contient des fichiers partagés provenant d'un autre projet (Cours04.vcxproj). Cela peut entraîner un comportement de nettoyage et de regénération incorrect.
   Cours05.cpp
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours06_SFML\Cours04\Cours05.cpp(40,67): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours06_SFML\Cours04\Cours05.cpp(33,67): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
           with
           [
               T=unsigned int
@@ -9,7 +9,7 @@ D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours
           [
               T=float
           ]
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours06_SFML\Cours04\Cours05.cpp(40,47): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours06_SFML\Cours04\Cours05.cpp(33,47): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
           with
           [
               T=unsigned int
@@ -18,7 +18,7 @@ D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours
           [
               T=float
           ]
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours06_SFML\Cours04\Cours05.cpp(41,76): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours06_SFML\Cours04\Cours05.cpp(34,76): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
           with
           [
               T=unsigned int
@@ -27,7 +27,7 @@ D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours
           [
               T=float
           ]
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours06_SFML\Cours04\Cours05.cpp(41,52): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours06_SFML\Cours04\Cours05.cpp(34,52): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
           with
           [
               T=unsigned int
@@ -36,7 +36,9 @@ D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours
           [
               T=float
           ]
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours06_SFML\Cours04\Cours05.cpp(67,50): warning C4390: ';' : une instruction contrôlée a été trouvée vide ; est-ce ce que vous souhaitiez ?
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours06_SFML\Cours04\Cours05.cpp(70,50): warning C4390: ';' : une instruction contrôlée a été trouvée vide ; est-ce ce que vous souhaitiez ?
+  LinkedList.cpp
   Turtle.cpp
   Génération de code en cours...
-  Cours04.vcxproj -> D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours06_SFML\x64\Debug\Cours05.exe
+Turtle.obj : error LNK2019: symbole externe non résolu "public: __cdecl LinkedList<struct Turtle::Command>::LinkedList<struct Turtle::Command>(struct Turtle::Command)" (??0?$LinkedList@UCommand@Turtle@@@@QEAA@UCommand@Turtle@@@Z) référencé dans la fonction "public: class LinkedList<struct Turtle::Command> * __cdecl LinkedList<struct Turtle::Command>::PushBack(struct Turtle::Command)" (?PushBack@?$LinkedList@UCommand@Turtle@@@@QEAAPEAV1@UCommand@Turtle@@@Z)
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours06_SFML\x64\Debug\Cours05.exe : fatal error LNK1120: 1 externes non résolus
