@@ -2,7 +2,7 @@
 #include "Entity.hpp"
 #include "SFML/Graphics.hpp"
 #include "Utility.hpp"
-#include "LinkedList.hpp"
+#include "CommandList.hpp"
 
 class Turtle : public sf::Transform, public sf::Drawable
 {
@@ -19,28 +19,17 @@ private:
 
 public:
 
-	enum CommandType
-	{
-		Advance,
-		Turn,
-	};
-	struct Command
-	{
-		CommandType type = Advance;
-		float originalValue = 0;
-		float currentValue = 0;
-	};
-
-	LinkedList<Command>* commands = nullptr;
-	Command* currCmd = nullptr;
+	CommandList* commands = nullptr;
 
 	Transform transform;
 
 	Turtle(sf::Vector2f pos);
 	~Turtle();
 
-	void appendCommand(Command* cmd);
-	Command* applyCommand(Command* cmd, float dt);
+	void appendCommand(CommandList* cmdList);
+	void appendCommand(CommandList::Command* cmd);
+
+	CommandList* applyCommand(CommandList* cmdList, float dt);
 
 	void move(sf::Vector2f direction, float dt);
 	void rotate(float rot, float dt);

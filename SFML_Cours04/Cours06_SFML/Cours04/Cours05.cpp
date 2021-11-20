@@ -6,7 +6,7 @@
 #include "Utility.hpp"
 #include "Entity.hpp"
 #include "Turtle.hpp"
-#include "LinkedList.hpp"
+#include "CommandList.hpp"
 
 #pragma region Variables
 
@@ -41,6 +41,15 @@ int main()
 
 	Turtle turtle = Turtle(GV_windowCenter);
 	GV_turtle = &turtle;
+
+	CommandList* cmd1 = new CommandList(CommandList::CommandType::Advance, 1);
+	CommandList* cmd2 = new CommandList(CommandList::CommandType::Turn, -1);
+	CommandList* cmd3 = new CommandList(CommandList::CommandType::Advance, -1);
+	CommandList::Command* cmd4 = cmd1->CreateCommand(CommandList::Turn, 1);
+	GV_turtle->appendCommand(cmd1);
+	GV_turtle->appendCommand(cmd2);
+	GV_turtle->appendCommand(cmd3);
+	GV_turtle->appendCommand(cmd4);
 
 #pragma endregion
 
@@ -93,7 +102,14 @@ int main()
 			ProcessInputs(window, dt);
 		}
 
+
+		//========= Updates
+
 		dt = elapsed.asSeconds();
+
+		GV_turtle->update(dt);
+
+		//=========	Draws
 
 		window.clear();
 

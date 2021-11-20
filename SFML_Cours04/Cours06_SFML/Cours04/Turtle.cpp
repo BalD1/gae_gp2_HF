@@ -27,39 +27,63 @@ Turtle::~Turtle()
 
 
 
-void Turtle::appendCommand(Command* cmd)
+void Turtle::appendCommand(CommandList* cmdList)
 {
-	commands->PushBack(*cmd);
-}
-
-Turtle::Command* Turtle::applyCommand(Command* cmd, float dt)
-{
-	if (cmd == nullptr)
-		return nullptr;
-
-	cmd->currentValue -= dt;
-	if (cmd->currentValue <= 0)
+	if (commands == nullptr)
 	{
-		return (Command*)commands->RemoveFirst()->next;
+		commands = cmdList;
 	}
 	else
 	{
-		// continuer
-		switch (cmd->type)
-		{
-		case Advance:
-			move(sf::Vector2f(cmd->originalValue, 0), dt);
-			break;
-
-		case Turn:
-			rotate(cmd->originalValue, dt);
-			break;
-
-		default:
-			break;
-		}
+		commands->PushBack(cmdList->cmd);
 	}
-	return cmd;
+}
+void Turtle::appendCommand(CommandList::Command* cmd)
+{
+	if (commands == nullptr)
+	{
+		commands = new CommandList(cmd);
+	}
+	else
+	{
+		commands->PushBack(cmd);
+	}
+}
+
+CommandList* Turtle::applyCommand(CommandList* cmdList, float dt)
+{
+	if (cmdList == nullptr)
+		return nullptr;
+
+	if (cmdList->cmd->originalValue > 0)
+	{
+		cmdList->cmd->currentValue -= dt;
+		if (cmdList->cmd->currentValue <= 0)
+			return cmdList->RemoveFirst();
+	}
+	else
+	{
+		cmdList->cmd->currentValue += dt;
+		if (cmdList->cmd->currentValue >= 0)
+			return cmdList->RemoveFirst();
+
+	}
+
+	switch (cmdList->cmd->type)
+	{
+	case cmdList->Advance:
+		move(NormalizeVector(sf::Vector2f(cmdList->cmd->originalValue, 0)), dt);
+		break;
+
+	case cmdList->Turn:
+		rotate(cmdList->cmd->originalValue, dt);
+		break;
+
+	default:
+		break;
+	}
+
+	return cmdList;
 }
 
 void Turtle::move(sf::Vector2f direction, float dt)
@@ -80,7 +104,7 @@ const sf::Vector2f Turtle::getPosition()
 
 void Turtle::update(float dt)
 {
-	currCmd = applyCommand(currCmd, dt);
+	commands = applyCommand(commands, dt);
 }
 
 void Turtle::draw(sf::RenderTarget& target, sf::RenderStates states) const

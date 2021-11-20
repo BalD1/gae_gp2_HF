@@ -36,9 +36,5 @@ D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours06_SFML\Cours04\Cours05.cpp(34,
           [
               T=float
           ]
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours06_SFML\Cours04\Cours05.cpp(70,50): warning C4390: ';' : une instruction contrôlée a été trouvée vide ; est-ce ce que vous souhaitiez ?
-  LinkedList.cpp
-  Turtle.cpp
-  Génération de code en cours...
-Turtle.obj : error LNK2019: symbole externe non résolu "public: __cdecl LinkedList<struct Turtle::Command>::LinkedList<struct Turtle::Command>(struct Turtle::Command)" (??0?$LinkedList@UCommand@Turtle@@@@QEAA@UCommand@Turtle@@@Z) référencé dans la fonction "public: class LinkedList<struct Turtle::Command> * __cdecl LinkedList<struct Turtle::Command>::PushBack(struct Turtle::Command)" (?PushBack@?$LinkedList@UCommand@Turtle@@@@QEAAPEAV1@UCommand@Turtle@@@Z)
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours06_SFML\x64\Debug\Cours05.exe : fatal error LNK1120: 1 externes non résolus
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours06_SFML\Cours04\Cours05.cpp(79,50): warning C4390: ';' : une instruction contrôlée a été trouvée vide ; est-ce ce que vous souhaitiez ?
+  Cours04.vcxproj -> D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours06_SFML\x64\Debug\Cours05.exe
