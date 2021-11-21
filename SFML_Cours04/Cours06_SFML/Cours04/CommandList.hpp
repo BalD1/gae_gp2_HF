@@ -33,6 +33,7 @@ public:
 	Command* CreateCommand(CommandType _type, float value);
 
 	void PrintList();
+
 };
 
 

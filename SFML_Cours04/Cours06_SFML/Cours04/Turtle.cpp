@@ -23,6 +23,9 @@ Turtle::Turtle(sf::Vector2f pos)
 
 Turtle::~Turtle()
 {
+	delete commands;
+	delete this->body;
+	delete this->head;
 }
 
 
@@ -36,6 +39,7 @@ void Turtle::appendCommand(CommandList* cmdList)
 	else
 	{
 		commands->PushBack(cmdList->cmd);
+		delete cmdList;
 	}
 }
 void Turtle::appendCommand(CommandList::Command* cmd)
@@ -88,19 +92,19 @@ CommandList* Turtle::applyCommand(CommandList* cmdList, float dt)
 
 	switch (cmdList->cmd->type)
 	{
-	case cmdList->Advance:
-		move(NormalizeVector(sf::Vector2f(cmdList->cmd->originalValue, 0)), dt);
-		break;
+		case cmdList->Advance:
+			move(NormalizeVector(sf::Vector2f(cmdList->cmd->originalValue, 0)), dt);
+			break;
 
-	case cmdList->Turn:
-		if (cmdList->cmd->originalValue > 0)
-			rotate(1, dt);
-		else
-			rotate(-1, dt);
-		break;
+		case cmdList->Turn:
+			if (cmdList->cmd->originalValue > 0)
+				rotate(1, dt);
+			else
+				rotate(-1, dt);
+			break;
 
-	default:
-		break;
+		default:
+			break;
 	}
 
 	return cmdList;
@@ -124,6 +128,7 @@ const sf::Vector2f Turtle::getPosition()
 
 void Turtle::update(float dt)
 {
+	printCommandList();
 	commands = applyCommand(commands, dt);
 }
 
@@ -140,4 +145,9 @@ void Turtle::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 	target.draw(eyes[0], states);
 	target.draw(eyes[1], states);
+}
+
+void Turtle::printCommandList()
+{
+	commands->PrintList();
 }

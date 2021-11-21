@@ -6,7 +6,6 @@ CommandList::CommandList(CommandType _type, float _val)
 	cmd->type = _type;
 	cmd->currentValue = cmd->originalValue = _val;
 
-
 	head = this;
 }
 
@@ -78,11 +77,27 @@ CommandList::Command* CommandList::CreateCommand(CommandType _type, float value)
 
 void CommandList::PrintList()
 {
+	if (this == nullptr)
+		return;
 	CommandList* newNode = head;
 
+	const char* cmdType = "";
+	int tIndex = -1;
 	while (newNode != nullptr)
 	{
-		std::cout << " { " << newNode->cmd->type << " : " << newNode->cmd->originalValue << " / " << newNode->cmd->currentValue << "---->" << '\n';
+		cmdType = "Undefinied in print";
+		tIndex = static_cast<CommandType>(newNode->cmd->type);
+		if (tIndex == 0)
+			cmdType = "Advance";
+		else if (tIndex == 1)
+			cmdType = "Turn";
+
+		printf(" { %s : %0.2f / %0.2f } ", cmdType, newNode->cmd->currentValue, newNode->cmd->originalValue);
+		if (newNode->next != nullptr)
+			printf(" --->");
+
 		newNode = newNode->next;
 	}
+	printf("\n");
+	delete(newNode);
 }

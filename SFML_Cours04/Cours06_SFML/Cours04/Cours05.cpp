@@ -47,13 +47,9 @@ int main()
 	GV_turtle->appendCommand(cmd1);
 	GV_turtle->appendCommand(cmd2);
 	GV_turtle->appendCommand(CommandList::CommandType::Advance, 1);
-	GV_turtle->appendCommand("Turn", 1);
+	GV_turtle->appendCommand("Turn", -1);
 
 #pragma endregion
-
-
-
-
 
 	gameEnd = false;
 
@@ -63,7 +59,7 @@ int main()
 		std::cout << "Could not load main music";
 		return 0;
 	}
-	music.setVolume(20);
+	music.setVolume(0);
 	music.setLoop(true);
 	music.play();
 
