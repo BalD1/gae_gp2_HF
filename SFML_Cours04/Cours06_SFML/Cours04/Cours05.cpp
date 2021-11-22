@@ -43,11 +43,17 @@ int main()
 	GV_turtle = &turtle;
 
 	CommandList* cmd1 = new CommandList(CommandList::CommandType::Advance, 1);
-	CommandList::Command* cmd2 = cmd1->CreateCommand(CommandList::Turn, 1);
-	GV_turtle->appendCommand(cmd1);
-	GV_turtle->appendCommand(cmd2);
-	GV_turtle->appendCommand(CommandList::CommandType::Advance, 1);
-	GV_turtle->appendCommand("Turn", -1);
+	int minRan = -4;
+	int maxRan = minRan * -1;
+
+	for (int i = 1; i < 101; i++)
+	{
+		srand(i);
+		CommandList::Command* adv = cmd1->CreateCommand(CommandList::Advance, rand() %(maxRan - minRan) + minRan);
+		CommandList::Command* trn = cmd1->CreateCommand(CommandList::Turn, rand() % (maxRan - minRan) + minRan);
+		GV_turtle->appendCommand(adv);
+		GV_turtle->appendCommand(trn);
+	}
 
 #pragma endregion
 
