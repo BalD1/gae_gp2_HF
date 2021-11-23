@@ -44,7 +44,7 @@ int main()
 	Turtle turtle = Turtle(GV_windowCenter);
 	GV_turtle = &turtle;
 
-	CommandList* cmd1 = new CommandList(CommandList::CommandType::Advance, 1);
+	CommandList* cmd1 = new CommandList(CommandList::CommandType::Advance, 1, 50);
 	int minRan = -4;
 	int maxRan = minRan * -1;
 
@@ -193,16 +193,17 @@ void ProcessInputs(sf::RenderWindow& window, float dt)
 			while (true)
 			{
 				int64_t nb = 0;
-				fscanf_s(fp, "%s %lld\n", line, 256, &nb);
+				int64_t spd = 0;
+				fscanf_s(fp, "%s %lld %lld\n", line, 256, &nb, &spd);
 				std::string s = line;
 				if (s == "Advance")
-					GV_turtle->appendCommand(CommandList::CommandType::Advance, nb);
+					GV_turtle->appendCommand(CommandList::CommandType::Advance, nb, spd);
 				else if (s == "Turn")
-					GV_turtle->appendCommand(CommandList::CommandType::Turn, nb);
+					GV_turtle->appendCommand(CommandList::CommandType::Turn, nb, spd);
 				else if (s == "PenUp")
-					GV_turtle->appendCommand(CommandList::CommandType::PenUp, nb);
+					GV_turtle->appendCommand(CommandList::CommandType::PenUp, nb, spd);
 				else if (s == "PenDown")
-					GV_turtle->appendCommand(CommandList::CommandType::PenDown, nb);
+					GV_turtle->appendCommand(CommandList::CommandType::PenDown, nb, spd);
 
 				if (feof(fp))
 					break;
@@ -228,10 +229,10 @@ void ProcessInputs(sf::RenderWindow& window, float dt)
 		GV_turtle->rotate(-1, dt);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-		GV_turtle->appendCommand(CommandList::CommandType::PenUp, 1);
+		GV_turtle->appendCommand(CommandList::CommandType::PenUp, 1, 1);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E))
-		GV_turtle->appendCommand(CommandList::CommandType::PenDown, 1);
+		GV_turtle->appendCommand(CommandList::CommandType::PenDown, 1, 1);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1))
 		GV_turtle->changePencilColor(sf::Color::Red);

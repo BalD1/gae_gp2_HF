@@ -19,7 +19,7 @@ Turtle::Turtle(sf::Vector2f pos)
 	eyes[1] = sf::CircleShape();
 	eyes[1] = SetCircle(2, sf::Color::White, this->body->getPosition().x + 25, this->body->getPosition().y + 3);
 
-	pencil = SetCircle(5, sf::Color::White, this->body->getPosition().x - 25, this->body->getPosition().y);
+	pencil = SetCircle(5, sf::Color::White, this->body->getPosition().x, this->body->getPosition().y);
 
 	turtleTexture = new sf::RenderTexture();
 	turtleTexture->create(2048, 2048);
@@ -60,29 +60,29 @@ void Turtle::appendCommand(CommandList::Command* cmd)
 		commands->PushBack(cmd);
 	}
 }
-void Turtle::appendCommand(const CommandList::CommandType _type, const float value)
+void Turtle::appendCommand(const CommandList::CommandType _type, const float value, const float _speed)
 {
-	CommandList* _cmd = new CommandList(_type, value);
+	CommandList* _cmd = new CommandList(_type, value, _speed);
 	appendCommand(_cmd);
 }
-void Turtle::appendCommand(const char* _type, const float value)
+void Turtle::appendCommand(const char* _type, const float value, const float _speed )
 {
 
 	if (_type == "Advance")
 	{
-		appendCommand(CommandList::CommandType::Advance, value);
+		appendCommand(CommandList::CommandType::Advance, value, _speed);
 	}
 	else if (_type == "Turn")
 	{
-		appendCommand(CommandList::CommandType::Turn, value);
+		appendCommand(CommandList::CommandType::Turn, value, _speed);
 	}
 	else if (_type == "PenUp")
 	{
-		appendCommand(CommandList::CommandType::PenUp, value);
+		appendCommand(CommandList::CommandType::PenUp, value, _speed);
 	}
 	else if (_type == "PenDown")
 	{
-		appendCommand(CommandList::CommandType::PenDown, value);
+		appendCommand(CommandList::CommandType::PenDown, value, _speed);
 	}
 }
 
@@ -93,13 +93,13 @@ CommandList* Turtle::applyCommand(CommandList* cmdList, float dt)
 
 	if (cmdList->cmd->originalValue > 0)
 	{
-		cmdList->cmd->currentValue -= dt;
+		cmdList->cmd->currentValue -= 1.0/60.0;
 		if (cmdList->cmd->currentValue <= 0)
 			return cmdList->RemoveFirst();
 	}
 	else
 	{
-		cmdList->cmd->currentValue += dt;
+		cmdList->cmd->currentValue += 1.0 / 60.0;
 		if (cmdList->cmd->currentValue >= 0)
 			return cmdList->RemoveFirst();
 
@@ -108,14 +108,14 @@ CommandList* Turtle::applyCommand(CommandList* cmdList, float dt)
 	switch (cmdList->cmd->type)
 	{
 		case cmdList->Advance:
-			move(NormalizeVector(sf::Vector2f(cmdList->cmd->originalValue, 0)), dt);
+			cmdMove(NormalizeVector(sf::Vector2f(cmdList->cmd->originalValue, 0)), cmdList->cmd->speed, dt);
 			break;
 
 		case cmdList->Turn:
 			if (cmdList->cmd->originalValue > 0)
-				rotate(1, dt);
+				cmdRotate(1, cmdList->cmd->speed, dt);
 			else
-				rotate(-1, dt);
+				cmdRotate(-1, cmdList->cmd->speed, dt);
 			break;
 
 		case cmdList->PenUp:
@@ -140,9 +140,19 @@ void Turtle::move(sf::Vector2f direction, float dt)
 	this->transform.translate(direction * speed * dt);
 }
 
+void Turtle::cmdMove(sf::Vector2f direction, float _speed, float dt)
+{
+	this->transform.translate(direction * _speed * dt);
+}
+
 void Turtle::rotate(float rot, float dt)
 {
 	this->transform.rotate(rot * rotationSpeed * dt);
+}
+
+void Turtle::cmdRotate(float rot, float _speed, float dt)
+{
+	this->transform.rotate(rot * _speed * dt);
 }
 
 void Turtle::changePencilColor(sf::Color _color)

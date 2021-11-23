@@ -17,6 +17,7 @@ public:
 		CommandType type = Advance;
 		float originalValue = 0;
 		float currentValue = 0;
+		float speed = 0;
 	};
 
 	Command* cmd = {};
@@ -24,8 +25,8 @@ public:
 	CommandList* head = nullptr;
 
 	CommandList(Command* _cmd);
-	CommandList(CommandType _type, float _val);
-	CommandList(CommandType _type, float _val, CommandList* _next);
+	CommandList(CommandType _type, float _val, float _speed);
+	CommandList(CommandType _type, float _val, float _speed, CommandList* _next);
 
 	CommandList* PushFirst(Command* _cmd);
 	CommandList* PushBack(Command* _cmd);

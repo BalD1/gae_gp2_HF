@@ -34,13 +34,15 @@ public:
 
 	void appendCommand(CommandList* cmdList);
 	void appendCommand(CommandList::Command* cmd);
-	void appendCommand(const CommandList::CommandType _type, const float value);
-	void appendCommand(const char* _type, const float value);
+	void appendCommand(const CommandList::CommandType _type, const float value, const float _speed = 50);
+	void appendCommand(const char* _type, const float value, const float _speed = 50);
 
 	CommandList* applyCommand(CommandList* cmdList, float dt);
 
 	void move(sf::Vector2f direction, float dt);
+	void cmdMove(sf::Vector2f direction, float _speed, float dt);
 	void rotate(float rot, float dt);
+	void cmdRotate(float rot, float _speed, float dt);
 
 	void changePencilColor(sf::Color _color);
 
