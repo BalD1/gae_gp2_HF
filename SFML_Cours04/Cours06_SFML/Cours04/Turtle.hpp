@@ -12,7 +12,13 @@ private:
 	sf::CircleShape* head = nullptr;
 	sf::CircleShape eyes[2];
 
+	sf::CircleShape pencil;
+
 	sf::Vector2f headOffset;
+
+	sf::RenderTexture* turtleTexture = nullptr;
+
+	bool renderPen = true;
 
 	float speed = 50;
 	float rotationSpeed = 90;
@@ -36,7 +42,10 @@ public:
 	void move(sf::Vector2f direction, float dt);
 	void rotate(float rot, float dt);
 
+	void changePencilColor(sf::Color _color);
+
 	const sf::Vector2f getPosition();
+	void setPosition(sf::Vector2f pos);
 
 	void update(float dt);
 

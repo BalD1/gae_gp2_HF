@@ -46,14 +46,28 @@ int main()
 	int minRan = -4;
 	int maxRan = minRan * -1;
 
+	
 	for (int i = 1; i < 101; i++)
 	{
-		srand(i);
+		srand(i * 200);
 		CommandList::Command* adv = cmd1->CreateCommand(CommandList::Advance, rand() %(maxRan - minRan) + minRan);
 		CommandList::Command* trn = cmd1->CreateCommand(CommandList::Turn, rand() % (maxRan - minRan) + minRan);
+		if (i % 2 == 0)
+			GV_turtle->appendCommand(CommandList::CommandType::PenDown, 1);
+		else
+			GV_turtle->appendCommand(CommandList::CommandType::PenUp, 1);
+
+		if (i % 5 == 0)
+			GV_turtle->changePencilColor(sf::Color::Red);
+		if (i % 7 == 0)
+			GV_turtle->changePencilColor(sf::Color::Green);
+		if (i % 8 == 0)
+			GV_turtle->changePencilColor(sf::Color::White);
+
 		GV_turtle->appendCommand(adv);
 		GV_turtle->appendCommand(trn);
 	}
+	
 
 #pragma endregion
 
@@ -93,6 +107,23 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+			if (event.type == sf::Event::KeyPressed)
+			{				
+				/*
+				if (event.key.code == sf::Keyboard::Z)
+					GV_turtle->appendCommand(CommandList::CommandType::Advance, 1);
+
+				if (event.key.code == sf::Keyboard::S)
+					GV_turtle->appendCommand(CommandList::CommandType::Advance, -1);
+
+				if (event.key.code == sf::Keyboard::D)
+					GV_turtle->appendCommand(CommandList::CommandType::Turn, 1);
+
+				if (event.key.code == sf::Keyboard::Q)
+					GV_turtle->appendCommand(CommandList::CommandType::Turn, -1);
+
+					*/
+			}
 
 		}
 
@@ -123,16 +154,30 @@ int main()
 void ProcessInputs(sf::RenderWindow& window, float dt)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z))
-	{
-		GV_turtle->move(sf::Vector2f(5, 0), dt);
-	}
+		GV_turtle->move(sf::Vector2f(1, 0), dt);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-		GV_turtle->move(sf::Vector2f(-5, 0), dt);
+		GV_turtle->move(sf::Vector2f(-1, 0), dt);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 		GV_turtle->rotate(1, dt);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q))
 		GV_turtle->rotate(-1, dt);
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+		GV_turtle->appendCommand(CommandList::CommandType::PenUp, 1);
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E))
+		GV_turtle->appendCommand(CommandList::CommandType::PenDown, 1);
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1))
+		GV_turtle->changePencilColor(sf::Color::Red);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num2))
+		GV_turtle->changePencilColor(sf::Color::Green);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num3))
+		GV_turtle->changePencilColor(sf::Color::Blue);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num4))
+		GV_turtle->changePencilColor(sf::Color::White);
+
 }

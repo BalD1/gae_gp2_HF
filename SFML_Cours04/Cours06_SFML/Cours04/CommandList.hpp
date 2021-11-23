@@ -9,6 +9,8 @@ public:
 	{
 		Advance,
 		Turn,
+		PenUp,
+		PenDown,
 	};
 	struct Command
 	{
