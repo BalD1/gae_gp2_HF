@@ -119,12 +119,12 @@ CommandList* Turtle::applyCommand(CommandList* cmdList, float dt)
 			break;
 
 		case cmdList->PenUp:
-			renderPen = true;
+			renderPen = false;
 			cmdList->cmd->currentValue = 0;
 			break;
 
 		case cmdList->PenDown:
-			renderPen = false;
+			renderPen = true;
 			cmdList->cmd->currentValue = 0;
 			break;
 

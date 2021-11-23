@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdio>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
@@ -17,6 +18,7 @@ sf::Vector2i GV_mousePos;
 Turtle* GV_turtle;
 
 bool gameEnd;
+bool enterWasPressed = false;
 
 #pragma endregion
 
@@ -46,7 +48,7 @@ int main()
 	int minRan = -4;
 	int maxRan = minRan * -1;
 
-	
+	/*
 	for (int i = 1; i < 101; i++)
 	{
 		srand(i * 200);
@@ -67,7 +69,25 @@ int main()
 		GV_turtle->appendCommand(adv);
 		GV_turtle->appendCommand(trn);
 	}
-	
+	*/
+
+
+	/*
+	err = fopen_s(&fp, "Assets/test.txt", "w");
+	if (err == 0)
+	{
+		printf("The file  was opened\n");
+	}
+	else
+	{
+		printf("The file was not opened\n");
+	}
+	if (fp != NULL)
+	{
+		fprintf(fp, "bonjour");
+		fclose(fp);
+	}
+	*/
 
 #pragma endregion
 
@@ -108,7 +128,7 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 			if (event.type == sf::Event::KeyPressed)
-			{				
+			{
 				/*
 				if (event.key.code == sf::Keyboard::Z)
 					GV_turtle->appendCommand(CommandList::CommandType::Advance, 1);
@@ -153,6 +173,48 @@ int main()
 
 void ProcessInputs(sf::RenderWindow& window, float dt)
 {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter) && !enterWasPressed)
+	{
+		enterWasPressed = true;
+
+		FILE* fp;
+		errno_t err;
+
+		err = fopen_s(&fp, "Assets/test.txt", "rb");
+		if (err == 0)
+			printf("The file  was opened\n");
+		else
+			printf("The file was not opened\n");
+
+
+		if (fp != NULL && !feof(fp))
+		{
+			char line[256] = {};
+			while (true)
+			{
+				int64_t nb = 0;
+				fscanf_s(fp, "%s %lld\n", line, 256, &nb);
+				std::string s = line;
+				if (s == "Advance")
+					GV_turtle->appendCommand(CommandList::CommandType::Advance, nb);
+				else if (s == "Turn")
+					GV_turtle->appendCommand(CommandList::CommandType::Turn, nb);
+				else if (s == "PenUp")
+					GV_turtle->appendCommand(CommandList::CommandType::PenUp, nb);
+				else if (s == "PenDown")
+					GV_turtle->appendCommand(CommandList::CommandType::PenDown, nb);
+
+				if (feof(fp))
+					break;
+			}
+
+		}
+		GV_turtle->printCommandList();
+		std::cout << enterWasPressed;
+		fclose(fp);
+	}
+
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z))
 		GV_turtle->move(sf::Vector2f(1, 0), dt);
 
@@ -180,4 +242,5 @@ void ProcessInputs(sf::RenderWindow& window, float dt)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num4))
 		GV_turtle->changePencilColor(sf::Color::White);
 
+		enterWasPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Enter);
 }

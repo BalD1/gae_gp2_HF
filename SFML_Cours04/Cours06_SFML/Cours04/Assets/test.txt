@@ -1,0 +1,13 @@
+Advance 3
+Turn -1
+Advance 3
+Turn -1
+Advance 3
+Turn -1
+Advance 3
+Advance 2
+PenUp 1
+Turn 1
+Advance 2
+PenDown 1
+Advance 2
