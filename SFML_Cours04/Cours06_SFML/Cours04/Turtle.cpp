@@ -61,20 +61,35 @@ void Turtle::appendCommand(CommandList::Command* cmd)
 		commands->PushBack(cmd);
 	}
 }
-void Turtle::appendCommand(const CommandList::CommandType _type, const float value, const float _speed)
+void Turtle::appendCommand(const CommandList::CommandType _type, const float value, float _speed)
 {
+	if (_speed == -1)
+	{
+		if (_type == CommandList::CommandType::Advance)
+			_speed = this->speed;
+		else if (_type == CommandList::CommandType::Turn)
+			_speed = this->rotationSpeed;
+	}
+
 	CommandList* _cmd = new CommandList(_type, value, _speed);
 	appendCommand(_cmd);
 }
-void Turtle::appendCommand(const char* _type, const float value, const float _speed )
+void Turtle::appendCommand(const char* _type, const float value,  float _speed )
 {
-
 	if (_type == "Advance")
 	{
+		if (_speed == -1)
+			_speed = this->speed;
 		appendCommand(CommandList::CommandType::Advance, value, _speed);
 	}
 	else if (_type == "Turn")
 	{
+		printf("%f", _speed);
+		if (_speed == -1)
+		{
+			printf("bah");
+			_speed = this->rotationSpeed;
+		}
 		appendCommand(CommandList::CommandType::Turn, value, _speed);
 	}
 	else if (_type == "PenUp")
@@ -162,6 +177,11 @@ void Turtle::cmdRotate(float rot, float _speed, float dt)
 	this->transform.rotate(rot * _speed * dt);
 }
 
+void Turtle::enablePen(bool enabled)
+{
+	this->renderPen = enabled;
+}
+
 void Turtle::changePencilColor(sf::Color _color)
 {
 	pencil.setFillColor(_color);
@@ -176,6 +196,26 @@ const sf::Vector2f Turtle::getPosition()
 void Turtle::setPosition(sf::Vector2f pos)
 {
 	this->pencil.setPosition(pos);
+}
+
+void Turtle::changeBaseSpeed(const float _speed)
+{
+	this->speed = _speed;
+}
+
+const float Turtle::getBaseSpeed()
+{
+	return this->speed;
+}
+
+void Turtle::changeBaseRotationSpeed(const float _speed)
+{
+	this->rotationSpeed = _speed;
+}
+
+const float Turtle::getBaseRotationSpeed()
+{
+	return this->rotationSpeed;
 }
 
 void Turtle::reset()

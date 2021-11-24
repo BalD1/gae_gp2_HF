@@ -3,6 +3,9 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
+#include "imgui/imgui.h"
+#include "imgui/imgui-SFML.h"
+
 #include "Shape.hpp"
 #include "Utility.hpp"
 #include "Entity.hpp"
@@ -31,6 +34,7 @@ int main()
 #pragma region Set window
 
 	sf::RenderWindow window(sf::VideoMode(1280, 720, 64), "wesh la mif c'est moi la fenetre de ouf");
+	ImGui::SFML::Init(window);
 
 	window.setFramerateLimit(60);
 	window.setVerticalSyncEnabled(true);
@@ -46,52 +50,22 @@ int main()
 	Turtle turtle = Turtle(GV_windowCenter);
 	GV_turtle = &turtle;
 
-	CommandList* cmd1 = new CommandList(CommandList::CommandType::Advance, 1, 50);
-	int minRan = -4;
-	int maxRan = minRan * -1;
+#pragma endregion
 
-	/*
-	for (int i = 1; i < 101; i++)
-	{
-		srand(i * 200);
-		CommandList::Command* adv = cmd1->CreateCommand(CommandList::Advance, rand() %(maxRan - minRan) + minRan);
-		CommandList::Command* trn = cmd1->CreateCommand(CommandList::Turn, rand() % (maxRan - minRan) + minRan);
-		if (i % 2 == 0)
-			GV_turtle->appendCommand(CommandList::CommandType::PenDown, 1);
-		else
-			GV_turtle->appendCommand(CommandList::CommandType::PenUp, 1);
+#pragma region ImGui variables
 
-		if (i % 5 == 0)
-			GV_turtle->changePencilColor(sf::Color::Red);
-		if (i % 7 == 0)
-			GV_turtle->changePencilColor(sf::Color::Green);
-		if (i % 8 == 0)
-			GV_turtle->changePencilColor(sf::Color::White);
+	bool moveForward = true;
+	bool turnRight = true;
+	bool penUp = false;
 
-		GV_turtle->appendCommand(adv);
-		GV_turtle->appendCommand(trn);
-	}
-	*/
+	float advanceTime = 1;
+	float turnTime = 1;
 
-
-	/*
-	err = fopen_s(&fp, "Assets/test.txt", "w");
-	if (err == 0)
-	{
-		printf("The file  was opened\n");
-	}
-	else
-	{
-		printf("The file was not opened\n");
-	}
-	if (fp != NULL)
-	{
-		fprintf(fp, "bonjour");
-		fclose(fp);
-	}
-	*/
+	float advanceSpeed = GV_turtle->getBaseSpeed();
+	float turnSpeed = GV_turtle->getBaseRotationSpeed();
 
 #pragma endregion
+
 
 	gameEnd = false;
 
@@ -108,16 +82,7 @@ int main()
 	sf::err().rdbuf(NULL);
 
 	GV_mousePos = sf::Mouse::getPosition(window);
-
-#pragma region Texts
-
-	sf::Font cybrpnukFont;
-	if (!cybrpnukFont.loadFromFile("Cybrpnuk2.ttf"));
-	{
-
-	}
-
-#pragma endregion
+	float turtlePenColor[3] = { (float)255 / 255,(float)255 / 255,(float)255 / 255 };
 
 	sf::Clock clock;
 	while (window.isOpen())
@@ -127,27 +92,80 @@ int main()
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
+			ImGui::SFML::ProcessEvent(event);
 			if (event.type == sf::Event::Closed)
 				window.close();
-			if (event.type == sf::Event::KeyPressed)
-			{
-				/*
-				if (event.key.code == sf::Keyboard::Z)
-					GV_turtle->appendCommand(CommandList::CommandType::Advance, 1);
-
-				if (event.key.code == sf::Keyboard::S)
-					GV_turtle->appendCommand(CommandList::CommandType::Advance, -1);
-
-				if (event.key.code == sf::Keyboard::D)
-					GV_turtle->appendCommand(CommandList::CommandType::Turn, 1);
-
-				if (event.key.code == sf::Keyboard::Q)
-					GV_turtle->appendCommand(CommandList::CommandType::Turn, -1);
-
-					*/
-			}
-
 		}
+#pragma region IMGUI
+
+		ImGui::SFML::Update(window, clock.restart());
+		bool toolActive;
+		ImGui::Begin("Cc jsuis la fenetre", &toolActive, ImGuiWindowFlags_MenuBar);
+
+		if (ImGui::Button("Advance", ImVec2(200, 20)))
+		{
+			if (!moveForward)
+				advanceTime *= -1;
+			GV_turtle->appendCommand(CommandList::CommandType::Advance, advanceTime);
+
+			if (!moveForward)
+				advanceTime *= -1;
+		}
+		ImGui::Spacing();
+
+		if (ImGui::Button("Turn", ImVec2(200, 20)))
+		{
+			if (turnRight)
+				turnTime *= -1;
+
+			GV_turtle->appendCommand(CommandList::CommandType::Turn, turnTime);
+
+			if (turnRight)
+				turnTime *= -1;
+		}
+
+		if (ImGui::BeginMenuBar())
+		{
+			if (ImGui::BeginMenu("Stats"))
+			{
+				if (ImGui::ColorEdit3("Pen color", turtlePenColor))
+				{
+					sf::Color c
+					(
+						(int)(turtlePenColor[0] * 255),
+						(int)(turtlePenColor[1] * 255),
+						(int)(turtlePenColor[2] * 255)
+					);
+					GV_turtle->changePencilColor(c);
+				}
+				if (ImGui::Checkbox("Pen up", &penUp))
+				{
+					if (penUp)
+						GV_turtle->appendCommand(CommandList::CommandType::PenUp, 1);
+					else
+						GV_turtle->appendCommand(CommandList::CommandType::PenDown, 1);
+				}
+				ImGui::Spacing();
+
+				ImGui::Checkbox("Forward", &moveForward);
+				if (ImGui::SliderFloat("Advance speed", &advanceSpeed, 0, 300))
+					GV_turtle->changeBaseSpeed(advanceSpeed);
+				ImGui::SliderFloat("Advance Time", &advanceTime, 0, 10);
+				ImGui::Spacing();
+
+				ImGui::Checkbox("Turn right", &turnRight);
+				if (ImGui::SliderFloat("Turn speed", &turnSpeed, 0, 360))
+					GV_turtle->changeBaseRotationSpeed(turnSpeed);
+				ImGui::SliderFloat("Turn Time", &turnTime, 0, 10);
+
+				ImGui::EndMenu();
+			}
+			ImGui::EndMenuBar();
+		}
+
+		ImGui::End();
+
+#pragma endregion
 
 		if (!gameEnd)
 		{
@@ -167,6 +185,7 @@ int main()
 		window.clear();
 
 		window.draw(turtle);
+		ImGui::SFML::Render(window);
 
 		window.display();
 	}

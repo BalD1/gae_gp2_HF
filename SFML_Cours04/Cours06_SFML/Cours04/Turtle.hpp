@@ -35,8 +35,8 @@ public:
 
 	void appendCommand(CommandList* cmdList);
 	void appendCommand(CommandList::Command* cmd);
-	void appendCommand(const CommandList::CommandType _type, const float value, const float _speed = 50);
-	void appendCommand(const char* _type, const float value, const float _speed = 50);
+	void appendCommand(const CommandList::CommandType _type, const float value,  float _speed = -1);
+	void appendCommand(const char* _type, const float value,  float _speed = -1);
 
 	void cleanCommands();
 
@@ -47,10 +47,16 @@ public:
 	void rotate(float rot, float dt);
 	void cmdRotate(float rot, float _speed, float dt);
 
+	void enablePen(bool enabled);
 	void changePencilColor(sf::Color _color);
 
 	const sf::Vector2f getPosition();
 	void setPosition(sf::Vector2f pos);
+
+	void changeBaseSpeed(const float _speed);
+	const float getBaseSpeed();
+	void changeBaseRotationSpeed(const float _speed);
+	const float getBaseRotationSpeed();
 
 	void reset();
 
