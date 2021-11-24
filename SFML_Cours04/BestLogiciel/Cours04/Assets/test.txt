@@ -1,0 +1,17 @@
+Advance 3 100
+PenUp 1 1
+Turn 1 135
+PenDown 1 1
+Advance 3 100
+PenUp 1 1
+Turn 1 135
+PenDown 1 1
+Advance 3 100
+PenUp 1 1
+Turn 1 135
+PenDown 1 1
+Advance 3 100
+PenUp 1 1
+Turn 1 170
+PenDown 1 1
+Advance 3 100

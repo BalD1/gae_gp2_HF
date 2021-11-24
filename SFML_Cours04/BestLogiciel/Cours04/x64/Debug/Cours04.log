@@ -1,0 +1,39 @@
+﻿D:\Visual Studio\2019\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: Le répertoire intermédiaire (x64\Debug\) contient des fichiers partagés provenant d'un autre projet (Cours04.vcxproj). Cela peut entraîner un comportement de nettoyage et de regénération incorrect.
+  Cours05.cpp
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\BestLogiciel\Cours04\Cours05.cpp(36,67): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\BestLogiciel\Cours04\Cours05.cpp(36,47): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\BestLogiciel\Cours04\Cours05.cpp(37,76): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\BestLogiciel\Cours04\Cours05.cpp(37,52): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+  Cours04.vcxproj -> D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\BestLogiciel\x64\Debug\Cours05.exe
