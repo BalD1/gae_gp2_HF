@@ -12,7 +12,7 @@ private:
 
 	sf::RenderTexture* drawableSpace = nullptr;
 
-	bool renderPen = true;
+	bool renderPen = false;
 
 public:
 
@@ -24,6 +24,7 @@ public:
 
 	const sf::Vector2f getPosition();
 	void setPosition(sf::Vector2f pos);
+	void setPosition(float posX, float posY);
 
 	void update(float dt);
 

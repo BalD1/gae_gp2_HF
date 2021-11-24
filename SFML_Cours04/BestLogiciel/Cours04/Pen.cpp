@@ -16,7 +16,7 @@ Pen::~Pen()
 
 void Pen::enablePen(bool enabled)
 {
-	renderPen = false;
+	renderPen = enabled;
 }
 
 void Pen::changePencilColor(sf::Color _color)
@@ -32,6 +32,11 @@ const sf::Vector2f Pen::getPosition()
 void Pen::setPosition(sf::Vector2f pos)
 {
 	pencil.setPosition(pos);
+}
+
+void Pen::setPosition(float posX, float posY)
+{
+	pencil.setPosition(sf::Vector2f(posX, posY));
 }
 
 void Pen::update(float dt)

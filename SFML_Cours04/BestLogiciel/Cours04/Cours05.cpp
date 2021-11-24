@@ -71,6 +71,30 @@ int main()
 			ImGui::SFML::ProcessEvent(event);
 			if (event.type == sf::Event::Closed)
 				window.close();
+			if (event.type == sf::Event::MouseButtonPressed)
+			{
+				switch (event.key.code)
+				{
+					case sf::Mouse::Left:
+						GV_currentPen->enablePen(true);
+						break;
+
+					default:
+						break;
+				}
+			}
+			if (event.type == sf::Event::MouseButtonReleased)
+			{
+				switch (event.key.code)
+				{
+					case sf::Mouse::Left:
+						GV_currentPen->enablePen(false);
+						break;
+
+					default:
+						break;
+				}
+			}
 		}
 #pragma region IMGUI
 
@@ -112,6 +136,8 @@ int main()
 		//========= Updates
 
 		dt = elapsed.asSeconds();
+
+		GV_currentPen->setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
 
 		//=========	Draws
 
