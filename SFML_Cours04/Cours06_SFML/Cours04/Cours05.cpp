@@ -20,6 +20,8 @@ Turtle* GV_turtle;
 bool gameEnd;
 bool enterWasPressed = false;
 
+time_t lastOpenedFile;
+
 #pragma endregion
 
 void ProcessInputs(sf::RenderWindow& window, float dt);
@@ -181,14 +183,26 @@ void ProcessInputs(sf::RenderWindow& window, float dt)
 		errno_t err;
 
 		err = fopen_s(&fp, "Assets/test.txt", "rb");
-		if (err == 0)
-			printf("The file  was opened\n");
-		else
+		if (err != 0)
 			printf("The file was not opened\n");
-
+		
 
 		if (fp != NULL && !feof(fp))
 		{
+			struct stat result;
+			if (stat("Assets/test.txt", &result) == 0)
+			{
+				if (lastOpenedFile == NULL)
+				{
+					lastOpenedFile = result.st_mtime;
+				}
+				else if (lastOpenedFile < result.st_mtime)
+				{
+					printf("The file has been changed, reloading");
+					lastOpenedFile = result.st_mtime;
+					GV_turtle->reset();
+				}
+			}
 			char line[256] = {};
 			while (true)
 			{
@@ -210,8 +224,6 @@ void ProcessInputs(sf::RenderWindow& window, float dt)
 			}
 
 		}
-		GV_turtle->printCommandList();
-		std::cout << enterWasPressed;
 		fclose(fp);
 	}
 

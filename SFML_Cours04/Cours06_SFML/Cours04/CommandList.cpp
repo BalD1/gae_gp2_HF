@@ -60,6 +60,19 @@ CommandList* CommandList::RemoveFirst()
 	return head;
 }
 
+void CommandList::CleanList()
+{
+	CommandList* curr = head;
+	CommandList* n = nullptr;
+	while (curr != nullptr)
+	{
+		n = curr->next;
+		free(curr);
+		curr = n;
+	}
+	head = nullptr;
+}
+
 
 CommandList::CommandList(Command* _cmd)
 {
@@ -79,8 +92,11 @@ CommandList::Command* CommandList::CreateCommand(CommandType _type, float value)
 
 void CommandList::PrintList()
 {
-	if (this == nullptr)
+	if (head == nullptr)
+	{
+		printf("List was empty");
 		return;
+	}
 	CommandList* newNode = head;
 
 	const char* cmdType = "";

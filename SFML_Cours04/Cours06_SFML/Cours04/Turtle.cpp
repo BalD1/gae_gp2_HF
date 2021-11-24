@@ -26,6 +26,7 @@ Turtle::Turtle(sf::Vector2f pos)
 	turtleTexture->clear(sf::Color(0, 0, 0, 0));
 
 	this->transform.translate(pos);
+	baseTransform = this->transform;
 }
 
 Turtle::~Turtle()
@@ -84,6 +85,12 @@ void Turtle::appendCommand(const char* _type, const float value, const float _sp
 	{
 		appendCommand(CommandList::CommandType::PenDown, value, _speed);
 	}
+}
+
+void Turtle::cleanCommands()
+{
+	commands->CleanList();
+	commands = nullptr;
 }
 
 CommandList* Turtle::applyCommand(CommandList* cmdList, float dt)
@@ -169,6 +176,14 @@ const sf::Vector2f Turtle::getPosition()
 void Turtle::setPosition(sf::Vector2f pos)
 {
 	this->pencil.setPosition(pos);
+}
+
+void Turtle::reset()
+{
+	cleanCommands();
+	turtleTexture->clear(sf::Color(0, 0, 0, 0));
+	this->transform = baseTransform;
+	renderPen = true;
 }
 
 void Turtle::update(float dt)

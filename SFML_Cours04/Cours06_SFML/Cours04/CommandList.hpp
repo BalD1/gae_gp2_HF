@@ -32,6 +32,7 @@ public:
 	CommandList* PushBack(Command* _cmd);
 
 	CommandList* RemoveFirst();
+	void CleanList();
 
 	Command* CreateCommand(CommandType _type, float value);
 

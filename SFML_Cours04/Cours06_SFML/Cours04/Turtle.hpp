@@ -28,6 +28,7 @@ public:
 	CommandList* commands = nullptr;
 
 	Transform transform;
+	Transform baseTransform;
 
 	Turtle(sf::Vector2f pos);
 	~Turtle();
@@ -36,6 +37,8 @@ public:
 	void appendCommand(CommandList::Command* cmd);
 	void appendCommand(const CommandList::CommandType _type, const float value, const float _speed = 50);
 	void appendCommand(const char* _type, const float value, const float _speed = 50);
+
+	void cleanCommands();
 
 	CommandList* applyCommand(CommandList* cmdList, float dt);
 
@@ -48,6 +51,8 @@ public:
 
 	const sf::Vector2f getPosition();
 	void setPosition(sf::Vector2f pos);
+
+	void reset();
 
 	void update(float dt);
 
