@@ -99,12 +99,14 @@ int main()
 			ImGui::SFML::ProcessEvent(event);
 			if (event.type == sf::Event::Closed)
 			{
+				GV_turtle->saveCommandsInFile("Assets/commands.txt");
 				window.close();
 			}
 			if (event.type == sf::Event::KeyPressed)
 			{
 				if (event.key.code == sf::Keyboard::Escape)
 				{
+					GV_turtle->saveCommandsInFile("Assets/commands.txt");
 					window.close();
 				}
 			}

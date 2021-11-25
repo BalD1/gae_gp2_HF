@@ -26,6 +26,7 @@ private:
 public:
 
 	CommandList* commands = nullptr;
+	CommandList* commandsSave = nullptr;
 
 	Transform transform;
 	Transform baseTransform;
@@ -42,7 +43,7 @@ public:
 
 	CommandList* applyCommand(CommandList* cmdList, float dt);
 
-	void saveCommandsInFile(const char* filePath, CommandList::Command* cmd);
+	void saveCommandsInFile(const char* filePath);
 
 	void move(sf::Vector2f direction, float dt);
 	void cmdMove(sf::Vector2f direction, float _speed, float dt);

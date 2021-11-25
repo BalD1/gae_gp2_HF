@@ -6,7 +6,7 @@ Turtle::Turtle(sf::Vector2f pos)
 	this->body = new sf::CircleShape();
 	*body = SetCircle(20, sf::Color::Green, Vector2zero());
 	body->setOrigin(body->getRadius(), body->getRadius());
-
+	
 
 	headOffset = sf::Vector2f(body->getRadius() + 10, body->getRadius() / 2);
 
@@ -45,12 +45,20 @@ void Turtle::appendCommand(CommandList* cmdList)
 	if (commands == nullptr)
 	{
 		commands = cmdList;
-		saveCommandsInFile("Assets/commands.txt", cmdList->cmd);
+		if (commandsSave == nullptr)
+		{
+			CommandList* sCmdL = new CommandList(cmdList->cmd->type, cmdList->cmd->originalValue, cmdList->cmd->speed);
+			commandsSave = sCmdL;
+		}
 	}
 	else
 	{
 		commands->PushBack(cmdList->cmd);
-		saveCommandsInFile("Assets/commands.txt", cmdList->cmd);
+		CommandList::Command* sCmd = new CommandList::Command();
+		sCmd->originalValue = cmdList->cmd->originalValue;
+		sCmd->speed = cmdList->cmd->speed;
+		sCmd->type = cmdList->cmd->type;
+		commandsSave->PushBack(sCmd);
 		delete cmdList;
 	}
 }
@@ -63,8 +71,12 @@ void Turtle::appendCommand(CommandList::Command* cmd)
 	else
 	{
 		commands->PushBack(cmd);
+		CommandList::Command* sCmd = new CommandList::Command();
+		sCmd->originalValue = cmd->originalValue;
+		sCmd->speed = cmd->speed;
+		sCmd->type = cmd->type;
+		commandsSave->PushBack(sCmd);
 	}
-	saveCommandsInFile("Assets/commands.txt", cmd);
 }
 void Turtle::appendCommand(const CommandList::CommandType _type, const float value, float _speed)
 {
@@ -79,7 +91,7 @@ void Turtle::appendCommand(const CommandList::CommandType _type, const float val
 	CommandList* _cmd = new CommandList(_type, value, _speed);
 	appendCommand(_cmd);
 }
-void Turtle::appendCommand(const char* _type, const float value, float _speed)
+void Turtle::appendCommand(const char* _type, const float value,  float _speed )
 {
 	if (_type == "Advance")
 	{
@@ -91,8 +103,9 @@ void Turtle::appendCommand(const char* _type, const float value, float _speed)
 	{
 		printf("%f", _speed);
 		if (_speed == -1)
+		{
 			_speed = this->rotationSpeed;
-
+		}
 		appendCommand(CommandList::CommandType::Turn, value, _speed);
 	}
 	else if (_type == "PenUp")
@@ -118,7 +131,7 @@ CommandList* Turtle::applyCommand(CommandList* cmdList, float dt)
 
 	if (cmdList->cmd->originalValue > 0)
 	{
-		cmdList->cmd->currentValue -= 1.0 / 60.0;
+		cmdList->cmd->currentValue -= 1.0/60.0;
 		if (cmdList->cmd->currentValue < 0)
 			return cmdList->RemoveFirst();
 	}
@@ -132,35 +145,35 @@ CommandList* Turtle::applyCommand(CommandList* cmdList, float dt)
 
 	switch (cmdList->cmd->type)
 	{
-	case cmdList->Advance:
-		cmdMove(NormalizeVector(sf::Vector2f(cmdList->cmd->originalValue, 0)), cmdList->cmd->speed, dt);
-		break;
+		case cmdList->Advance:
+			cmdMove(NormalizeVector(sf::Vector2f(cmdList->cmd->originalValue, 0)), cmdList->cmd->speed, dt);
+			break;
 
-	case cmdList->Turn:
-		if (cmdList->cmd->originalValue > 0)
-			cmdRotate(1, cmdList->cmd->speed, dt);
-		else
-			cmdRotate(-1, cmdList->cmd->speed, dt);
-		break;
+		case cmdList->Turn:
+			if (cmdList->cmd->originalValue > 0)
+				cmdRotate(1, cmdList->cmd->speed, dt);
+			else
+				cmdRotate(-1, cmdList->cmd->speed, dt);
+			break;
 
-	case cmdList->PenUp:
-		renderPen = false;
-		cmdList->cmd->currentValue = 0;
-		break;
+		case cmdList->PenUp:
+			renderPen = false;
+			cmdList->cmd->currentValue = 0;
+			break;
 
-	case cmdList->PenDown:
-		renderPen = true;
-		cmdList->cmd->currentValue = 0;
-		break;
+		case cmdList->PenDown:
+			renderPen = true;
+			cmdList->cmd->currentValue = 0;
+			break;
 
-	default:
-		break;
+		default:
+			break;
 	}
 
 	return cmdList;
 }
 
-void Turtle::saveCommandsInFile(const char* filePath, CommandList::Command* cmd)
+void Turtle::saveCommandsInFile(const char* filePath)
 {
 	FILE* fp;
 	errno_t err;
@@ -170,14 +183,15 @@ void Turtle::saveCommandsInFile(const char* filePath, CommandList::Command* cmd)
 		printf("The file was not opened\n");
 	else
 	{
-		switch (cmd->type)
+		while (commandsSave != nullptr)
 		{
-		case CommandList::Advance:
-			fprintf(fp, "%s \n", "Advance");
-			break;
-		default:
-			break;
+			char curr[256];
+			CommandList::Command* tmpCmd = commandsSave->head->cmd;
+			sprintf_s(curr, "%s %f %f \n", commandsSave->ConvertEnumToStr(tmpCmd->type), tmpCmd->originalValue, tmpCmd->speed);
+			commandsSave = commandsSave->RemoveFirst();
+			fprintf(fp, curr);
 		}
+
 		fclose(fp);
 	}
 }
