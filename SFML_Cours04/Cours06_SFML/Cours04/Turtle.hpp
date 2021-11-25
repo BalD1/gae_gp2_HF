@@ -42,6 +42,8 @@ public:
 
 	CommandList* applyCommand(CommandList* cmdList, float dt);
 
+	void saveCommandsInFile(const char* filePath, CommandList::Command* cmd);
+
 	void move(sf::Vector2f direction, float dt);
 	void cmdMove(sf::Vector2f direction, float _speed, float dt);
 	void rotate(float rot, float dt);

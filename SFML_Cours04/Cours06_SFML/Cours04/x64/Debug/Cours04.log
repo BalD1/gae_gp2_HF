@@ -1,5 +1,5 @@
-﻿D:\Visual Studio\2019\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: Le répertoire intermédiaire (x64\Debug\) contient des fichiers partagés provenant d'un autre projet (Cours04.vcxproj). Cela peut entraîner un comportement de nettoyage et de regénération incorrect.
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(491,5): warning MSB8028: Le répertoire intermédiaire (x64\Debug\) contient des fichiers partagés provenant d'un autre projet (Cours04.vcxproj). Cela peut entraîner un comportement de nettoyage et de régénération incorrect.
   Turtle.cpp
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours06_SFML\Cours04\Turtle.cpp(118,41): warning C4305: '-=' : troncation de 'double' à 'float'
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours06_SFML\Cours04\Turtle.cpp(124,43): warning C4305: '+=' : troncation de 'double' à 'float'
-  Cours04.vcxproj -> D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours06_SFML\x64\Debug\Cours05.exe
+D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours06_SFML\Cours04\Turtle.cpp(121,43): warning C4305: '-=' : troncation de 'double' à 'float'
+D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours06_SFML\Cours04\Turtle.cpp(127,43): warning C4305: '+=' : troncation de 'double' à 'float'
+  Cours04.vcxproj -> D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours06_SFML\x64\Debug\Cours05.exe

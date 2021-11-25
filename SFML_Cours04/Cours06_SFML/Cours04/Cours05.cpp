@@ -11,6 +11,7 @@
 #include "Entity.hpp"
 #include "Turtle.hpp"
 #include "CommandList.hpp"
+#include "FileWatcher.hpp"
 
 #pragma region Variables
 
@@ -20,10 +21,10 @@ sf::Vector2i GV_mousePos;
 
 Turtle* GV_turtle;
 
+FileWatcher* GV_turtleCommandsFile;
+
 bool gameEnd;
 bool enterWasPressed = false;
-
-time_t lastOpenedFile;
 
 #pragma endregion
 
@@ -34,6 +35,7 @@ int main()
 #pragma region Set window
 
 	sf::RenderWindow window(sf::VideoMode(1280, 720, 64), "wesh la mif c'est moi la fenetre de ouf");
+	window.setFramerateLimit(60);
 	ImGui::SFML::Init(window);
 
 	window.setFramerateLimit(60);
@@ -66,6 +68,8 @@ int main()
 
 #pragma endregion
 
+	FileWatcher turtleCommandsFile("Assets/test.txt");
+	GV_turtleCommandsFile = &turtleCommandsFile;
 
 	gameEnd = false;
 
@@ -94,14 +98,23 @@ int main()
 		{
 			ImGui::SFML::ProcessEvent(event);
 			if (event.type == sf::Event::Closed)
+			{
 				window.close();
+			}
+			if (event.type == sf::Event::KeyPressed)
+			{
+				if (event.key.code == sf::Keyboard::Escape)
+				{
+					window.close();
+				}
+			}
 		}
 #pragma region IMGUI
 
 		ImGui::SFML::Update(window, clock.restart());
 		bool toolActive;
 		ImGui::Begin("Cc jsuis la fenetre", &toolActive, ImGuiWindowFlags_MenuBar);
-
+		ImGui::Text("Mouse : { x%d y%d }", sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
 		if (ImGui::Button("Advance", ImVec2(200, 20)))
 		{
 			if (!moveForward)
@@ -115,15 +128,20 @@ int main()
 
 		if (ImGui::Button("Turn", ImVec2(200, 20)))
 		{
-			if (turnRight)
+			if (!turnRight)
 				turnTime *= -1;
 
 			GV_turtle->appendCommand(CommandList::CommandType::Turn, turnTime);
 
-			if (turnRight)
+			if (!turnRight)
 				turnTime *= -1;
 		}
+		ImGui::Spacing();
 
+		if (ImGui::Button("Reset", ImVec2(200, 20)))
+		{
+			GV_turtle->reset();
+		}
 		if (ImGui::BeginMenuBar())
 		{
 			if (ImGui::BeginMenu("Stats"))
@@ -173,12 +191,16 @@ int main()
 			ProcessInputs(window, dt);
 		}
 
-
 		//========= Updates
 
 		dt = elapsed.asSeconds();
 
 		GV_turtle->update(dt);
+		if (turtleCommandsFile.checkFileModification(dt))
+		{
+			GV_turtle->reset();
+			GV_turtleCommandsFile->appendCommandsFromFile(GV_turtle);
+		}
 
 		//=========	Draws
 
@@ -197,55 +219,8 @@ void ProcessInputs(sf::RenderWindow& window, float dt)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter) && !enterWasPressed)
 	{
 		enterWasPressed = true;
-
-		FILE* fp;
-		errno_t err;
-
-		err = fopen_s(&fp, "Assets/test.txt", "rb");
-		if (err != 0)
-			printf("The file was not opened\n");
-		
-
-		if (fp != NULL && !feof(fp))
-		{
-			struct stat result;
-			if (stat("Assets/test.txt", &result) == 0)
-			{
-				if (lastOpenedFile == NULL)
-				{
-					lastOpenedFile = result.st_mtime;
-				}
-				else if (lastOpenedFile < result.st_mtime)
-				{
-					printf("The file has been changed, reloading");
-					lastOpenedFile = result.st_mtime;
-					GV_turtle->reset();
-				}
-			}
-			char line[256] = {};
-			while (true)
-			{
-				int64_t nb = 0;
-				int64_t spd = 0;
-				fscanf_s(fp, "%s %lld %lld\n", line, 256, &nb, &spd);
-				std::string s = line;
-				if (s == "Advance")
-					GV_turtle->appendCommand(CommandList::CommandType::Advance, nb, spd);
-				else if (s == "Turn")
-					GV_turtle->appendCommand(CommandList::CommandType::Turn, nb, spd);
-				else if (s == "PenUp")
-					GV_turtle->appendCommand(CommandList::CommandType::PenUp, nb, spd);
-				else if (s == "PenDown")
-					GV_turtle->appendCommand(CommandList::CommandType::PenDown, nb, spd);
-
-				if (feof(fp))
-					break;
-			}
-
-		}
-		fclose(fp);
+		GV_turtleCommandsFile->appendCommandsFromFile(GV_turtle);
 	}
-
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z))
 		GV_turtle->move(sf::Vector2f(1, 0), dt);
@@ -259,20 +234,5 @@ void ProcessInputs(sf::RenderWindow& window, float dt)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q))
 		GV_turtle->rotate(-1, dt);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-		GV_turtle->appendCommand(CommandList::CommandType::PenUp, 1, 1);
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E))
-		GV_turtle->appendCommand(CommandList::CommandType::PenDown, 1, 1);
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1))
-		GV_turtle->changePencilColor(sf::Color::Red);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num2))
-		GV_turtle->changePencilColor(sf::Color::Green);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num3))
-		GV_turtle->changePencilColor(sf::Color::Blue);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num4))
-		GV_turtle->changePencilColor(sf::Color::White);
-
-		enterWasPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Enter);
+	enterWasPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Enter);
 }

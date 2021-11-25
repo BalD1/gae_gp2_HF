@@ -21,6 +21,12 @@ CommandList::CommandList(CommandType _type, float _val, float _speed, CommandLis
 	head = this;
 }
 
+const char* CommandList::ConvertEnumToStr(int idx)
+{
+	const char* tmp(StrCommandType[idx]);
+	return tmp;
+}
+
 CommandList* CommandList::PushFirst(Command* _cmd)
 {
 	CommandList* newNode = new CommandList(_cmd);
@@ -62,6 +68,8 @@ CommandList* CommandList::RemoveFirst()
 
 void CommandList::CleanList()
 {
+	if (this == nullptr)
+		return;
 	CommandList* curr = head;
 	CommandList* n = nullptr;
 	while (curr != nullptr)

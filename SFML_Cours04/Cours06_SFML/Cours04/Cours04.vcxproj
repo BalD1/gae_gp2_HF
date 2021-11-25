@@ -154,6 +154,7 @@
   <ItemGroup>
     <ClCompile Include="Cours05.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="FileWatcher.cpp" />
     <ClCompile Include="Hitbox.cpp" />
     <ClCompile Include="CommandList.cpp" />
     <ClCompile Include="imgui\imgui-SFML.cpp" />
@@ -167,6 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.hpp" />
+    <ClInclude Include="FileWatcher.hpp" />
     <ClInclude Include="Hitbox.hpp" />
     <ClInclude Include="CommandList.hpp" />
     <ClInclude Include="imgui\imconfig-SFML.h" />

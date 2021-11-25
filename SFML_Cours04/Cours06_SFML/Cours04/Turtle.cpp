@@ -6,7 +6,7 @@ Turtle::Turtle(sf::Vector2f pos)
 	this->body = new sf::CircleShape();
 	*body = SetCircle(20, sf::Color::Green, Vector2zero());
 	body->setOrigin(body->getRadius(), body->getRadius());
-	
+
 
 	headOffset = sf::Vector2f(body->getRadius() + 10, body->getRadius() / 2);
 
@@ -19,7 +19,9 @@ Turtle::Turtle(sf::Vector2f pos)
 	eyes[1] = sf::CircleShape();
 	eyes[1] = SetCircle(2, sf::Color::White, this->body->getPosition().x + 25, this->body->getPosition().y + 3);
 
-	pencil = SetCircle(5, sf::Color::White, this->body->getPosition().x, this->body->getPosition().y);
+	pencil = SetCircle(5, sf::Color::White, Vector2zero());
+	pencil.setOrigin(pencil.getRadius(), pencil.getRadius());
+	pencil.setPosition(this->body->getPosition().x, this->body->getPosition().y);
 
 	turtleTexture = new sf::RenderTexture();
 	turtleTexture->create(2048, 2048);
@@ -43,10 +45,12 @@ void Turtle::appendCommand(CommandList* cmdList)
 	if (commands == nullptr)
 	{
 		commands = cmdList;
+		saveCommandsInFile("Assets/commands.txt", cmdList->cmd);
 	}
 	else
 	{
 		commands->PushBack(cmdList->cmd);
+		saveCommandsInFile("Assets/commands.txt", cmdList->cmd);
 		delete cmdList;
 	}
 }
@@ -60,6 +64,7 @@ void Turtle::appendCommand(CommandList::Command* cmd)
 	{
 		commands->PushBack(cmd);
 	}
+	saveCommandsInFile("Assets/commands.txt", cmd);
 }
 void Turtle::appendCommand(const CommandList::CommandType _type, const float value, float _speed)
 {
@@ -74,7 +79,7 @@ void Turtle::appendCommand(const CommandList::CommandType _type, const float val
 	CommandList* _cmd = new CommandList(_type, value, _speed);
 	appendCommand(_cmd);
 }
-void Turtle::appendCommand(const char* _type, const float value,  float _speed )
+void Turtle::appendCommand(const char* _type, const float value, float _speed)
 {
 	if (_type == "Advance")
 	{
@@ -86,10 +91,8 @@ void Turtle::appendCommand(const char* _type, const float value,  float _speed )
 	{
 		printf("%f", _speed);
 		if (_speed == -1)
-		{
-			printf("bah");
 			_speed = this->rotationSpeed;
-		}
+
 		appendCommand(CommandList::CommandType::Turn, value, _speed);
 	}
 	else if (_type == "PenUp")
@@ -115,46 +118,68 @@ CommandList* Turtle::applyCommand(CommandList* cmdList, float dt)
 
 	if (cmdList->cmd->originalValue > 0)
 	{
-		cmdList->cmd->currentValue -= 1.0/60.0;
-		if (cmdList->cmd->currentValue <= 0)
+		cmdList->cmd->currentValue -= 1.0 / 60.0;
+		if (cmdList->cmd->currentValue < 0)
 			return cmdList->RemoveFirst();
 	}
 	else
 	{
 		cmdList->cmd->currentValue += 1.0 / 60.0;
-		if (cmdList->cmd->currentValue >= 0)
+		if (cmdList->cmd->currentValue > 0)
 			return cmdList->RemoveFirst();
 
 	}
 
 	switch (cmdList->cmd->type)
 	{
-		case cmdList->Advance:
-			cmdMove(NormalizeVector(sf::Vector2f(cmdList->cmd->originalValue, 0)), cmdList->cmd->speed, dt);
-			break;
+	case cmdList->Advance:
+		cmdMove(NormalizeVector(sf::Vector2f(cmdList->cmd->originalValue, 0)), cmdList->cmd->speed, dt);
+		break;
 
-		case cmdList->Turn:
-			if (cmdList->cmd->originalValue > 0)
-				cmdRotate(1, cmdList->cmd->speed, dt);
-			else
-				cmdRotate(-1, cmdList->cmd->speed, dt);
-			break;
+	case cmdList->Turn:
+		if (cmdList->cmd->originalValue > 0)
+			cmdRotate(1, cmdList->cmd->speed, dt);
+		else
+			cmdRotate(-1, cmdList->cmd->speed, dt);
+		break;
 
-		case cmdList->PenUp:
-			renderPen = false;
-			cmdList->cmd->currentValue = 0;
-			break;
+	case cmdList->PenUp:
+		renderPen = false;
+		cmdList->cmd->currentValue = 0;
+		break;
 
-		case cmdList->PenDown:
-			renderPen = true;
-			cmdList->cmd->currentValue = 0;
-			break;
+	case cmdList->PenDown:
+		renderPen = true;
+		cmdList->cmd->currentValue = 0;
+		break;
 
-		default:
-			break;
+	default:
+		break;
 	}
 
 	return cmdList;
+}
+
+void Turtle::saveCommandsInFile(const char* filePath, CommandList::Command* cmd)
+{
+	FILE* fp;
+	errno_t err;
+
+	err = fopen_s(&fp, filePath, "w");
+	if (err != 0)
+		printf("The file was not opened\n");
+	else
+	{
+		switch (cmd->type)
+		{
+		case CommandList::Advance:
+			fprintf(fp, "%s \n", "Advance");
+			break;
+		default:
+			break;
+		}
+		fclose(fp);
+	}
 }
 
 void Turtle::move(sf::Vector2f direction, float dt)
@@ -190,7 +215,7 @@ void Turtle::changePencilColor(sf::Color _color)
 
 const sf::Vector2f Turtle::getPosition()
 {
-	return this->body->getPosition();
+	return this->pencil.getPosition();
 }
 
 void Turtle::setPosition(sf::Vector2f pos)
