@@ -43,6 +43,12 @@ int main()
 	Pen* p = new Pen(GV_windowCenter);
 	GV_currentPen = p;
 
+	std::vector<sf::VertexArray> vertices;
+	vertices.push_back(sf::VertexArray());
+	vertices[0].setPrimitiveType(sf::LinesStrip);
+	int lines_number = 0;
+	bool isMousePressed = false;
+
 	gameEnd = false;
 
 	sf::Music music;
@@ -59,6 +65,7 @@ int main()
 
 	GV_mousePos = sf::Mouse::getPosition(window);
 	float pencilColor[3] = { (float)255 / 255,(float)255 / 255,(float)255 / 255 };
+	sf::Vector2f Border_Offset(-5, -25); // Compensate for the Window frame when calling window.getPosition()
 
 	sf::Clock clock;
 	while (window.isOpen())
@@ -76,7 +83,11 @@ int main()
 				switch (event.key.code)
 				{
 					case sf::Mouse::Left:
-						GV_currentPen->enablePen(true);
+							isMousePressed = true;
+						if (!ImGui::IsWindowHovered(ImGuiHoveredFlags_AnyWindow))
+						{
+							GV_currentPen->enablePen(true);
+						}
 						break;
 
 					default:
@@ -88,6 +99,10 @@ int main()
 				switch (event.key.code)
 				{
 					case sf::Mouse::Left:
+						lines_number++;
+						vertices.push_back(sf::VertexArray());
+						vertices[lines_number].setPrimitiveType(sf::LinesStrip);
+						isMousePressed = false;
 						GV_currentPen->enablePen(false);
 						break;
 
@@ -140,8 +155,20 @@ int main()
 		GV_currentPen->setPosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
 
 		//=========	Draws
+		if (isMousePressed) // See "locked" definition
+		{
+				//.append(Position, Color) : .append(MousePos - WindowPos + MouseOffset, curr_col)
+				//vertices[lines_number].append(sf::Vertex(sf::Vector2f(sf::Mouse::getPosition().x - window.getPosition().x + Border_Offset.x, sf::Mouse::getPosition().y - window.getPosition().y + Border_Offset.y), sf::Color::White));
+
+			
+		}
 
 		window.clear();
+
+		for (int i = 0; i < vertices.size(); i++)
+		{
+			window.draw(vertices[i]);
+		}
 
 		GV_currentPen->render(window);
 		ImGui::SFML::Render(window);
