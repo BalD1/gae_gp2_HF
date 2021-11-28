@@ -1,7 +1,5 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
 sf::CircleShape SetCircle(const int size, const sf::Color color, const sf::Vector2f pos);
 sf::CircleShape SetCircle(const int size, const sf::Color color, const float posX, const float posY);
 

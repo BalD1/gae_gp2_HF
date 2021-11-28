@@ -1,7 +1,5 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
 #pragma region Vectors
 
 sf::Vector2f Vector2zero();

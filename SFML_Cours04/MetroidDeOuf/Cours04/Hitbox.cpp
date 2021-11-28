@@ -1,3 +1,4 @@
+#include "stdafx.hpp"
 #include "Hitbox.hpp"
 
 Hitbox::Hitbox(sf::Sprite& sprite, float newOffsetX, float newOffsetY, float width, float height) 

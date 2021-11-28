@@ -1,4 +1,4 @@
-#include <SFML/Graphics.hpp>
+#include "stdafx.hpp"
 #include "Shape.hpp"
 
 sf::CircleShape SetCircle(const int size, const sf::Color color, const sf::Vector2f pos)

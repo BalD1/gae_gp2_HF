@@ -1,4 +1,4 @@
-#include <SFML/Graphics.hpp>
+#include "stdafx.hpp"
 #include "Utility.hpp"
 
 #pragma region Vectors

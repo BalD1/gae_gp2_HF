@@ -1,5 +1,4 @@
-#include "SFML/Graphics/Rect.hpp"
-#include "SFML/Graphics/Shape.hpp"
+#include "stdafx.hpp"
 #include "Entity.hpp"
 
 void Entity::init()

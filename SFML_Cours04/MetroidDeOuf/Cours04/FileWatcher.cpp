@@ -1,3 +1,4 @@
+#include "stdafx.hpp"
 #include "FileWatcher.hpp"
 
 FileWatcher::FileWatcher(const char* _filePath)

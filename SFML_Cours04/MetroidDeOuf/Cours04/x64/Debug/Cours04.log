@@ -1,7 +1,7 @@
 ﻿D:\Visual Studio\2019\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: Le répertoire intermédiaire (x64\Debug\) contient des fichiers partagés provenant d'un autre projet (Cours04.vcxproj, Cours05.vcxproj). Cela peut entraîner un comportement de nettoyage et de regénération incorrect.
   MetroidDeOuf.cpp
   The contents of <optional> are available only with C++17 or later.
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\MetroidDeOuf.cpp(37,67): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\MetroidDeOuf.cpp(39,67): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
           with
           [
               T=unsigned int
@@ -10,7 +10,7 @@ D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\MetroidDeOuf.cp
           [
               T=float
           ]
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\MetroidDeOuf.cpp(37,47): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\MetroidDeOuf.cpp(39,47): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
           with
           [
               T=unsigned int
@@ -19,7 +19,7 @@ D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\MetroidDeOuf.cp
           [
               T=float
           ]
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\MetroidDeOuf.cpp(38,76): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\MetroidDeOuf.cpp(40,76): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
           with
           [
               T=unsigned int
@@ -28,7 +28,7 @@ D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\MetroidDeOuf.cp
           [
               T=float
           ]
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\MetroidDeOuf.cpp(38,52): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\MetroidDeOuf.cpp(40,52): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
           with
           [
               T=unsigned int
@@ -37,4 +37,17 @@ D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\MetroidDeOuf.cp
           [
               T=float
           ]
+  Entity.cpp
+  FileWatcher.cpp
+  The contents of <optional> are available only with C++17 or later.
+  Hitbox.cpp
+  Player.cpp
+  Shape.cpp
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Shape.cpp(6,23): warning C4244: 'argument' : conversion de 'const int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Shape.cpp(14,23): warning C4244: 'argument' : conversion de 'const int' en 'float', perte possible de données
+  Utility.cpp
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Utility.cpp(83,13): warning C4244: 'return' : conversion de 'double' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Utility.cpp(116,13): warning C4244: 'return' : conversion de 'double' en 'float', perte possible de données
+  Génération de code en cours...
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Entity.cpp(31): warning C4715: 'Entity::getPosition' : les chemins de contrôle ne retournent pas tous une valeur
   Cours04.vcxproj -> D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\x64\Debug\MetroidDeOuf.exe

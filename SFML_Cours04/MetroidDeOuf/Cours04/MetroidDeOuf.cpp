@@ -1,10 +1,4 @@
-#include <iostream>
-#include <cstdio>
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-
-#include "imgui/imgui.h"
-#include "imgui/imgui-SFML.h"
+#include "Game.hpp"
 
 #include "Shape.hpp"
 #include "Utility.hpp"
@@ -26,10 +20,18 @@ void ProcessInputs(sf::RenderWindow& window, float dt);
 
 int main()
 {
+	Game game;
+
+	ImGui::SFML::Init(game.getWindow());
+
+	while (game.getWindow().isOpen())
+	{
+		game.update();
+		game.render();
+	}
 #pragma region Set window
 
 	sf::RenderWindow window(sf::VideoMode(1280, 720, 64), "wesh la mif c'est moi la fenetre de ouf");
-	window.setFramerateLimit(60);
 	ImGui::SFML::Init(window);
 
 	window.setFramerateLimit(60);

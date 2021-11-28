@@ -1,8 +1,5 @@
 #pragma once
-#include "SFML/Graphics/Rect.hpp"
-#include "SFML/Graphics/Shape.hpp"
 #include "Hitbox.hpp"
-#include <iostream>
 
 class Hitbox;
 
