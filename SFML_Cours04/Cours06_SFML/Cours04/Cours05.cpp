@@ -66,6 +66,9 @@ int main()
 	float advanceSpeed = GV_turtle->getBaseSpeed();
 	float turnSpeed = GV_turtle->getBaseRotationSpeed();
 
+	const size_t cmdBufferSize = 256;
+	char cmdBuffer[cmdBufferSize]{};
+
 #pragma endregion
 
 	FileWatcher turtleCommandsFile("Assets/commands.txt");
@@ -153,6 +156,18 @@ int main()
 					GV_turtle->cleanCommands();
 					GV_turtleCommandsFile->appendCommandsFromFile(GV_turtle);
 				}
+				ImGui::InputTextMultiline("Commands", cmdBuffer, cmdBufferSize, ImVec2(200, 200));
+				if (ImGui::Button("Apply"))
+				{
+					if (strcmp(cmdBuffer, "Advance") == 0)
+						GV_turtle->appendCommand(CommandList::CommandType::Advance, 1, 50);
+					else if (strcmp(cmdBuffer, "Turn") == 0)
+						GV_turtle->appendCommand(CommandList::CommandType::Turn, 1, 90);
+					else if (strcmp(cmdBuffer, "PenUp") == 0)
+						GV_turtle->appendCommand(CommandList::CommandType::PenUp, 1, 1);
+					else if (strcmp(cmdBuffer, "PenDown") == 0)
+						GV_turtle->appendCommand(CommandList::CommandType::PenDown, 1, 1);
+				}
 
 				ImGui::EndMenu();
 			}
@@ -232,7 +247,6 @@ void ProcessInputs(sf::RenderWindow& window, float dt)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter) && !enterWasPressed)
 	{
 		enterWasPressed = true;
-		GV_turtleCommandsFile->appendCommandsFromFile(GV_turtle);
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z))
