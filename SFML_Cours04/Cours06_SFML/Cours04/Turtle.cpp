@@ -120,6 +120,8 @@ void Turtle::appendCommand(const char* _type, const float value,  float _speed )
 
 void Turtle::cleanCommands()
 {
+	commandsSave->CleanList();
+	commandsSave = nullptr;
 	commands->CleanList();
 	commands = nullptr;
 }
@@ -187,7 +189,7 @@ void Turtle::saveCommandsInFile(const char* filePath)
 		{
 			char curr[256];
 			CommandList::Command* tmpCmd = commandsSave->head->cmd;
-			sprintf_s(curr, "%s %f %f \n", commandsSave->ConvertEnumToStr(tmpCmd->type), tmpCmd->originalValue, tmpCmd->speed);
+			sprintf_s(curr, "%s %d %d \n", commandsSave->ConvertEnumToStr(tmpCmd->type), (int)tmpCmd->originalValue, (int)tmpCmd->speed);
 			commandsSave = commandsSave->RemoveFirst();
 			fprintf(fp, curr);
 		}

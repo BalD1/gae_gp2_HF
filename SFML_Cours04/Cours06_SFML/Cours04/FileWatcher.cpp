@@ -40,7 +40,7 @@ void FileWatcher::appendCommandsFromFile(Turtle* entity)
 	FILE* fp;
 	errno_t err;
 
-	err = fopen_s(&fp, "Assets/test.txt", "rb");
+	err = fopen_s(&fp, filePath, "rb");
 	if (err != 0)
 		printf("The file was not opened\n");
 

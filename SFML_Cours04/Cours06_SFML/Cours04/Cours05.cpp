@@ -68,7 +68,7 @@ int main()
 
 #pragma endregion
 
-	FileWatcher turtleCommandsFile("Assets/test.txt");
+	FileWatcher turtleCommandsFile("Assets/commands.txt");
 	GV_turtleCommandsFile = &turtleCommandsFile;
 
 	gameEnd = false;
@@ -99,14 +99,12 @@ int main()
 			ImGui::SFML::ProcessEvent(event);
 			if (event.type == sf::Event::Closed)
 			{
-				GV_turtle->saveCommandsInFile("Assets/commands.txt");
 				window.close();
 			}
 			if (event.type == sf::Event::KeyPressed)
 			{
 				if (event.key.code == sf::Keyboard::Escape)
 				{
-					GV_turtle->saveCommandsInFile("Assets/commands.txt");
 					window.close();
 				}
 			}
@@ -146,6 +144,18 @@ int main()
 		}
 		if (ImGui::BeginMenuBar())
 		{
+			if (ImGui::BeginMenu("Commands"))
+			{
+				if (ImGui::Button("Save"))
+					GV_turtle->saveCommandsInFile("Assets/commands.txt");
+				if (ImGui::Button("Load"))
+				{
+					GV_turtle->cleanCommands();
+					GV_turtleCommandsFile->appendCommandsFromFile(GV_turtle);
+				}
+
+				ImGui::EndMenu();
+			}
 			if (ImGui::BeginMenu("Stats"))
 			{
 				if (ImGui::ColorEdit3("Pen color", turtlePenColor))
@@ -198,12 +208,13 @@ int main()
 		dt = elapsed.asSeconds();
 
 		GV_turtle->update(dt);
+		/*
 		if (turtleCommandsFile.checkFileModification(dt))
 		{
 			GV_turtle->reset();
 			GV_turtleCommandsFile->appendCommandsFromFile(GV_turtle);
 		}
-
+		*/
 		//=========	Draws
 
 		window.clear();
