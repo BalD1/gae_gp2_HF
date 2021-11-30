@@ -37,6 +37,7 @@ public:
 	CommandList(CommandType _type, float _val, float _speed, CommandList* _next);
 
 	const char* ConvertEnumToStr(int idx);
+	const char* ConvertListToStr();
 
 	CommandList* PushFirst(Command* _cmd);
 	CommandList* PushBack(Command* _cmd);
@@ -45,6 +46,8 @@ public:
 	void CleanList();
 
 	Command* CreateCommand(CommandType _type, float value);
+
+	void saveCommandsInFile(const char* filePath);
 
 	void PrintList();
 

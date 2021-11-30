@@ -66,9 +66,6 @@ int main()
 	float advanceSpeed = GV_turtle->getBaseSpeed();
 	float turnSpeed = GV_turtle->getBaseRotationSpeed();
 
-	const size_t cmdBufferSize = 256;
-	char cmdBuffer[cmdBufferSize]{};
-
 #pragma endregion
 
 	FileWatcher turtleCommandsFile("Assets/commands.txt");
@@ -147,29 +144,74 @@ int main()
 		}
 		if (ImGui::BeginMenuBar())
 		{
-			if (ImGui::BeginMenu("Commands"))
+			if (ImGui::BeginMenu("Commandes"))
 			{
-				if (ImGui::Button("Save"))
-					GV_turtle->saveCommandsInFile("Assets/commands.txt");
-				if (ImGui::Button("Load"))
+				static CommandList* cmdH = nullptr;
+				if (ImGui::TreeNode("Liste de commandes"))
 				{
-					GV_turtle->cleanCommands();
-					GV_turtleCommandsFile->appendCommandsFromFile(GV_turtle);
-				}
-				ImGui::InputTextMultiline("Commands", cmdBuffer, cmdBufferSize, ImVec2(200, 200));
-				if (ImGui::Button("Apply"))
-				{
-					if (strcmp(cmdBuffer, "Advance") == 0)
-						GV_turtle->appendCommand(CommandList::CommandType::Advance, 1, 50);
-					else if (strcmp(cmdBuffer, "Turn") == 0)
-						GV_turtle->appendCommand(CommandList::CommandType::Turn, 1, 90);
-					else if (strcmp(cmdBuffer, "PenUp") == 0)
-						GV_turtle->appendCommand(CommandList::CommandType::PenUp, 1, 1);
-					else if (strcmp(cmdBuffer, "PenDown") == 0)
-						GV_turtle->appendCommand(CommandList::CommandType::PenDown, 1, 1);
+					if (ImGui::Button("+"))
+					{
+						auto cmdList = new CommandList(CommandList::CommandType::Advance, 1, 50);
+						if (cmdH == nullptr)
+							cmdH = cmdList;
+						else
+							cmdH->PushBack(cmdList->cmd);
+					}
+
+					int idx = 0;
+					ImGui::Separator();
+					auto h = cmdH;
+					while (h)
+					{
+						ImGui::PushID(idx);
+						ImGui::Value("idx", idx);
+						static const char* items[] =
+						{
+							"Advance",
+							"Turn",
+							"PenUp",
+							"PenDown",
+						};
+						ImGui::Combo("Cmd type", (int*)&h->cmd->type, items, IM_ARRAYSIZE(items));
+
+						switch (h->cmd->type)
+						{
+						case CommandList::CommandType::PenDown:
+							break;
+						case CommandList::CommandType::PenUp:
+							break;
+						default:
+							ImGui::DragFloat("Value", &h->cmd->speed);
+							break;
+						}
+						ImGui::NewLine();
+						ImGui::Separator();
+						h = h->next;
+						idx++;
+						ImGui::PopID();
+					}
+
+					ImGui::Separator();
+					if (ImGui::Button("Run"))
+					{
+						if (cmdH)
+							GV_turtle->appendCommand(cmdH->head);
+						cmdH = nullptr;
+					}
+					ImGui::SameLine();
+					if (ImGui::Button("Save"))
+					{
+						cmdH->saveCommandsInFile("Assets/bonjour.txt");
+					}
+					ImGui::SameLine();
+					if (ImGui::Button("Load"))
+					{
+
+					}
+					ImGui::TreePop();
 				}
 
-				ImGui::EndMenu();
+					ImGui::EndMenu();
 			}
 			if (ImGui::BeginMenu("Stats"))
 			{

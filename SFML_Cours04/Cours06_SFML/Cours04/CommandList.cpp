@@ -27,6 +27,44 @@ const char* CommandList::ConvertEnumToStr(int idx)
 	return tmp;
 }
 
+const char* CommandList::ConvertListToStr()
+{
+	std::string str = "";
+	if (head == nullptr)
+	{
+		printf("List was empty");
+		const char* chr = "";
+		return chr;
+	}
+	CommandList* newNode = head;
+
+	const char* cmdType = "";
+	int tIndex = -1;
+	while (newNode != nullptr)
+	{
+		cmdType = "Undefined type ";
+		tIndex = static_cast<CommandType>(newNode->cmd->type);
+		if (tIndex == 0)
+			cmdType = "Advance";
+		else if (tIndex == 1)
+			cmdType = "Turn";
+		else if (tIndex == 2)
+			cmdType = "PenUp";
+		else if (tIndex == 3)
+			cmdType = "PenDown";
+
+		str += cmdType;
+		str += newNode->cmd->currentValue;
+		str += newNode->cmd->originalValue;
+		if (newNode->next != nullptr)
+			str += '\n';
+
+		newNode = newNode->next;
+	}
+	delete(newNode);
+	return str.c_str();
+}
+
 CommandList* CommandList::PushFirst(Command* _cmd)
 {
 	CommandList* newNode = new CommandList(_cmd);
@@ -96,6 +134,28 @@ CommandList::Command* CommandList::CreateCommand(CommandType _type, float value)
 	newCmd->currentValue = newCmd->originalValue = value;
 
 	return newCmd;
+}
+
+void CommandList::saveCommandsInFile(const char* filePath)
+{
+	FILE* fp;
+	errno_t err;
+
+	err = fopen_s(&fp, filePath, "w");
+	if (err != 0)
+		printf("The file was not opened\n");
+	else
+	{
+		while (this->head != nullptr && this != nullptr)
+		{
+			char curr[256];
+			CommandList::Command* tmpCmd = this->head->cmd;
+			sprintf_s(curr, "%s %d %d \n", this->ConvertEnumToStr(tmpCmd->type), (int)tmpCmd->originalValue, (int)tmpCmd->speed);
+			this->head = this->RemoveFirst();
+		}
+
+		fclose(fp);
+	}
 }
 
 void CommandList::PrintList()
