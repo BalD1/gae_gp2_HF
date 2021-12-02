@@ -36,6 +36,17 @@ sf::RectangleShape SetRectangle(const float sizeX, const float sizeY, const sf::
 	return tmpR;
 }
 
+sf::RectangleShape SetRectangleWOutline(const sf::Vector2f size, const sf::Color color, const sf::Vector2f pos, const sf::Color outColor, const float outThickness)
+{
+	sf::RectangleShape tmpR(size);
+	tmpR.setFillColor(color);
+	tmpR.setPosition(pos);
+	tmpR.setOutlineColor(outColor);
+	tmpR.setOutlineThickness(outThickness);
+
+	return tmpR;
+}
+
 sf::Text SetText(const int size, const std::string txt, const sf::Color color, const sf::Font font)
 {
 	sf::Text t;

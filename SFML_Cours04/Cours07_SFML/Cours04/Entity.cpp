@@ -1,97 +1,46 @@
-#include "SFML/Graphics/Rect.hpp"
-#include "SFML/Graphics/Shape.hpp"
 #include "Entity.hpp"
-
-void Entity::init()
-{
-	this->hitbox = nullptr;
-	this->spr = nullptr;
-}
 
 Entity::Entity()
 {
-	init();
+
 }
 
 Entity::~Entity()
 {
 }
 
-void Entity::createHitbox(sf::Sprite& sprite, float offsetX, float offsetY, float width, float height)
+void Entity::manageMovements()
 {
-	this->hitbox = new Hitbox(sprite, offsetX, offsetY, width, height);
+	// x
+	rx += dx;
+	dx *= 0.96f;
+
+	while (rx > 1) { rx--; cx++; }
+	while (rx < 0) { rx++; cx--; }
+
+	// y
+	ry += dy;
+	dy *= 0.96f;
+
+	while (ry > 1) { ry--; cy++; }
+	while (ry < 0) { ry++; cy--; }
 }
 
-const sf::Vector2f& Entity::getPosition() const
+void Entity::syncSprite()
 {
-	if (this->hitbox)
-		return this->hitbox->getPosition();
-
-	if (this->spr)
-		return this->spr->getPosition();
+	manageMovements();
+	xx = std::int16_t((cx + rx) * stride);
+	yy = std::int16_t((cy + ry) * stride);
+	this->spr->setPosition(xx, yy);
 }
 
-void Entity::setPosition(const sf::Vector2f pos)
+void Entity::render(sf::RenderTarget& target)
 {
-	this->hitbox->setPosition(pos);
-	this->spr->setPosition(pos);
-}
-void Entity::setPosition(const float x, const float y)
-{
-	this->hitbox->setPosition(x, y);
-	this->spr->setPosition(x, y);
+	target.draw(*spr);
 }
 
-void Entity::setOrigin(const sf::Vector2f pos)
+void Entity::update()
 {
-	this->spr->setOrigin(pos);
+	if (moved)
+		syncSprite();
 }
-
-void Entity::setOrigin(const float x, const float y)
-{
-}
-
-void Entity::setStats(float _speed, float _invincibilityCD)
-{
-	speed = _speed;
-	invincibility_CD = _invincibilityCD;
-}
-
-void Entity::setSpeed(float _speed)
-{
-	speed = _speed;
-}
-
-void Entity::setInvincibilityCD(float CD)
-{
-	invincibility_CD = CD;
-}
-
-void Entity::setTag(const std::string _tag)
-{
-	this->tag = _tag;
-}
-
-const std::string Entity::getTag()
-{
-	return this->tag;
-}
-
-void Entity::move(const sf::Vector2f pos)
-{
-	this->spr->move(pos * speed);
-}
- void Entity::move(const float x, const float y)
-{
-	this->spr->move(x * speed, y * speed);
-}
-
- void Entity::kill()
- {
-	 alive = false;
- }
-
- void Entity::revive()
- {
-	 alive = true;
- }

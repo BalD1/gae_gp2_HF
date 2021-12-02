@@ -1,68 +1,57 @@
 #pragma once
-#include "SFML/Graphics/Rect.hpp"
-#include "SFML/Graphics/Shape.hpp"
-#include "Hitbox.hpp"
 #include <iostream>
+#include "SFML/Graphics.hpp"
+#include "Shape.hpp"
+#include "Utility.hpp"
+
+#include "imgui/imgui.h"
+#include "imgui/imgui-SFML.h"
 
 class Hitbox;
 
 class Entity
 {
 private: 
-	void init();
 
 public:
 
 #pragma region Variables
 
-	sf::Sprite* spr = nullptr;
-	Hitbox* hitbox = nullptr;
+	sf::Shape*			spr = nullptr;
 
-	float speed = 5;
-	float invincibility_CD = 1;
-	float invincibility_Timer = 0;
+#pragma region Grid
 
-	bool alive = true;
+	int					cx = 0;
+	int					cy = 0;
+	float				rx = 0.0f;
+	float				ry = 0.0f;
 
-	std::string tag = "";
+	float				xx = 0.0f;
+	float				yy = 0.0f;
+
+	float				dx = 0.0f;
+	float				dy = 0.0f;
+
+	int					stride = 16;
+
+#pragma endregion
+
+	bool				moved = false;
+
+	float				speed = 0.5f;
 
 #pragma endregion
 
 #pragma region Funcs
 
 	Entity();
-
 	~Entity();
 
-	void createHitbox(sf::Sprite& sprite, float offsetX, float offsetY, float width, float height);
 
-	const sf::Vector2f& getPosition() const;
-	void setPosition(const sf::Vector2f pos);
-	void setPosition(const float x, const float y);
+	void manageMovements();
 
-	void setOrigin(const sf::Vector2f pos);
-	void setOrigin(const float x, const float y);
+	void syncSprite();
+	void render(sf::RenderTarget& target);
 
-	void setStats(float _speed, float _invincibilityCD);
-	void setSpeed(float _speed);
-	void setInvincibilityCD(float CD);
-
-	void setTag(const std::string _tag);
-	const std::string getTag();
-
-	void move(const sf::Vector2f pos);
-	void move(const float x, const float y);
-
-	void kill();
-	void revive();
-
-
-#pragma endregion
-};
-
-//brick : entity
-class EntityManager
-{
-public:
-	std::vector<Entity*> repository;
+	void update();
 };
