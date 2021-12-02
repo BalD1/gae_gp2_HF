@@ -14,3 +14,7 @@
 #include "imgui/imgui.h"
 #include "imgui/imgui-SFML.h"
 
+//MISC
+#include "Utility.hpp"
+#include "Shape.hpp"
+

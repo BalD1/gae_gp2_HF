@@ -1,4 +1,5 @@
 #pragma once
+#include "stdafx.hpp"
 #include "Hitbox.hpp"
 
 class Hitbox;
@@ -15,6 +16,9 @@ public:
 	sf::Sprite* spr = nullptr;
 	Hitbox* hitbox = nullptr;
 
+	std::string name = "NONAME";
+	float maxHealth = 5;
+	float currentHealth = 5;
 	float speed = 5;
 	float invincibility_CD = 1;
 	float invincibility_Timer = 0;
@@ -27,7 +31,7 @@ public:
 
 #pragma region Funcs
 
-	Entity();
+	Entity(std::string _name, float _speed, float _invicibilityCD, float _maxHealth);
 
 	~Entity();
 
@@ -40,10 +44,6 @@ public:
 	void setOrigin(const sf::Vector2f pos);
 	void setOrigin(const float x, const float y);
 
-	void setStats(float _speed, float _invincibilityCD);
-	void setSpeed(float _speed);
-	void setInvincibilityCD(float CD);
-
 	void setTag(const std::string _tag);
 	const std::string getTag();
 
@@ -55,11 +55,4 @@ public:
 
 
 #pragma endregion
-};
-
-//brick : entity
-class EntityManager
-{
-public:
-	std::vector<Entity*> repository;
 };

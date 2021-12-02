@@ -7,9 +7,13 @@ void Entity::init()
 	this->spr = nullptr;
 }
 
-Entity::Entity()
+Entity::Entity(std::string _name, float _speed, float _invicibilityCD, float _maxHealth)
 {
 	init();
+	this->name = _name;
+	this->speed = _speed;
+	this->invincibility_CD = _invicibilityCD;
+	this->currentHealth = maxHealth = _maxHealth;
 }
 
 Entity::~Entity()
@@ -48,22 +52,7 @@ void Entity::setOrigin(const sf::Vector2f pos)
 
 void Entity::setOrigin(const float x, const float y)
 {
-}
-
-void Entity::setStats(float _speed, float _invincibilityCD)
-{
-	speed = _speed;
-	invincibility_CD = _invincibilityCD;
-}
-
-void Entity::setSpeed(float _speed)
-{
-	speed = _speed;
-}
-
-void Entity::setInvincibilityCD(float CD)
-{
-	invincibility_CD = CD;
+	this->spr->setOrigin(sf::Vector2f(x,y));
 }
 
 void Entity::setTag(const std::string _tag)
