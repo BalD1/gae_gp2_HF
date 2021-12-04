@@ -6,7 +6,6 @@ private:
 
 	//vars
 
-	sf::CircleShape* c;
 
 	//funcs
 
@@ -17,8 +16,10 @@ public:
 
 	//funcs
 
-	Player(std::string _name, float _speed, float _invicibilityCD, float _maxHealth);
+	Player(std::string _name, float _speed, float _invicibilityCD, float _maxHealth, float _cx, float _cy, int _stride);
 	~Player();
+
+	void im();
 
 	void render(sf::RenderTarget& target);
 

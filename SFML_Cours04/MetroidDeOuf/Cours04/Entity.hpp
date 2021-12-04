@@ -13,45 +13,57 @@ public:
 
 #pragma region Variables
 
-	sf::Sprite* spr = nullptr;
-	Hitbox* hitbox = nullptr;
+	sf::Sprite*			spr = nullptr;
+	sf::Texture*		texture = nullptr;
+	Hitbox*				hitbox = nullptr;
 
-	std::string name = "NONAME";
-	float maxHealth = 5;
-	float currentHealth = 5;
-	float speed = 5;
-	float invincibility_CD = 1;
-	float invincibility_Timer = 0;
+	std::string			name = "NONAME";
+	float				maxHealth = 5;
+	float				currentHealth = 5;
+	float				speed = 0.5f;
+	float				invincibility_CD = 1;
+	float				invincibility_Timer = 0;
 
-	bool alive = true;
+	bool				alive = true;
+	bool				moved = false;
 
-	std::string tag = "";
+	std::string			tag = "";
+
+#pragma region Grid
+
+	int					cx = 0;
+	int					cy = 0;
+	float				rx = 0.0f;
+	float				ry = 0.0f;
+
+	float				xx = 0.0f;
+	float				yy = 0.0f;
+
+	float				dx = 0.0f;
+	float				dy = 0.0f;
+
+	int					stride = 16;
+
+#pragma endregion
+
 
 #pragma endregion
 
 #pragma region Funcs
 
-	Entity(std::string _name, float _speed, float _invicibilityCD, float _maxHealth);
+	Entity(std::string _name, float _speed, float _invicibilityCD, float _maxHealth, float _cx, float _cy, int _stride);
 
 	~Entity();
-
-	void createHitbox(sf::Sprite& sprite, float offsetX, float offsetY, float width, float height);
-
-	const sf::Vector2f& getPosition() const;
-	void setPosition(const sf::Vector2f pos);
-	void setPosition(const float x, const float y);
-
-	void setOrigin(const sf::Vector2f pos);
-	void setOrigin(const float x, const float y);
 
 	void setTag(const std::string _tag);
 	const std::string getTag();
 
-	void move(const sf::Vector2f pos);
-	void move(const float x, const float y);
+	void manageMovements();
 
-	void kill();
-	void revive();
+	void syncSprite();
+	void render(sf::RenderTarget& target);
+
+	void update(float dt);
 
 
 #pragma endregion

@@ -5,9 +5,10 @@ class AudioManager
 private:
 
 	sf::Music globalMusic;
-	float musicVolume = 50;
 
 public:
+
+	float musicVolume = 05;
 
 	AudioManager();
 	~AudioManager();

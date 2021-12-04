@@ -1,5 +1,6 @@
 #pragma once
 #include "stdafx.hpp"
+#include "AudioManager.hpp"
 #include "Player.hpp"
 
 class Game
@@ -15,12 +16,16 @@ private:
 	sf::Time elapsedTime;
 	float dt = 0;
 
+	AudioManager audioManager;
+
 	Player* player;
 
 	// funcs
 
 	void initWindow();
 	void closeWindow();
+
+	void initMusic();
 
 	void initPlayer();
 
@@ -31,6 +36,7 @@ public:
 	sf::Vector2f windowSize;
 	sf::Vector2f windowCenter;
 
+	int stride = 16;
 
 	// funcs
 
