@@ -10,7 +10,7 @@ Player::Player( std::string _name, float _speed, float _invicibilityCD, float _m
 
 	this->spr = new sf::Sprite();
 	this->spr->setTexture(*texture);
-	syncSprite();
+	syncSprite(1);
 }
 
 Player::~Player()
@@ -23,7 +23,7 @@ void Player::im()
 	moved |= (ImGui::DragInt("cy", &cy, 1));
 	moved |= (ImGui::DragFloat("rx", &rx, 0.05f));
 	moved |= (ImGui::DragFloat("ry", &ry, 0.05f));
-	ImGui::DragFloat("Speed", &speed, 0.005f, 0, 1);
+	ImGui::DragFloat("Speed", &speed, 1, 0, 100);
 	ImGui::Dummy(ImVec2(40, 0));
 	ImGui::SameLine();
 	if (ImGui::Button("Step up"))
@@ -51,7 +51,11 @@ void Player::im()
 	}
 
 	ImGui::Value("dx", (float)dx);
+	ImGui::SameLine();
 	ImGui::Value("dy", (float)dy);
+	ImGui::Value("Jump Timer", (float)jumpTimer);
+	ImGui::Value("Is Grounded", (bool)isGrounded);
+	ImGui::Value("State", (State)characterState);
 }
 
 void Player::render(sf::RenderTarget& target)
@@ -61,4 +65,72 @@ void Player::render(sf::RenderTarget& target)
 	im();
 	ImGui::End();
 	ImGui::SFML::Render(target);
+}
+
+void Player::update(float dt)
+{
+	this->dt = dt;
+	manageInputs();
+	Entity::update(dt);
+
+}
+
+void Player::manageInputs()
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+	{
+		dx = -speed;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	{
+		dx = speed;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		if (characterState != State::Falling)
+			jump();
+		
+}
+
+void Player::manageEventInputs(sf::Keyboard::Key key)
+{
+	switch (key)
+	{
+		default:
+			break;
+	}
+}
+
+void Player::manageEventInputsRelease(sf::Keyboard::Key key)
+{
+	switch (key)
+	{
+		case sf::Keyboard::Space:
+			characterState = State::Falling;
+			break;
+		default:
+			break;
+	}
+}
+
+void Player::jump()
+{
+	if (isGrounded && characterState != State::Jumping)
+	{
+		characterState = State::Jumping;
+		jumpTimer = jumpLength;
+		dy = jumpForce;
+	}
+	if (characterState == State::Jumping)
+	{
+		if (jumpTimer > 0.01f)
+		{
+			dy = jumpForce;
+			jumpTimer -= dt;
+		}
+		else
+		{
+			characterState = State::Falling;
+			jumpTimer = 0;
+		}
+	}
 }

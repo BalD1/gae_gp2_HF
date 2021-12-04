@@ -6,6 +6,13 @@ private:
 
 	//vars
 
+	float				jumpForce = -20;
+	float				jumpLength = 0.5f;
+	float				jumpTimer = 0;
+
+	float				dt = 0;
+
+	bool				canJump = true;
 
 	//funcs
 
@@ -22,6 +29,12 @@ public:
 	void im();
 
 	void render(sf::RenderTarget& target);
+	void update(float dt);
+
+	void manageInputs();
+	void manageEventInputs(sf::Keyboard::Key key);
+	void manageEventInputsRelease(sf::Keyboard::Key key);
+	void jump();
 
 };
 

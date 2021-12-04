@@ -33,10 +33,12 @@ public:
 
 	// vars
 
-	sf::Vector2f windowSize;
-	sf::Vector2f windowCenter;
+	sf::Vector2f			windowSize;
+	sf::Vector2f			windowCenter;
 
-	int stride = 16;
+	int						stride = 32;
+
+	const float				gravity = 0.7f;
 
 	// funcs
 
@@ -46,6 +48,7 @@ public:
 
 	void update();
 	void checkPressedKey(sf::Keyboard::Key key);
+	void checkReleasedKey(sf::Keyboard::Key key);
 
 	void processImGui();
 

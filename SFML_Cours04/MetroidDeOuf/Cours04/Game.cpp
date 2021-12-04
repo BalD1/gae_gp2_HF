@@ -24,7 +24,8 @@ void Game::initMusic()
 
 void Game::initPlayer()
 {
-	this->player = new Player("Samus", 0.5f, 1, 5, windowCenter.x / stride, windowCenter.y / stride, stride);
+	this->player = new Player("Samus", 5, 1, 5, windowCenter.x / stride, windowCenter.y / stride, stride);
+	this->player->setGravity(gravity);
 }
 
 #pragma endregion
@@ -57,6 +58,8 @@ void Game::update()
 			case sf::Event::KeyPressed:
 				checkPressedKey(this->gameEvent.key.code);
 				break;
+			case sf::Event::KeyReleased:
+				checkReleasedKey(this->gameEvent.key.code);
 
 		}
 	}
@@ -81,9 +84,21 @@ void Game::checkPressedKey(sf::Keyboard::Key key)
 		case sf::Keyboard::Escape:
 			closeWindow();
 			break;
-		case sf::Keyboard::Q:
+		case sf::Keyboard::Space:
+			player->manageEventInputs(key);
 			break;
-		case sf::Keyboard::D:
+	}
+}
+
+void Game::checkReleasedKey(sf::Keyboard::Key key)
+{
+	switch (key)
+	{
+		case sf::Keyboard::Escape:
+			closeWindow();
+			break;
+		case sf::Keyboard::Space:
+			player->manageEventInputsRelease(key);
 			break;
 	}
 }
@@ -95,6 +110,7 @@ void Game::processImGui()
 
 	ImGui::Begin("Tools", &toolActive, ImGuiWindowFlags_MenuBar);
 	ImGui::Text("Mouse : { x%d y%d }", sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+	ImGui::Value("Gravity : ", (float)gravity);
 	float vol = audioManager.musicVolume;
 	if (ImGui::DragFloat("Volume", &vol, 1, 0, 100))
 	{
