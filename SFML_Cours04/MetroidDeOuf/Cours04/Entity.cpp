@@ -13,8 +13,25 @@ Entity::Entity(float _cx, float _cy, int _stride)
 	this->stride = _stride;
 }
 
+Entity::Entity(float _cx, float _cy, int _stride, sf::Texture* _texture)
+{
+	init();
+	this->cx = _cx;
+	this->cy = _cy;
+	this->stride = _stride;
+
+	this->texture = _texture;
+	this->spr = new sf::Sprite();
+	this->spr->setTexture(*texture);
+	syncSprite(1);
+}
+
 Entity::~Entity()
 {
+	if (this->texture)
+		delete(texture);
+	if (this->spr)
+		delete(spr);
 }
 
 void Entity::setTag(const std::string _tag)

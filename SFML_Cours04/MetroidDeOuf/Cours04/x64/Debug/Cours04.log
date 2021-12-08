@@ -1,3 +1,5 @@
 ﻿D:\Visual Studio\2019\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: Le répertoire intermédiaire (x64\Debug\) contient des fichiers partagés provenant d'un autre projet (Cours04.vcxproj, Cours05.vcxproj). Cela peut entraîner un comportement de nettoyage et de regénération incorrect.
-  Character.cpp
+  World.cpp
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\World.cpp(18,33): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\World.cpp(18,28): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
   Cours04.vcxproj -> D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\x64\Debug\MetroidDeOuf.exe

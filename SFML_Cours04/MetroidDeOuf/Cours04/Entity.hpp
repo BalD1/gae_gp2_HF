@@ -33,7 +33,7 @@ public:
 	float				dx = 0.0f;
 	float				dy = 0.0f;
 
-	int					stride = 16;
+	int					stride = 32;
 
 #pragma endregion
 
@@ -43,6 +43,7 @@ public:
 #pragma region Funcs
 
 	Entity(float _cx, float _cy, int _stride);
+	Entity(float _cx, float _cy, int _stride, sf::Texture* _texture);
 
 	~Entity();
 

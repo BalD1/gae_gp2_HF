@@ -31,7 +31,7 @@ void Game::initPlayer()
 void Game::initWorld()
 {
 	this->world = new World();
-
+	this->world->placeWall(0,0);
 }
 
 #pragma endregion
@@ -39,6 +39,7 @@ void Game::initWorld()
 Game::Game()
 {
 	this->initWindow();
+	this->initWorld();
 	this->initPlayer();
 	this->initMusic();
 
@@ -151,6 +152,7 @@ void Game::render()
 {
 	this->window.clear();
 
+	this->world->render(this->window);
 	this->player->render(this->window);
 
 	ImGui::SFML::Render(window);
