@@ -2,7 +2,7 @@
 #include "Player.hpp"
 
 Player::Player( std::string _name, float _speed, float _invicibilityCD, float _maxHealth, float _cx, float _cy, int _stride) :
-	Entity(_name, _speed, _invicibilityCD, _maxHealth, _cx, _cy, _stride)
+	Character(_name, _speed, _invicibilityCD, _maxHealth, _cx, _cy, _stride)
 {
 	this->texture = new sf::Texture();
 	if (!texture->loadFromFile("Assets/Graphs/samus.png"))
@@ -73,8 +73,7 @@ void Player::update(float dt)
 {
 	this->dt = dt;
 	manageInputs();
-	Entity::update(dt);
-
+	Character::update(dt);
 }
 
 void Player::manageInputs()

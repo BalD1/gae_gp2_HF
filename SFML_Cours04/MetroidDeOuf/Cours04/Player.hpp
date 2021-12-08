@@ -1,9 +1,9 @@
 #pragma once
-#include "Entity.hpp"
-class Player : public Entity
+#include "Character.hpp"
+
+class Player : public Character
 {
 private:
-
 	//vars
 
 	float				jumpForce = -20;
