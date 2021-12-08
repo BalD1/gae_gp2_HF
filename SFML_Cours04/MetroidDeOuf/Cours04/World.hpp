@@ -18,6 +18,8 @@ public:
 
 	void placeWall(int _cx, int _cy);
 
+	bool hasCollision(int cx, int cy);
+
 	void render(sf::RenderTarget& target);
 
 };

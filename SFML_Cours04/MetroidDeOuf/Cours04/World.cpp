@@ -19,6 +19,13 @@ void World::placeWall(int _cx, int _cy)
 	walls[_cx][_cy] = wall;
 }
 
+bool World::hasCollision(int cx, int cy)
+{
+	if (walls[cx][cy] != nullptr)
+		return true;
+	return false;
+}
+
 void World::render(sf::RenderTarget& target)
 {
 	for (int i = 0; i < 10; i++)

@@ -58,7 +58,7 @@ public:
 
 	float deltaTime();
 
-
+	World* getWorld();
 	 sf::RenderWindow& getWindow() ;
 };
 

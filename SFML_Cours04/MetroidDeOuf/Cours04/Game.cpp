@@ -31,7 +31,8 @@ void Game::initPlayer()
 void Game::initWorld()
 {
 	this->world = new World();
-	this->world->placeWall(0,0);
+	for (int i = 0; i < 10; i++)
+		this->world->placeWall(i, i);
 }
 
 #pragma endregion
@@ -165,6 +166,11 @@ float Game::deltaTime()
 	return this->dt;
 }
 
+
+World* Game::getWorld()
+{
+	return this->world;
+}
 
 sf::RenderWindow& Game::getWindow()
 {
