@@ -2,6 +2,7 @@
 #include "stdafx.hpp"
 #include "AudioManager.hpp"
 #include "Player.hpp"
+#include "World.hpp"
 
 class Game
 {
@@ -20,14 +21,15 @@ private:
 
 	Player* player;
 
+	World* world;
+
 	// funcs
 
 	void initWindow();
 	void closeWindow();
-
 	void initMusic();
-
 	void initPlayer();
+	void initWorld();
 
 public:
 

@@ -24,8 +24,14 @@ void Game::initMusic()
 
 void Game::initPlayer()
 {
-	this->player = new Player("Samus", 5, 1, 5, windowCenter.x / stride, windowCenter.y / stride, stride);
+	this->player = new Player("Samus", 15, 1, 5, windowCenter.x / stride, windowCenter.y / stride, stride);
 	this->player->setGravity(gravity);
+}
+
+void Game::initWorld()
+{
+	this->world = new World();
+
 }
 
 #pragma endregion

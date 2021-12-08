@@ -53,6 +53,8 @@ void Player::im()
 	ImGui::Value("dx", (float)dx);
 	ImGui::SameLine();
 	ImGui::Value("dy", (float)dy);
+	ImGui::SameLine();
+	ImGui::Checkbox("Fly", &ignoreGravity);
 	ImGui::Value("Jump Timer", (float)jumpTimer);
 	ImGui::Value("Is Grounded", (bool)isGrounded);
 	ImGui::Value("State", (State)characterState);
@@ -114,6 +116,11 @@ void Player::manageEventInputsRelease(sf::Keyboard::Key key)
 
 void Player::jump()
 {
+	if (ignoreGravity)
+	{
+		dy = jumpForce;
+		return;
+	}
 	if (isGrounded && characterState != State::Jumping)
 	{
 		characterState = State::Jumping;
