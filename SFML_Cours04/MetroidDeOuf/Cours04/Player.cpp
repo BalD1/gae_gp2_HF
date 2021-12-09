@@ -10,6 +10,7 @@ Player::Player( std::string _name, float _speed, float _invicibilityCD, float _m
 
 	this->spr = new sf::Sprite();
 	this->spr->setTexture(*texture);
+	this->spr->setOrigin(this->texture->getSize().x / 2, this->texture->getSize().y / 2);
 	syncSprite(1);
 }
 

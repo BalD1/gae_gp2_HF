@@ -14,6 +14,7 @@ private:
 
 	bool				canJump = true;
 
+
 	//funcs
 
 public:

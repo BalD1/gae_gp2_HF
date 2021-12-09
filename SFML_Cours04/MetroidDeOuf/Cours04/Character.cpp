@@ -19,20 +19,25 @@ void Character::setGravity(float _gravity, bool _ignoreGravity)
 	this->ignoreGravity = _ignoreGravity;
 }
 
+void Character::setWorld(World* _worldRef)
+{
+	this->worldRef = _worldRef;
+}
+
 
 void Character::manageMovements(float dt)
 {
 	// x
 	rx += dx * dt;
 	dx *= 0.96f;
-	if (cx - 1 < 0 && rx <= 0.1f)
+	if (worldRef->hasCollision(cx - 1, cy) && rx <= 0.1f)
 	{
 		rx = 0.1f;
 		dx = 0;
 	}
-	if (cx + 1 > 36 && rx >= 0.7f)
+	if ((worldRef->hasCollision(cx + 2, cy) && rx >= 0.9f))
 	{
-		rx = 0.7f;
+		rx = 0.9f;
 		dx = 0;
 	}
 
@@ -42,14 +47,14 @@ void Character::manageMovements(float dt)
 	// y
 	ry += dy * dt;
 	dy *= 0.96f;
-	if (cy - 1 < 0 && ry <= 0.1f)
+	if (worldRef->hasCollision(cx, cy - 1) && ry <= 0.05f)
 	{
-		ry = 0.1f;
+		ry = 0.05f;
 		dy = 0;
 	}
-	if (cy + 1 > 23 && ry >= 0.7f)
+	if (worldRef->hasCollision(cx, cy + 1) && ry >= 0.05f)
 	{
-		ry = 0.7f;
+		ry = 0.05f;
 		dy = 0;
 	}
 
@@ -59,7 +64,7 @@ void Character::manageMovements(float dt)
 
 void Character::applyGravity(float dt)
 {
-	isGrounded = (cy + 1 > 23 && ry >= 0.7f);
+	isGrounded = (worldRef->hasCollision(cx, cy + 1) && ry >= 0.05f);
 	if (ignoreGravity || isGrounded || characterState == State::Jumping)
 		return;
 	float fallingSpeed = gravity * mass;

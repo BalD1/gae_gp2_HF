@@ -13,6 +13,10 @@ private:
 	sf::RenderWindow window;
 	sf::Event gameEvent;
 
+	sf::RectangleShape gridRct;
+	sf::Vector2f gridSize = { 25,25 };
+	bool renderGrid = false;
+
 	sf::Clock clock;
 	sf::Time elapsedTime;
 	float dt = 0;
@@ -22,6 +26,7 @@ private:
 	Player* player;
 
 	World* world;
+	Entity* walls[20][20];
 
 	// funcs
 
@@ -51,14 +56,16 @@ public:
 	void update();
 	void checkPressedKey(sf::Keyboard::Key key);
 	void checkReleasedKey(sf::Keyboard::Key key);
+	void checkPressedMouse(sf::Keyboard::Key key);
 
 	void processImGui();
 
+	void drawGrid();
 	void render();
 
 	float deltaTime();
 
 	World* getWorld();
-	 sf::RenderWindow& getWindow() ;
+	sf::RenderWindow& getWindow();
 };
 

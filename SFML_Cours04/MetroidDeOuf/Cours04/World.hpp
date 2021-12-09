@@ -7,7 +7,8 @@ private:
 
 	sf::Texture*			wallTexture = nullptr;
 
-	Entity*					walls[20][20] = {};
+	int						mapLength = 50;
+	Entity*					walls[50][50];
 
 	int						stride = 32;
 

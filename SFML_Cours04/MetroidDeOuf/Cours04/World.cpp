@@ -15,22 +15,31 @@ World::~World()
 
 void World::placeWall(int _cx, int _cy)
 {
+	if (walls[_cx][_cy] != nullptr)
+		return;
+	if (_cx > mapLength || _cy > mapLength)
+		return;
+
 	Entity* wall = new Entity(_cx, _cy, stride, wallTexture);
 	walls[_cx][_cy] = wall;
 }
 
 bool World::hasCollision(int cx, int cy)
 {
+	if (this == nullptr || walls == nullptr)
+		return false;
+
 	if (walls[cx][cy] != nullptr)
 		return true;
+
 	return false;
 }
 
 void World::render(sf::RenderTarget& target)
 {
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < mapLength; i++)
 	{
-		for (int j = 0; j < 10; j++)
+		for (int j = 0; j < mapLength; j++)
 		{
 			if (walls[i][j] != nullptr)
 				walls[i][j]->render(target);

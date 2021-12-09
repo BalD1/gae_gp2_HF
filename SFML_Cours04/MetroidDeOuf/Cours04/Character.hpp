@@ -1,5 +1,7 @@
 #pragma once
 #include "Entity.hpp"
+#include "World.hpp"
+
 class Character : public Entity
 {
 private:
@@ -24,11 +26,14 @@ public:
 	enum				State { Idle, Walking, Jumping, Falling };
 	State				characterState = Idle;
 
+	World*				worldRef = nullptr;
+
 
 	Character(std::string _name, float _speed, float _invicibilityCD, float _maxHealth, float _cx, float _cy, int _stride);
 	~Character();
 
 	void setGravity(float _gravity, bool _ignoreGravity = false);
+	void setWorld(World* _worldRef);
 
 	void manageMovements(float dt);
 	void applyGravity(float dt);

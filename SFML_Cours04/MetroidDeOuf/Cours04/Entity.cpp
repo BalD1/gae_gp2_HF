@@ -23,6 +23,7 @@ Entity::Entity(float _cx, float _cy, int _stride, sf::Texture* _texture)
 	this->texture = _texture;
 	this->spr = new sf::Sprite();
 	this->spr->setTexture(*texture);
+	this->spr->setOrigin(this->texture->getSize().x / 2, this->texture->getSize().y / 2);
 	syncSprite(1);
 }
 

@@ -24,15 +24,17 @@ void Game::initMusic()
 
 void Game::initPlayer()
 {
-	this->player = new Player("Samus", 15, 1, 5, windowCenter.x / stride, windowCenter.y / stride, stride);
-	this->player->setGravity(gravity);
+	this->player = new Player("Samus", 15, 1, 5, 5,5, stride);
+	this->player->setWorld(world);
+	this->player->setGravity(gravity, true);
 }
 
 void Game::initWorld()
 {
 	this->world = new World();
-	for (int i = 0; i < 10; i++)
-		this->world->placeWall(i, i);
+	int floor = 24;
+	for (int i = 0; i < 20; i++)
+		this->world->placeWall(i, floor);
 }
 
 #pragma endregion
@@ -43,6 +45,12 @@ Game::Game()
 	this->initWorld();
 	this->initPlayer();
 	this->initMusic();
+
+	gridRct = sf::RectangleShape(sf::Vector2f(stride, stride));
+	gridRct.setOutlineColor(sf::Color::White);
+	gridRct.setOutlineThickness(0.9f);
+	gridRct.setFillColor(sf::Color::Transparent);
+	gridRct.setOrigin(stride / 2, stride / 2);
 
 	//tmp
 	sf::err().rdbuf(NULL);
@@ -68,10 +76,14 @@ void Game::update()
 				break;
 			case sf::Event::KeyReleased:
 				checkReleasedKey(this->gameEvent.key.code);
+				break;
+
+			case sf::Event::MouseButtonPressed:
+				checkPressedMouse(gameEvent.key.code);
+				break;
 
 		}
 	}
-
 
 	//dt
 	elapsedTime = clock.getElapsedTime();
@@ -95,6 +107,9 @@ void Game::checkPressedKey(sf::Keyboard::Key key)
 		case sf::Keyboard::Space:
 			player->manageEventInputs(key);
 			break;
+
+		default:
+			break;
 	}
 }
 
@@ -111,6 +126,20 @@ void Game::checkReleasedKey(sf::Keyboard::Key key)
 	}
 }
 
+void Game::checkPressedMouse(sf::Keyboard::Key key)
+{
+	switch (key)
+	{
+		case sf::Mouse::Left:
+			if (!ImGui::IsWindowHovered(ImGuiHoveredFlags_AnyWindow))
+			{
+				sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+				world->placeWall(mousePosition.x / stride, mousePosition.y / stride);
+			}
+		break;
+	}
+}
+
 void Game::processImGui()
 {
 	bool toolActive;
@@ -124,7 +153,12 @@ void Game::processImGui()
 	{
 		audioManager.changeMusicVolume(vol);
 	}
-
+	ImGui::Checkbox("Draw grid", &renderGrid);
+	if (renderGrid)
+	{
+		ImGui::DragFloat("Grid X", &gridSize.x, 1, 0); 
+		ImGui::DragFloat("Grid Y", &gridSize.y, 1, 0);
+	}
 
 	if (ImGui::BeginMenuBar())
 	{
@@ -149,12 +183,27 @@ void Game::processImGui()
 	ImGui::End();
 }
 
+void Game::drawGrid()
+{
+	for (int y = 0; y < gridSize.y * stride; y += stride) 
+	{
+		for (int x = 0; x < gridSize.x * stride; x += stride) 
+		{
+			gridRct.setPosition(x + stride, y + stride);
+			window.draw(gridRct);
+		}
+	}
+}
+
 void Game::render()
 {
 	this->window.clear();
 
 	this->world->render(this->window);
 	this->player->render(this->window);
+
+	if (renderGrid)
+		drawGrid();
 
 	ImGui::SFML::Render(window);
 

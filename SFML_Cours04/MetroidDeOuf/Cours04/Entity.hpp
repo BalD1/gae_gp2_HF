@@ -1,8 +1,5 @@
 #pragma once
 #include "stdafx.hpp"
-#include "World.hpp"
-
-class Hitbox;
 
 class Entity
 {
