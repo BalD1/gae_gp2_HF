@@ -6,6 +6,7 @@ class World
 private:
 
 	sf::Texture*			wallTexture = nullptr;
+	sf::CircleShape			cs;
 
 	int						mapLength = 50;
 	Entity*					walls[50][50];

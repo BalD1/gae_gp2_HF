@@ -21,6 +21,8 @@ void World::placeWall(int _cx, int _cy)
 		return;
 
 	Entity* wall = new Entity(_cx, _cy, stride, wallTexture);
+	cs = sf::CircleShape(2);
+	cs.setFillColor(sf::Color::Red);
 	walls[_cx][_cy] = wall;
 }
 
@@ -42,7 +44,11 @@ void World::render(sf::RenderTarget& target)
 		for (int j = 0; j < mapLength; j++)
 		{
 			if (walls[i][j] != nullptr)
+			{
+				cs.setPosition(walls[i][j]->spr->getPosition());
 				walls[i][j]->render(target);
+				target.draw(cs);
+			}
 		}
 	}
 }

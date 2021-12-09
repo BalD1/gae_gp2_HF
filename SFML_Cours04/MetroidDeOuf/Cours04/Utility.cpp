@@ -102,6 +102,16 @@ sf::Vector2f Reflect(sf::Vector2f a, sf::Vector2f b)
 	return a;
 }
 
+sf::Vector2f vectoriToVectorf(sf::Vector2i v)
+{
+	return sf::Vector2f(v.x, v.y);
+}
+
+sf::Vector2i vectorfToVectori(sf::Vector2f v)
+{
+	return sf::Vector2i(v.x, v.y);
+}
+
 #pragma endregion
 
 float catmul(float p0, float p1, float p2, float p3, float t)

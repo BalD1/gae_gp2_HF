@@ -17,6 +17,10 @@ private:
 	sf::Vector2f gridSize = { 25,25 };
 	bool renderGrid = false;
 
+	bool debugMouse = false;
+
+	sf::CircleShape mouseShape;
+
 	sf::Clock clock;
 	sf::Time elapsedTime;
 	float dt = 0;
@@ -35,6 +39,7 @@ private:
 	void initMusic();
 	void initPlayer();
 	void initWorld();
+	void initGrid();
 
 public:
 
