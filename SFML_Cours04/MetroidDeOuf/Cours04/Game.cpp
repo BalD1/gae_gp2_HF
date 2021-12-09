@@ -11,6 +11,7 @@ void Game::initWindow()
 
 	windowSize = sf::Vector2f(window.getSize().x, window.getSize().y);
 	windowCenter = sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2);
+
 }
 
 void Game::closeWindow()
@@ -33,6 +34,7 @@ void Game::initPlayer()
 void Game::initWorld()
 {
 	this->world = new World();
+	world->gravity = this->gravity;
 	int floor = 24;
 	for (int i = 0; i < 20; i++)
 		this->world->placeWall(i, floor);
@@ -164,7 +166,11 @@ void Game::processImGui()
 		if (ImGui::SliderFloat("Shape size", &rad, 1, 10))
 			mouseShape.setRadius(rad);
 	}
-	ImGui::Value("Gravity : ", (float)gravity);
+	if (ImGui::DragFloat("Gravity", &gravity, 0.05f, -5, 5))
+	{
+		world->gravity = this->gravity;
+	}
+	
 	float vol = audioManager.musicVolume;
 	if (ImGui::DragFloat("Volume", &vol, 1, 0, 100))
 	{

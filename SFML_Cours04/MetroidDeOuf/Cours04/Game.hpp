@@ -50,7 +50,7 @@ public:
 
 	int						stride = 32;
 
-	const float				gravity = 0.7f;
+	float					gravity = 0.7f;
 
 	// funcs
 

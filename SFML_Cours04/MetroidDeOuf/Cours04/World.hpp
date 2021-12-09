@@ -11,7 +11,10 @@ private:
 
 	int						stride = 32;
 
+
 public:
+
+	float					gravity = 0.7f;
 
 	std::vector<Entity*>	entities;
 

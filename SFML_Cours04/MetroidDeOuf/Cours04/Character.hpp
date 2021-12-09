@@ -15,7 +15,6 @@ public:
 	float				speed = 0.5f;
 	float				invincibility_CD = 1;
 	float				invincibility_Timer = 0;
-	float				gravity = 0.5f;
 	float				mass = 1;
 
 	bool				alive = true;

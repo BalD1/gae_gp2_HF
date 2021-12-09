@@ -1,4 +1,5 @@
 #include "Character.hpp"
+#include "Game.hpp"
 
 Character::Character(std::string _name, float _speed, float _invicibilityCD, float _maxHealth, float _cx, float _cy, int _stride) :
 	Entity(_cx, _cy, _stride)
@@ -15,7 +16,6 @@ Character::~Character()
 
 void Character::setGravity(float _gravity, bool _ignoreGravity)
 {
-	this->gravity = _gravity;
 	this->ignoreGravity = _ignoreGravity;
 }
 
@@ -60,7 +60,7 @@ void Character::manageMovements(float dt)
 		if (isColliding(cx + 2, cy)) 
 		{
 			dx = 0;
-			rx = 0.9;
+			rx = 0.95;
 		}
 		else {
 			rx--;
@@ -72,7 +72,7 @@ void Character::manageMovements(float dt)
 		if (isColliding(cx - 1, cy))
 		{
 			dx = 0;
-			rx = 0.1;
+			rx = 0.05;
 		}
 		else {
 			rx++;
@@ -88,7 +88,7 @@ void Character::manageMovements(float dt)
 		if (isColliding(cx, cy + 1))
 		{
 			dy = 0;
-			ry = 0.9f;
+			ry = 0.95f;
 		}
 		else {
 			ry--;
@@ -100,7 +100,7 @@ void Character::manageMovements(float dt)
 		if (isColliding(cx, cy - 1)) 
 		{
 			dy = 0.0f;
-			ry = 0.1f;
+			ry = 0.05f;
 		}
 		else {
 			ry++;
@@ -114,7 +114,7 @@ void Character::applyGravity(float dt)
 	isGrounded = (isColliding(cx, cy + 1));
 	if (ignoreGravity || isGrounded || characterState == State::Jumping)
 		return;
-	float fallingSpeed = gravity * mass;
+	float fallingSpeed = worldRef->gravity * mass;
 	dy += fallingSpeed;
 	moved = true;
 }

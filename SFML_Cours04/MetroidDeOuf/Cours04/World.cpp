@@ -17,7 +17,12 @@ void World::placeWall(int _cx, int _cy)
 {
 	if (_cx > mapLength || _cy > mapLength)
 		return;
-
+	for (size_t i = 0; i < entities.size(); ++i)
+	{
+		if (entities[i]->cx == _cx && entities[i]->cy == _cy)
+			return;
+	}
+	printf("%d %d \n", _cx, _cy);
 	Entity* wall = new Entity(_cx, _cy, stride, wallTexture);
 	entities.push_back(wall);
 }
