@@ -35,6 +35,7 @@ public:
 	void setGravity(float _gravity, bool _ignoreGravity = false);
 	void setWorld(World* _worldRef);
 
+	bool isColliding(float _cx, float _cy);
 	void manageMovements(float dt);
 	void applyGravity(float dt);
 	void manageState();

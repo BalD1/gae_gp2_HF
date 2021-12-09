@@ -29,8 +29,8 @@ Entity::Entity(float _cx, float _cy, int _stride, sf::Texture* _texture)
 
 Entity::~Entity()
 {
-	if (this->texture)
-		delete(texture);
+	if (this == nullptr)
+		return;
 	if (this->spr)
 		delete(spr);
 }

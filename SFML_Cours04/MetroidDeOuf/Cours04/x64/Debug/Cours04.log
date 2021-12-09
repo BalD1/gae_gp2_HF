@@ -1,17 +1,6 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(491,5): warning MSB8028: Le répertoire intermédiaire (x64\Debug\) contient des fichiers partagés provenant d'un autre projet (Cours04.vcxproj, Cours05.vcxproj). Cela peut entraîner un comportement de nettoyage et de régénération incorrect.
-  Entity.cpp
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Entity.cpp(11,13): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Entity.cpp(12,13): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Entity.cpp(19,13): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Entity.cpp(20,13): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Entity.cpp(26,82): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
-          with
-          [
-              T=unsigned int
-          ]
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Entity.cpp(26,50): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
-          with
-          [
-              T=unsigned int
-          ]
+  World.cpp
+D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\World.cpp(21,33): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\World.cpp(21,28): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+  LINK : D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\x64\Debug\MetroidDeOuf.exe introuvable ou non généré par la dernière édition de liens incrémentielle ; édition de liens complète en cours
   Cours04.vcxproj -> D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\x64\Debug\MetroidDeOuf.exe

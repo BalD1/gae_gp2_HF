@@ -25,46 +25,93 @@ void Character::setWorld(World* _worldRef)
 }
 
 
+bool Character::isColliding(float _cx, float _cy)
+{
+	if (_cx <= 0)
+		return true;
+	if (_cy <= 0)
+		return true;
+	if (_cx >= 1280 / stride)
+		return true;
+	if (_cy >= 960 / stride)
+		return true;
+
+	if (worldRef != nullptr)
+	{
+		for (size_t i = 0; i < worldRef->entities.size(); ++i)
+		{
+			if (worldRef->entities[i]->cx == _cx && worldRef->entities[i]->cy == _cy)
+				return true;
+		}
+	}
+
+	
+
+	return false;
+}
+
 void Character::manageMovements(float dt)
 {
 	// x
 	rx += dx * dt;
 	dx *= 0.96f;
-	if (worldRef->hasCollision(cx - 1, cy) && rx <= 0.1f)
+	while (rx >= 1) 
 	{
-		rx = 0.1f;
-		dx = 0;
+		if (isColliding(cx + 2, cy)) 
+		{
+			dx = 0;
+			rx = 0.9;
+		}
+		else {
+			rx--;
+			cx++;
+		}
 	}
-	if ((worldRef->hasCollision(cx + 2, cy) && rx >= 0.9f))
+	while (rx <= 0) 
 	{
-		rx = 0.9f;
-		dx = 0;
+		if (isColliding(cx - 1, cy))
+		{
+			dx = 0;
+			rx = 0.1;
+		}
+		else {
+			rx++;
+			cx--;
+		}
 	}
-
-	while (rx > 1) { rx--; cx++; }
-	while (rx < 0) { rx++; cx--; }
 
 	// y
 	ry += dy * dt;
 	dy *= 0.96f;
-	if (worldRef->hasCollision(cx, cy - 1) && ry <= 0.05f)
+	while (ry >= 1) 
 	{
-		ry = 0.05f;
-		dy = 0;
+		if (isColliding(cx, cy + 1))
+		{
+			dy = 0;
+			ry = 0.9f;
+		}
+		else {
+			ry--;
+			cy++;
+		}
 	}
-	if (worldRef->hasCollision(cx, cy + 1) && ry >= 0.05f)
+	while (ry <= 0) 
 	{
-		ry = 0.05f;
-		dy = 0;
+		if (isColliding(cx, cy - 1)) 
+		{
+			dy = 0.0f;
+			ry = 0.1f;
+		}
+		else {
+			ry++;
+			cy--;
+		}
 	}
-
-	while (ry > 1) { ry--; cy++; }
-	while (ry < 0) { ry++; cy--; }
 }
 
 void Character::applyGravity(float dt)
 {
-	isGrounded = (worldRef->hasCollision(cx, cy + 1) && ry >= 0.05f);
+	isGrounded = (isColliding(cx, cy + 1));
 	if (ignoreGravity || isGrounded || characterState == State::Jumping)
 		return;
 	float fallingSpeed = gravity * mass;

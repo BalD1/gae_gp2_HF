@@ -6,6 +6,7 @@
 void Game::initWindow()
 {
 	this->window.create(sf::VideoMode(1280, 960), "MetroidDeOuf", sf::Style::Close | sf::Style::Titlebar);
+
 	ImGui::SFML::Init(this->window);
 
 	windowSize = sf::Vector2f(window.getSize().x, window.getSize().y);
@@ -35,6 +36,7 @@ void Game::initWorld()
 	int floor = 24;
 	for (int i = 0; i < 20; i++)
 		this->world->placeWall(i, floor);
+
 }
 
 void Game::initGrid()

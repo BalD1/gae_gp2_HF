@@ -31,6 +31,9 @@ public:
 	float				dx = 0.0f;
 	float				dy = 0.0f;
 
+	float				frict_x = 0.67f;
+	float				frict_y = 0.65f;
+
 	int					stride = 32;
 
 #pragma endregion
