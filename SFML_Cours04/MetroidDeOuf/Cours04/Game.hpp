@@ -29,8 +29,13 @@ private:
 	AudioManager audioManager;
 
 	Player* player;
+	sf::Texture* textures[2];
+	const char* texturesNames[2] = { "redTexture", "purpleTexture"};
+	std::vector<Character*> charactersList;
 
 	World* world;
+
+	int imIdx = 0;
 
 	// funcs
 
@@ -39,6 +44,7 @@ private:
 	void initMusic();
 	void initPlayer();
 	void initWorld();
+	void initEnemies();
 	void initGrid();
 
 public:

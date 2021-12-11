@@ -117,6 +117,25 @@ void Character::manageState()
 	moved = (!characterState == State::Idle);
 }
 
+void Character::takeDamages(float rawDamages)
+{
+	this->currentHealth -= rawDamages;
+	if (currentHealth <= 0)
+	{
+		kill();
+	}
+}
+
+void Character::heal(float rawHeal)
+{
+	this->currentHealth = clamp(this->currentHealth + rawHeal, 0, this->maxHealth);
+}
+
+void Character::kill()
+{
+	delete(this);
+}
+
 void Character::update(float dt)
 {
 	applyGravity(dt);

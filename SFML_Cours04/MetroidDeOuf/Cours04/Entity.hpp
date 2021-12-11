@@ -48,6 +48,7 @@ public:
 
 	~Entity();
 
+	void setTexture(sf::Texture* _texture);
 	void setTag(const std::string _tag);
 	const std::string getTag();
 

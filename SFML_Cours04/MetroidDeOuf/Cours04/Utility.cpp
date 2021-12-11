@@ -125,3 +125,12 @@ float catmul(float p0, float p1, float p2, float p3, float t)
 
 	return 0.5 * q;
 }
+
+float clamp(float v, const float min, const float max)
+{
+	if (v > max)
+		v = max;
+	if (v < min)
+		v = min;
+	return v;
+}

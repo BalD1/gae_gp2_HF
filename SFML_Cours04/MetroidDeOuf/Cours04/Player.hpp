@@ -6,7 +6,7 @@ class Player : public Character
 private:
 	//vars
 
-	float				jumpForce = -20;
+	float				jumpForce = 20;
 	float				jumpLength = 0.5f;
 	float				jumpTimer = 0;
 
@@ -38,6 +38,9 @@ public:
 	void manageEventInputsRelease(sf::Keyboard::Key key);
 	void jump();
 	void jumpBehaviour();
+
+	void takeDamages(float rawDamages);
+	void kill();
 
 };
 

@@ -8,11 +8,12 @@ private:
 	sf::Texture*			wallTexture = nullptr;
 
 	int						mapLength = 50;
-
 	int						stride = 32;
 
 
 public:
+
+	bool					worldInitialized = false;
 
 	float					gravity = 0.7f;
 

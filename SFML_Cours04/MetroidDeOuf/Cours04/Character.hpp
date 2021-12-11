@@ -42,6 +42,10 @@ public:
 	void applyGravity(float dt);
 	void manageState();
 
+	void takeDamages(float rawDamages);
+	void heal(float rawHeal);
+	void kill();
+
 	void update(float dt);
 
 };

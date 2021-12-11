@@ -1,21 +1,4 @@
 ﻿D:\Visual Studio\2019\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: Le répertoire intermédiaire (x64\Debug\) contient des fichiers partagés provenant d'un autre projet (Cours04.vcxproj, Cours05.vcxproj). Cela peut entraîner un comportement de nettoyage et de regénération incorrect.
-  Character.cpp
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Character.cpp(63,26): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Character.cpp(63,21): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Character.cpp(68,27): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Character.cpp(68,22): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Character.cpp(68,71): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Character.cpp(68,66): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Character.cpp(81,26): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Character.cpp(81,19): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Character.cpp(81,73): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Character.cpp(81,65): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Character.cpp(86,26): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Character.cpp(86,19): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Character.cpp(86,74): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Character.cpp(86,66): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Character.cpp(100,35): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Character.cpp(100,28): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
   Game.cpp
 D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(14,64): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
           with
@@ -53,18 +36,20 @@ D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(15,49)
           [
               T=float
           ]
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(48,52): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(58,35): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(68,52): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
           with
           [
               T=float
           ]
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(48,44): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(68,44): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
           with
           [
               T=float
           ]
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(216,38): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(216,26): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-  MetroidDeOuf.cpp
-  Génération de code en cours...
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(293,54): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(293,46): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(295,41): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(343,38): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(343,26): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
   Cours04.vcxproj -> D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\x64\Debug\MetroidDeOuf.exe

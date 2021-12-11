@@ -34,6 +34,14 @@ Entity::~Entity()
 		delete(spr);
 }
 
+void Entity::setTexture(sf::Texture* _texture)
+{
+	this->texture = _texture;
+	this->spr = new sf::Sprite();
+	this->spr->setTexture(*texture);
+	syncSprite(1);
+}
+
 void Entity::setTag(const std::string _tag)
 {
 	this->tag = _tag;
@@ -48,6 +56,7 @@ void Entity::syncSprite(float dt)
 {
 	xx = (cx + rx) * stride;
 	yy = (cy + ry) * stride;
+	if (this->spr != nullptr)
 	this->spr->setPosition(xx, yy);
 }
 

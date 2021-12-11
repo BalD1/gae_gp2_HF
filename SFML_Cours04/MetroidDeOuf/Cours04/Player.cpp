@@ -36,6 +36,7 @@ void Player::im()
 	moved |= (ImGui::DragFloat("rx", &rx, 0.05f));
 	moved |= (ImGui::DragFloat("ry", &ry, 0.05f));
 	ImGui::DragFloat("Speed", &speed, 1, 0, 100);
+	ImGui::DragFloat("Jump Force", &jumpForce, 1, 1, 100);
 	ImGui::DragFloat("Friction x", &frct_x, 0.05f, 0, 1);
 	ImGui::DragFloat("Friction y", &frct_y, 0.05f, 0, 1);
 	ImGui::Dummy(ImVec2(40, 0));
@@ -135,14 +136,14 @@ void Player::jump()
 {
 	if (ignoreGravity)
 	{
-		dy = jumpForce;
+		dy = jumpForce * -1;
 		return;
 	}
 	if (isGrounded && characterState != State::Jumping)
 	{
 		characterState = State::Jumping;
 		jumpTimer = jumpLength;
-		dy = jumpForce;
+		dy = jumpForce * -1;
 	}
 }
 
@@ -150,7 +151,7 @@ void Player::jumpBehaviour()
 {
 	if (jumpTimer > 0.01f)
 	{
-		dy = jumpForce;
+		dy = jumpForce * -1;
 		jumpTimer -= dt;
 	}
 	else
@@ -158,4 +159,18 @@ void Player::jumpBehaviour()
 		characterState = State::Falling;
 		jumpTimer = 0;
 	}
+}
+
+void Player::takeDamages(float rawDamages)
+{
+	this->currentHealth -= rawDamages;
+	if (currentHealth <= 0)
+	{
+		kill();
+	}
+}
+
+void Player::kill()
+{
+	this->alive = false;
 }
