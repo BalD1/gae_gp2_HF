@@ -2,6 +2,7 @@
 #include "stdafx.hpp"
 #include "AudioManager.hpp"
 #include "Player.hpp"
+#include "Character.hpp"
 #include "World.hpp"
 
 class Game
@@ -30,7 +31,6 @@ private:
 	Player* player;
 
 	World* world;
-	Entity* walls[20][20];
 
 	// funcs
 
@@ -50,7 +50,7 @@ public:
 
 	int						stride = 32;
 
-	float					gravity = 0.7f;
+	float					gravity = 0.95f;
 
 	// funcs
 

@@ -23,7 +23,6 @@ Entity::Entity(float _cx, float _cy, int _stride, sf::Texture* _texture)
 	this->texture = _texture;
 	this->spr = new sf::Sprite();
 	this->spr->setTexture(*texture);
-	this->spr->setOrigin(this->texture->getSize().x / 2, this->texture->getSize().y / 2);
 	syncSprite(1);
 }
 
@@ -47,8 +46,8 @@ const std::string Entity::getTag()
 
 void Entity::syncSprite(float dt)
 {
-	xx = std::int16_t((cx + rx) * stride);
-	yy = std::int16_t((cy + ry) * stride);
+	xx = (cx + rx) * stride;
+	yy = (cy + ry) * stride;
 	this->spr->setPosition(xx, yy);
 }
 

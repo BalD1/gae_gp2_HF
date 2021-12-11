@@ -6,6 +6,8 @@
 void Game::initWindow()
 {
 	this->window.create(sf::VideoMode(1280, 960), "MetroidDeOuf", sf::Style::Close | sf::Style::Titlebar);
+	window.setVerticalSyncEnabled(true);
+	this->window.setFramerateLimit(60);
 
 	ImGui::SFML::Init(this->window);
 
@@ -26,7 +28,7 @@ void Game::initMusic()
 
 void Game::initPlayer()
 {
-	this->player = new Player("Samus", 15, 1, 5, 5,5, stride);
+	this->player = new Player("Samus", 5, 5, stride);
 	this->player->setWorld(world);
 	this->player->setGravity(gravity);
 }
@@ -47,7 +49,6 @@ void Game::initGrid()
 	gridRct.setOutlineColor(sf::Color::White);
 	gridRct.setOutlineThickness(0.9f);
 	gridRct.setFillColor(sf::Color::Transparent);
-	gridRct.setOrigin(stride / 2, stride / 2);
 }
 
 #pragma endregion
@@ -61,7 +62,6 @@ Game::Game()
 	this->initGrid();
 
 	mouseShape = SetCircle(3, sf::Color::Magenta, vectoriToVectorf(sf::Mouse::getPosition(window)));
-	mouseShape.setOrigin(mouseShape.getRadius(), mouseShape.getRadius());
 
 	//tmp
 	sf::err().rdbuf(NULL);
@@ -75,9 +75,8 @@ void Game::update()
 {
 	mouseShape.setPosition(vectoriToVectorf(sf::Mouse::getPosition(window)));
 	//dt
-	elapsedTime = clock.getElapsedTime();
+	elapsedTime = clock.restart();
 	dt = elapsedTime.asSeconds();
-	clock.restart();
 
 	//updates
 	player->update(dt);
@@ -162,6 +161,7 @@ void Game::processImGui()
 	if (debugMouse)
 	{
 		ImGui::Text("Mouse : { x%d y%d }", sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+		ImGui::Text("Mouse cell : { dx%d dy%d }", sf::Mouse::getPosition(window).x / stride, sf::Mouse::getPosition(window).y / stride);
 		float rad = mouseShape.getRadius();
 		if (ImGui::SliderFloat("Shape size", &rad, 1, 10))
 			mouseShape.setRadius(rad);

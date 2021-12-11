@@ -24,6 +24,7 @@ public:
 
 	//funcs
 
+	Player(std::string _name, float _cx, float _cy, int _stride);
 	Player(std::string _name, float _speed, float _invicibilityCD, float _maxHealth, float _cx, float _cy, int _stride);
 	~Player();
 
@@ -36,6 +37,7 @@ public:
 	void manageEventInputs(sf::Keyboard::Key key);
 	void manageEventInputsRelease(sf::Keyboard::Key key);
 	void jump();
+	void jumpBehaviour();
 
 };
 

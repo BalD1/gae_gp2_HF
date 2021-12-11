@@ -1,6 +1,18 @@
 #include "stdafx.hpp"
 #include "Player.hpp"
 
+Player::Player(std::string _name, float _cx, float _cy, int _stride) :
+	Character(_name, _cx, _cy, _stride)
+{
+	this->texture = new sf::Texture();
+	if (!texture->loadFromFile("Assets/Graphs/samus.png"))
+		printf("Samus texture could not be loaded in Assets/Graphs/samus.png");
+
+	this->spr = new sf::Sprite();
+	this->spr->setTexture(*texture);
+	syncSprite(1);
+}
+
 Player::Player( std::string _name, float _speed, float _invicibilityCD, float _maxHealth, float _cx, float _cy, int _stride) :
 	Character(_name, _speed, _invicibilityCD, _maxHealth, _cx, _cy, _stride)
 {
@@ -10,7 +22,6 @@ Player::Player( std::string _name, float _speed, float _invicibilityCD, float _m
 
 	this->spr = new sf::Sprite();
 	this->spr->setTexture(*texture);
-	this->spr->setOrigin(this->texture->getSize().x / 2, this->texture->getSize().y / 2);
 	syncSprite(1);
 }
 
@@ -25,6 +36,8 @@ void Player::im()
 	moved |= (ImGui::DragFloat("rx", &rx, 0.05f));
 	moved |= (ImGui::DragFloat("ry", &ry, 0.05f));
 	ImGui::DragFloat("Speed", &speed, 1, 0, 100);
+	ImGui::DragFloat("Friction x", &frct_x, 0.05f, 0, 1);
+	ImGui::DragFloat("Friction y", &frct_y, 0.05f, 0, 1);
 	ImGui::Dummy(ImVec2(40, 0));
 	ImGui::SameLine();
 	if (ImGui::Button("Step up"))
@@ -75,6 +88,9 @@ void Player::update(float dt)
 	this->dt = dt;
 	manageInputs();
 	Character::update(dt);
+
+	if (characterState == State::Jumping)
+		jumpBehaviour();
 }
 
 void Player::manageInputs()
@@ -108,6 +124,7 @@ void Player::manageEventInputsRelease(sf::Keyboard::Key key)
 	{
 		case sf::Keyboard::Space:
 			characterState = State::Falling;
+			jumpTimer = 0;
 			break;
 		default:
 			break;
@@ -127,17 +144,18 @@ void Player::jump()
 		jumpTimer = jumpLength;
 		dy = jumpForce;
 	}
-	if (characterState == State::Jumping)
+}
+
+void Player::jumpBehaviour()
+{
+	if (jumpTimer > 0.01f)
 	{
-		if (jumpTimer > 0.01f)
-		{
-			dy = jumpForce;
-			jumpTimer -= dt;
-		}
-		else
-		{
-			characterState = State::Falling;
-			jumpTimer = 0;
-		}
+		dy = jumpForce;
+		jumpTimer -= dt;
+	}
+	else
+	{
+		characterState = State::Falling;
+		jumpTimer = 0;
 	}
 }

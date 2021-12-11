@@ -12,10 +12,13 @@ public:
 	std::string			name = "NONAME";
 	float				maxHealth = 5;
 	float				currentHealth = 5;
-	float				speed = 0.5f;
+	float				speed = 7.5f;
 	float				invincibility_CD = 1;
 	float				invincibility_Timer = 0;
 	float				mass = 1;
+	float				frct_x = 0.86f;
+	float				frct_y = 0.96f;
+	float				fallingSpeedFactor = 3;
 
 	bool				alive = true;
 	bool				moved = false;
@@ -27,7 +30,7 @@ public:
 
 	World*				worldRef = nullptr;
 
-
+	Character(std::string _name, float _cx, float _cy, int _stride);
 	Character(std::string _name, float _speed, float _invicibilityCD, float _maxHealth, float _cx, float _cy, int _stride);
 	~Character();
 
@@ -38,8 +41,6 @@ public:
 	void manageMovements(float dt);
 	void applyGravity(float dt);
 	void manageState();
-
-	void syncSprite(float dt);
 
 	void update(float dt);
 
