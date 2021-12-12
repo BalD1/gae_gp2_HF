@@ -1,6 +1,8 @@
 #pragma once
 #include "Character.hpp"
 
+class Game;
+
 class Player : public Character
 {
 private:
@@ -21,12 +23,16 @@ public:
 
 	//vars
 
+	Game*				gameRef = nullptr;
+
 
 	//funcs
 
 	Player(std::string _name, float _cx, float _cy, int _stride);
 	Player(std::string _name, float _speed, float _invicibilityCD, float _maxHealth, float _cx, float _cy, int _stride);
 	~Player();
+
+	void setGame(Game* _gameRef);
 
 	void im();
 

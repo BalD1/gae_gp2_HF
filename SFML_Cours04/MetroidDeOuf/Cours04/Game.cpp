@@ -30,6 +30,7 @@ void Game::initPlayer()
 {
 	this->player = new Player("Samus", 7,7, stride);
 	this->player->setWorld(world);
+	this->player->setGame(this);
 	this->player->setGravity(gravity);
 }
 
@@ -119,11 +120,6 @@ void Game::update()
 	if (world->worldInitialized)
 	{
 		player->update(dt);
-		if (player->currentHealth <= 0)
-		{
-			player->currentHealth = 1;
-			gameOver();
-		}
 
 		for (Character* c : charactersList)
 			c->update(dt);
@@ -235,6 +231,7 @@ void Game::processImGui()
 			ImGui::DragFloat("Grid X", &gridSize.x, 1, 0);
 			ImGui::DragFloat("Grid Y", &gridSize.y, 1, 0);
 		}
+		ImGui::Checkbox("Show Death Zones", &world->renderDeathZones);
 	}
 	else if (imIdx == 1)
 	{
@@ -427,11 +424,36 @@ sf::RenderWindow& Game::getWindow()
 	return this->window;
 }
 
-void Game::gameOver()
+void Game::setGameState(GameState _GS)
 {
-	stateText.setFont(baseFont);
-	stateText.setPosition(windowCenter.x - 100,100);
-	stateText.setCharacterSize(100);
-	stateText.setFillColor(sf::Color::Yellow);
-	stateText.setString("Vous mort");
+	this->GS = _GS;
+	switch (GS)
+	{
+	case Game::MainMenu:
+		break;
+
+	case Game::InGame:
+		stateText.setFillColor(sf::Color::Transparent);
+		break;
+
+	case Game::Pause:
+		break;
+
+	case Game::GameOver:
+		stateText.setFont(baseFont);
+		stateText.setPosition(windowCenter.x - 100, 100);
+		stateText.setCharacterSize(100);
+		stateText.setFillColor(sf::Color::Yellow);
+		stateText.setString("Vous mort");
+		break;
+
+	case Game::Win:
+		break;
+
+	case Game::Cinematic:
+		break;
+
+	default:
+		break;
+	}
 }

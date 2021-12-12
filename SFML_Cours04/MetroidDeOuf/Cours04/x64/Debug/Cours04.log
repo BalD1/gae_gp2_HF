@@ -37,22 +37,19 @@ D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(15,49)
           [
               T=float
           ]
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(81,52): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(82,52): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
           with
           [
               T=float
           ]
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(81,44): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(82,44): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
           with
           [
               T=float
           ]
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(275,54): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(275,46): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(277,41): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(385,38): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(385,26): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-  Player.cpp
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Player.cpp(123,2): warning C4065: l'instruction switch contient 'default' mais aucune étiquette 'case'
-  Génération de code en cours...
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(272,54): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(272,46): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(274,41): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(382,38): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(382,26): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
   Cours04.vcxproj -> D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\x64\Debug\MetroidDeOuf.exe

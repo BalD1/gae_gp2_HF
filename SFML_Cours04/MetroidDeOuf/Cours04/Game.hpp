@@ -63,6 +63,17 @@ public:
 
 	float						gravity = 2.976;
 
+	enum						GameState
+	{
+		MainMenu,
+		InGame,
+		Pause,
+		GameOver,
+		Win,
+		Cinematic,
+	};
+	GameState					GS = MainMenu;
+
 	// funcs
 
 	Game();
@@ -91,6 +102,8 @@ public:
 	World* getWorld();
 	sf::RenderWindow& getWindow();
 
-	void gameOver();
+	// sets
+	void setGameState(GameState _GS);
+
 };
 

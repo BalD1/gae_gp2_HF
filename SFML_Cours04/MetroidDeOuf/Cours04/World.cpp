@@ -58,8 +58,11 @@ void World::render(sf::RenderTarget& target)
 {
 	for (auto e : entities)
 		e->render(target);
-	for (auto dz : deathZones)
-		dz->render(target);
+	if (renderDeathZones)
+	{
+		for (auto dz : deathZones)
+			dz->render(target);
+	}
 }
 
 void World::saveMapInFile(const char* filePath)

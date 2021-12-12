@@ -1,5 +1,6 @@
 #include "stdafx.hpp"
 #include "Player.hpp"
+#include "Game.hpp"
 
 Player::Player(std::string _name, float _cx, float _cy, int _stride) :
 	Character(_name, _cx, _cy, _stride)
@@ -27,6 +28,11 @@ Player::Player( std::string _name, float _speed, float _invicibilityCD, float _m
 
 Player::~Player()
 {
+}
+
+void Player::setGame(Game* _gameRef)
+{
+	this->gameRef = _gameRef;
 }
 
 void Player::im()
@@ -74,6 +80,11 @@ void Player::im()
 	ImGui::Value("Jump Timer", (float)jumpTimer);
 	ImGui::Value("Is Grounded", (bool)isGrounded);
 	ImGui::Value("State", (State)characterState);
+	if (ImGui::Button("Revive"))
+	{
+		this->currentHealth = this->maxHealth;
+		gameRef->setGameState(Game::GameState::InGame);
+	}
 }
 
 void Player::render(sf::RenderTarget& target)
@@ -87,7 +98,7 @@ void Player::render(sf::RenderTarget& target)
 
 void Player::update(float dt)
 {
-	if (!alive)
+	if (!alive())
 		return;
 
 	this->dt = dt;
@@ -189,5 +200,5 @@ void Player::takeDamages(float rawDamages)
 void Player::kill()
 {
 	this->currentHealth = 0;
-	this->alive = false;
+	gameRef->setGameState(Game::GameState::GameOver);
 }

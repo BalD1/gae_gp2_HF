@@ -22,7 +22,6 @@ public:
 	float				maxFallingSpeed = 4.0f;
 	float				fallingSpeedFactor = 8.256f;
 
-	bool				alive = true;
 	bool				moved = false;
 	bool				isGrounded = false;
 	bool				ignoreGravity = false;
@@ -44,6 +43,7 @@ public:
 	void applyGravity(float dt);
 	void manageState();
 
+	bool alive() { return this->currentHealth > 0; };
 	void takeDamages(float rawDamages);
 	void heal(float rawHeal);
 	void kill();
