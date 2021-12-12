@@ -221,66 +221,28 @@ void Game::processImGui()
 		if (ImGui::TreeNode("Existing characters"))
 		{
 			int idx = 0;
-			static float d;
-			ImGui::Text(player->name.c_str());
-			ImGui::Text("Health : %f / %f", player->currentHealth, player->maxHealth);
-			ImGui::Text("Pos : {x%d y%d}", player->cx, player->cy);
-			ImGui::Text("Mov : {x%.1f y%.1f}", player->dx, player->dy);
-			if (ImGui::Button("Damage"))
-				player->takeDamages(d);
 
-			ImGui::SameLine();
-			if (ImGui::Button("Heal"))
-				player->heal(d);
-			ImGui::SameLine();
-			ImGui::DragFloat("amount", &d, 0.5f, 0, 10);
-			ImGui::Separator();
+			charactersImGui((Character*)player, idx, true);
 
 			for (Character* c : charactersList)
 			{
 				ImGui::PushID(idx);
-				if (ImGui::TreeNode(c->name.c_str()))
-				{
-					ImGui::Text("Health : %f / %f", c->currentHealth, c->maxHealth);
 
-					if (ImGui::Button("Damage"))
-					{
-						c->takeDamages(d);
-						if (c->currentHealth <= 0)
-							charactersList.erase(charactersList.begin() + idx);
+				charactersImGui(c, idx);
 
-					}
-					ImGui::SameLine();
-					if (ImGui::Button("Heal"))
-						c->heal(d);
-					ImGui::SameLine();
-					ImGui::DragFloat("amount", &d, 0.5f, 0, 10);
-					ImGui::Value("State", (Character::State)c->characterState);
-					if (ImGui::TreeNode("Position"))
-					{
-						ImGui::Text("Pos : {x%d y%d}", c->cx, c->cy);
-						ImGui::Text("Mov : {x%.1f y%.1f}", c->dx, c->dy);
-						c->moved |= (ImGui::DragInt("cx", &c->cx, 1));
-						c->moved |= (ImGui::DragInt("cy", &c->cy, 1));
-						c->moved |= (ImGui::DragFloat("rx", &c->rx, 0.05f));
-						c->moved |= (ImGui::DragFloat("ry", &c->ry, 0.05f));
-
-						ImGui::TreePop();
-					}
-					ImGui::Separator();
-
-					ImGui::TreePop();
-				}
 				idx++;
 				ImGui::PopID();
 			}
+
+			ImGui::Spacing();
+
 			if (ImGui::TreeNode("Create new"))
 			{
 				static char name[20] = "";
 				ImGui::InputText("Name", name, 20);
-				static int pos[2] = { 0,0 };
+				static int pos[2] = { 1,1 };
 				ImGui::DragInt2("Pos", pos, 1, 0, 100);
-				static int health = 0;
+				static int health = 5;
 				ImGui::DragInt("Health", &health, 1, 0, 100);
 				static int selectedIdx = 0;
 				static sf::Texture* selectedTexture = textures[selectedIdx];
@@ -310,16 +272,30 @@ void Game::processImGui()
 	{
 		if (ImGui::BeginMenu("File"))
 		{
-			if (ImGui::Button("Save"))
+			if (ImGui::TreeNode("Map"))
 			{
 
+				if (ImGui::Button("Save"))
+				{
+					this->world->saveMapInFile("Assets/Data/map.txt");
+				}
+				ImGui::Spacing();
+				if (ImGui::Button("Load"))
+				{
+					this->world->loadMap("Assets/Data/map.txt");
+				}
+				ImGui::Spacing();
+				if (ImGui::TreeNode("Erase"))
+				{
+					if (ImGui::Button("Really ?"))
+					{
+						this->world->eraseMap();
+					}
+					ImGui::TreePop();
+				}
+				ImGui::Spacing();
+				ImGui::TreePop();
 			}
-			ImGui::Spacing();
-			if (ImGui::Button("Load"))
-			{
-
-			}
-			ImGui::Spacing();
 
 
 			ImGui::EndMenu();
@@ -332,6 +308,52 @@ void Game::processImGui()
 	}
 
 	ImGui::End();
+}
+void Game::charactersImGui(Character* chara, int idx, bool isPlayer)
+{
+	static float d;
+
+	if (ImGui::TreeNode(chara->name.c_str()))
+	{
+		ImGui::Text("Health : %f / %f", chara->currentHealth, chara->maxHealth);
+
+		if (ImGui::Button("Damage"))
+		{
+			if (isPlayer)
+				player->takeDamages(d);
+			else
+			{
+				chara->takeDamages(d);
+				if (chara->currentHealth <= 0)
+					charactersList.erase(charactersList.begin() + idx);
+			}
+
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("Heal"))
+			if (isPlayer)
+				player->heal(d);
+			else
+				chara->heal(d);
+
+		ImGui::SameLine();
+		ImGui::DragFloat("amount", &d, 0.5f, 0, 10);
+		ImGui::Value("State", (Character::State)chara->characterState);
+		if (ImGui::TreeNode("Position"))
+		{
+			ImGui::Text("Pos : {x%d y%d}", chara->cx, chara->cy);
+			ImGui::Text("Mov : {x%.1f y%.1f}", chara->dx, chara->dy);
+			chara->moved |= (ImGui::DragInt("cx", &chara->cx, 1));
+			chara->moved |= (ImGui::DragInt("cy", &chara->cy, 1));
+			chara->moved |= (ImGui::DragFloat("rx", &chara->rx, 0.05f));
+			chara->moved |= (ImGui::DragFloat("ry", &chara->ry, 0.05f));
+
+			ImGui::TreePop();
+		}
+		ImGui::Separator();
+
+		ImGui::TreePop();
+	}
 }
 
 void Game::drawGrid()
@@ -370,6 +392,7 @@ float Game::deltaTime()
 {
 	return this->dt;
 }
+
 
 
 World* Game::getWorld()

@@ -23,8 +23,13 @@ public:
 	~World();
 
 	void placeWall(int _cx, int _cy);
+	void eraseMap();
 
 	void render(sf::RenderTarget& target);
+
+	// files
+	void saveMapInFile(const char* filePath);
+	void loadMap(const char* filePath, bool eraseCurrentMap = true);
 
 };
 

@@ -97,7 +97,7 @@ void Character::manageMovements(float dt)
 
 void Character::applyGravity(float dt)
 {
-	isGrounded = (isColliding(cx, cy + 1));
+	isGrounded = (isColliding(cx, cy + 1) || isColliding(cx + 1, cy + 1));
 	if (ignoreGravity || isGrounded || characterState == State::Jumping)
 		return;
 	float fallingSpeed = worldRef->gravity * mass * fallingSpeedFactor;
