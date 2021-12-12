@@ -37,6 +37,7 @@ void Player::im()
 	moved |= (ImGui::DragFloat("ry", &ry, 0.05f));
 	ImGui::DragFloat("Speed", &speed, 1, 0, 100);
 	ImGui::DragFloat("Jump Force", &jumpForce, 1, 1, 100);
+	ImGui::DragFloat("Falling speed factor", &fallingSpeedFactor, 0.5f, 0);
 	ImGui::DragFloat("Friction x", &frct_x, 0.05f, 0, 1);
 	ImGui::DragFloat("Friction y", &frct_y, 0.05f, 0, 1);
 	ImGui::Dummy(ImVec2(40, 0));
@@ -86,12 +87,18 @@ void Player::render(sf::RenderTarget& target)
 
 void Player::update(float dt)
 {
+	if (!alive)
+		return;
+
 	this->dt = dt;
 	manageInputs();
 	Character::update(dt);
 
 	if (characterState == State::Jumping)
 		jumpBehaviour();
+
+	if (moved)
+		checkIfInDeathZone();
 }
 
 void Player::manageInputs()
@@ -161,16 +168,26 @@ void Player::jumpBehaviour()
 	}
 }
 
+void Player::checkIfInDeathZone()
+{
+	for (auto dz : worldRef->deathZones)
+	{
+		if (this->cx == dz->cx && this->cy == dz->cy)
+			this->kill();
+	}
+}
+
 void Player::takeDamages(float rawDamages)
 {
 	this->currentHealth -= rawDamages;
 	if (currentHealth <= 0)
 	{
-		kill();
+		this->kill();
 	}
 }
 
 void Player::kill()
 {
+	this->currentHealth = 0;
 	this->alive = false;
 }

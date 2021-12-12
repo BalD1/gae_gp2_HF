@@ -14,6 +14,10 @@ private:
 	sf::RenderWindow			window;
 	sf::Event					gameEvent;
 
+	sf::Font					titleFont;
+	sf::Font					baseFont;
+	sf::Text					stateText;
+
 	sf::RectangleShape			gridRct;
 	sf::Vector2f				gridSize = { 25,25 };
 	bool						renderGrid = false;
@@ -40,6 +44,7 @@ private:
 	// funcs
 
 	void initWindow();
+	void initFonts();
 	void closeWindow();
 	void initMusic();
 	void initPlayer();
@@ -56,7 +61,7 @@ public:
 
 	int							stride = 32;
 
-	float						gravity = 2.47f;
+	float						gravity = 2.976;
 
 	// funcs
 
@@ -85,5 +90,7 @@ public:
 	// gets
 	World* getWorld();
 	sf::RenderWindow& getWindow();
+
+	void gameOver();
 };
 

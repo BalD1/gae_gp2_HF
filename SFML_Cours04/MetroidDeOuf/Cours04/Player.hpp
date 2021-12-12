@@ -39,6 +39,7 @@ public:
 	void jump();
 	void jumpBehaviour();
 
+	void checkIfInDeathZone();
 	void takeDamages(float rawDamages);
 	void kill();
 

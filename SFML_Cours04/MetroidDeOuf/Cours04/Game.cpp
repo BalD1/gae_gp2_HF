@@ -40,7 +40,8 @@ void Game::initWorld()
 	int floor = 24;
 	for (int i = 0; i < 20; i++)
 		this->world->placeWall(i, floor);
-
+	for (int i = 11; i < 17; i++)
+		this->world->placeDeathZone(i, 29);
 }
 
 void Game::initEnemies()
@@ -51,6 +52,7 @@ void Game::initEnemies()
 	textures[1] = new sf::Texture();
 	if (!textures[1]->loadFromFile("Assets/Graphs/purple.png"))
 		printf("purple texture could not be loaded in Assets/Graphs/purple.png");
+	/*
 	for (int i = 1; i < 6; i++)
 	{
 		char c[50];
@@ -61,6 +63,17 @@ void Game::initEnemies()
 		e->setGravity(gravity);
 		charactersList.push_back(e);
 	}
+	*/
+}
+
+void Game::initFonts()
+{
+	titleFont = sf::Font();
+	if (!titleFont.loadFromFile("Assets/Fonts/titlefont.ttf"))
+		printf("Couldn't load Assets/Fonts/titlefont.ttf");
+	baseFont = sf::Font();
+	if (!baseFont.loadFromFile("Assets/Fonts/basefont.ttf"))
+		printf("Couldn't load Assets/Fonts/basefont.ttf");
 }
 
 void Game::initGrid()
@@ -76,6 +89,7 @@ void Game::initGrid()
 Game::Game()
 {
 	this->initWindow();
+	this->initFonts();
 	this->initWorld();
 	this->initPlayer();
 	this->initEnemies();
@@ -105,6 +119,12 @@ void Game::update()
 	if (world->worldInitialized)
 	{
 		player->update(dt);
+		if (player->currentHealth <= 0)
+		{
+			player->currentHealth = 1;
+			gameOver();
+		}
+
 		for (Character* c : charactersList)
 			c->update(dt);
 	}
@@ -383,6 +403,8 @@ void Game::render()
 	if (renderGrid)
 		drawGrid();
 
+	this->window.draw(stateText);
+
 	ImGui::SFML::Render(window);
 
 	this->window.display();
@@ -403,4 +425,13 @@ World* Game::getWorld()
 sf::RenderWindow& Game::getWindow()
 {
 	return this->window;
+}
+
+void Game::gameOver()
+{
+	stateText.setFont(baseFont);
+	stateText.setPosition(windowCenter.x - 100,100);
+	stateText.setCharacterSize(100);
+	stateText.setFillColor(sf::Color::Yellow);
+	stateText.setString("Vous mort");
 }

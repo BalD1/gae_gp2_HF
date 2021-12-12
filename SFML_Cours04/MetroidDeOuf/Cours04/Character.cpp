@@ -1,5 +1,4 @@
 #include "Character.hpp"
-#include "Game.hpp"
 
 Character::Character(std::string _name, float _cx, float _cy, int _stride) :
 	Entity(_cx, _cy, _stride)
@@ -99,8 +98,11 @@ void Character::applyGravity(float dt)
 {
 	isGrounded = (isColliding(cx, cy + 1) || isColliding(cx + 1, cy + 1));
 	if (ignoreGravity || isGrounded || characterState == State::Jumping)
+	{
+		fallingSpeed = 0;
 		return;
-	float fallingSpeed = worldRef->gravity * mass * fallingSpeedFactor;
+	}
+	fallingSpeed += clamp(worldRef->gravity * mass * fallingSpeedFactor * dt * 2, 0, maxFallingSpeed);
 	dy += fallingSpeed;
 }
 

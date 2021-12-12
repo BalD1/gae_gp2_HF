@@ -18,7 +18,9 @@ public:
 	float				mass = 1;
 	float				frct_x = 0.86f;
 	float				frct_y = 0.96f;
-	float				fallingSpeedFactor = 3;
+	float				fallingSpeed = 0;
+	float				maxFallingSpeed = 4.0f;
+	float				fallingSpeedFactor = 8.256f;
 
 	bool				alive = true;
 	bool				moved = false;

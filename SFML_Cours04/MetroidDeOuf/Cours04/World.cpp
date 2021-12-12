@@ -13,6 +13,23 @@ World::~World()
 {
 }
 
+void World::placeDeathZone(int _cx, int _cy)
+{
+	if (_cx > mapLength || _cy > mapLength)
+		return;
+	for (size_t i = 0; i < deathZones.size(); ++i)
+	{
+		if (deathZones[i]->cx == _cx && deathZones[i]->cy == _cy)
+		{
+			delete(deathZones[i]);
+			deathZones.erase(deathZones.begin() + i);
+			return;
+		}
+	}
+	DeathZone* dz = new DeathZone(_cx, _cy, stride);
+	deathZones.push_back(dz);
+}
+
 void World::placeWall(int _cx, int _cy)
 {
 	if (_cx > mapLength || _cy > mapLength)
@@ -39,10 +56,10 @@ void World::eraseMap()
 
 void World::render(sf::RenderTarget& target)
 {
-	for (std::size_t i = 0; i < entities.size(); i++)
-	{
-		entities[i]->render(target);
-	}
+	for (auto e : entities)
+		e->render(target);
+	for (auto dz : deathZones)
+		dz->render(target);
 }
 
 void World::saveMapInFile(const char* filePath)
