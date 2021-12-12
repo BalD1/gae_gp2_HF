@@ -52,14 +52,17 @@ void World::saveMapInFile(const char* filePath)
 	if (f)
 	{
 		std::string entityData = "";
-		
-		for (Entity* e : entities)
+
+		if (entities.size() > 0)
 		{
-			entityData = "";
-			if (e->texture == wallTexture)
-				entityData += "wall ";
-			entityData += std::to_string(e->cx) + " " + std::to_string(e->cy) + "\n";
-			fprintf(f, entityData.c_str());
+			for (Entity* e : entities)
+			{
+				entityData = "";
+				if (e->texture == wallTexture)
+					entityData += "wall ";
+				entityData += std::to_string(e->cx) + " " + std::to_string(e->cy) + "\n";
+				fprintf(f, entityData.c_str());
+			}
 		}
 		fflush(f);
 		fclose(f);
@@ -82,7 +85,7 @@ void World::loadMap(const char* filePath, bool eraseCurrentMap)
 			int64_t _cx = 0;
 			int64_t _cy = 0;
 			fscanf_s(f, "%s %lld %lld\n", line, 256, &_cx, &_cy);
-			if (strcmp(line, "wall "))
+			if (strcmp(line, "wall") == 0)
 			{
 				Entity* w = new Entity(_cx, _cy, stride, wallTexture);
 				entities.push_back(w);

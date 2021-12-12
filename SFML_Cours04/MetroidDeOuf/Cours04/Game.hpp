@@ -56,7 +56,7 @@ public:
 
 	int							stride = 32;
 
-	float						gravity = 0.95f;
+	float						gravity = 2.47f;
 
 	// funcs
 

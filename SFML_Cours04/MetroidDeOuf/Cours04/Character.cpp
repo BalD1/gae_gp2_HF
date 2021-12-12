@@ -58,7 +58,7 @@ void Character::manageMovements(float dt)
 {
 	// x
 	rx += dx * dt;
-	dx *= frct_x * (dt * 60);
+	dx *= frct_x * dt;
 
 	if (isColliding(cx - 1, cy) && rx <= 0.01f)
 	{
@@ -76,7 +76,7 @@ void Character::manageMovements(float dt)
 
 	// y
 	ry += dy * dt;
-	dy *= frict_y * (dt * 60);
+	dy *= frict_y * dt;
 
 	if ((isColliding(cx, cy -1) && ry <= 0.01f) || (isColliding(cx + 1, cy - 1) && ry <= 0.01f))
 	{
