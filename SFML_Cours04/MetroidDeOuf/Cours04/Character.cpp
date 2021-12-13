@@ -102,7 +102,7 @@ void Character::applyGravity(float dt)
 		fallingSpeed = 0;
 		return;
 	}
-	fallingSpeed += clamp(worldRef->gravity * mass * fallingSpeedFactor * dt * 2, 0, maxFallingSpeed);
+	fallingSpeed += clamp(worldRef->gravity * mass * fallingSpeedFactor * dt, 0, maxFallingSpeed);
 	dy += fallingSpeed;
 }
 

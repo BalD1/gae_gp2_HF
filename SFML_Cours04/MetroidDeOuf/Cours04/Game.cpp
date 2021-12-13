@@ -28,7 +28,7 @@ void Game::initMusic()
 
 void Game::initPlayer()
 {
-	this->player = new Player("Samus", 7,7, stride);
+	this->player = new Player("Samus", 1,28, stride);
 	this->player->setWorld(world);
 	this->player->setGame(this);
 	this->player->setGravity(gravity);
@@ -38,9 +38,7 @@ void Game::initWorld()
 {
 	this->world = new World();
 	world->gravity = this->gravity;
-	int floor = 24;
-	for (int i = 0; i < 20; i++)
-		this->world->placeWall(i, floor);
+	world->loadMap("Assets/Data/map.txt");
 	for (int i = 11; i < 17; i++)
 		this->world->placeDeathZone(i, 29);
 }

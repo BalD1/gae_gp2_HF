@@ -7,6 +7,9 @@ World::World(int _stride)
 	this->wallTexture = new sf::Texture();
 	if (!wallTexture->loadFromFile("Assets/Graphs/mur.png"))
 		printf("Mur texture could not be loaded in Assets/Graphs/mur.png");
+	this->deathzoneTexture = new sf::Texture();
+	if (!deathzoneTexture->loadFromFile("Assets/Graphs/deathzone.png"))
+		printf("Mur texture could not be loaded in Assets/Graphs/deathzone.png");
 }
 
 World::~World()
@@ -26,7 +29,7 @@ void World::placeDeathZone(int _cx, int _cy)
 			return;
 		}
 	}
-	DeathZone* dz = new DeathZone(_cx, _cy, stride);
+	DeathZone* dz = new DeathZone(_cx, _cy, stride, *deathzoneTexture);
 	deathZones.push_back(dz);
 }
 
@@ -52,6 +55,9 @@ void World::eraseMap()
 	for (Entity* e : entities)
 		delete(e);
 	entities.clear();
+	for (DeathZone* dz : deathZones)
+		delete(dz);
+	deathZones.clear();
 }
 
 void World::render(sf::RenderTarget& target)
@@ -80,7 +86,16 @@ void World::saveMapInFile(const char* filePath)
 				entityData = "";
 				if (e->texture == wallTexture)
 					entityData += "wall ";
+
 				entityData += std::to_string(e->cx) + " " + std::to_string(e->cy) + "\n";
+				fprintf(f, entityData.c_str());
+			}
+			for (DeathZone* dz : deathZones)
+			{
+				entityData = "";
+				entityData += "deathzone ";
+
+				entityData += std::to_string(dz->cx) + " " + std::to_string(dz->cy) + "\n";
 				fprintf(f, entityData.c_str());
 			}
 		}
@@ -109,6 +124,11 @@ void World::loadMap(const char* filePath, bool eraseCurrentMap)
 			{
 				Entity* w = new Entity(_cx, _cy, stride, wallTexture);
 				entities.push_back(w);
+			}
+			else if (strcmp(line, "deathzone") == 0)
+			{
+				DeathZone* dz = new DeathZone(_cx, _cy, stride, *deathzoneTexture);
+				deathZones.push_back(dz);
 			}
 
 			if (feof(f))

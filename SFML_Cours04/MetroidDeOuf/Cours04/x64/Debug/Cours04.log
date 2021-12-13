@@ -1,55 +1,11 @@
-﻿D:\Visual Studio\2019\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: Le répertoire intermédiaire (x64\Debug\) contient des fichiers partagés provenant d'un autre projet (Cours04.vcxproj, Cours05.vcxproj). Cela peut entraîner un comportement de nettoyage et de regénération incorrect.
-  Game.cpp
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.hpp(64,21): warning C4305: 'initialisation' : troncation de 'double' à 'float'
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(14,64): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(14,44): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(15,73): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(15,49): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
-          with
-          [
-              T=unsigned int
-          ]
-          and
-          [
-              T=float
-          ]
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(82,52): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
-          with
-          [
-              T=float
-          ]
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(82,44): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
-          with
-          [
-              T=float
-          ]
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(272,54): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(272,46): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(274,41): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(382,38): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\Game.cpp(382,26): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-  Cours04.vcxproj -> D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\x64\Debug\MetroidDeOuf.exe
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(491,5): warning MSB8028: Le répertoire intermédiaire (x64\Debug\) contient des fichiers partagés provenant d'un autre projet (Cours04.vcxproj, Cours05.vcxproj). Cela peut entraîner un comportement de nettoyage et de régénération incorrect.
+  World.cpp
+D:\Program files (Data)\Win\Users\Student\Documents\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\World.cpp(32,37): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\Program files (Data)\Win\Users\Student\Documents\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\World.cpp(32,32): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\Program files (Data)\Win\Users\Student\Documents\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\World.cpp(49,33): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\Program files (Data)\Win\Users\Student\Documents\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\World.cpp(49,28): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\Program files (Data)\Win\Users\Student\Documents\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\World.cpp(125,33): warning C4244: 'argument' : conversion de 'int64_t' en 'float', perte possible de données
+D:\Program files (Data)\Win\Users\Student\Documents\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\World.cpp(125,28): warning C4244: 'argument' : conversion de 'int64_t' en 'float', perte possible de données
+D:\Program files (Data)\Win\Users\Student\Documents\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\World.cpp(130,40): warning C4244: 'argument' : conversion de 'int64_t' en 'float', perte possible de données
+D:\Program files (Data)\Win\Users\Student\Documents\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\Cours04\World.cpp(130,35): warning C4244: 'argument' : conversion de 'int64_t' en 'float', perte possible de données
+  Cours04.vcxproj -> D:\Program files (Data)\Win\Users\Student\Documents\gae_gp2_HF\SFML_Cours04\MetroidDeOuf\x64\Debug\MetroidDeOuf.exe

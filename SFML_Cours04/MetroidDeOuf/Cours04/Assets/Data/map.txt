@@ -129,3 +129,9 @@ wall 0 8
 wall 6 2
 wall 7 2
 wall 8 2
+deathzone 11 29
+deathzone 12 29
+deathzone 13 29
+deathzone 14 29
+deathzone 15 29
+deathzone 16 29

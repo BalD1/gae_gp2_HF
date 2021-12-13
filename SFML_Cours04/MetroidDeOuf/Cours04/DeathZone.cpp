@@ -12,6 +12,14 @@ DeathZone::DeathZone(float _cx, float _cy, int _stride)
 	syncSprite(1);
 }
 
+DeathZone::DeathZone(float _cx, float _cy, int _stride, sf::Texture& texture)
+	: Entity(_cx, _cy, _stride)
+{
+	this->spr = new sf::Sprite();
+	this->spr->setTexture(texture);
+	syncSprite(1);
+}
+
 DeathZone::~DeathZone()
 {
 }

@@ -7,6 +7,7 @@ class World
 private:
 
 	sf::Texture*				wallTexture = nullptr;
+	sf::Texture*				deathzoneTexture = nullptr;
 
 	int							mapLength = 50;
 	int							stride = 32;
