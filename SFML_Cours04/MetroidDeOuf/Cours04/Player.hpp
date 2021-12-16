@@ -1,5 +1,6 @@
 #pragma once
 #include "Character.hpp"
+#include "Weapon.hpp"
 
 class Game;
 
@@ -7,6 +8,10 @@ class Player : public Character, public sf::Transform
 {
 private:
 	//vars
+
+	Weapon*				currentWeapon = nullptr;
+
+	sf::RenderStates	states;
 
 	float				jumpForce = 20;
 	float				jumpLength = 0.5f;

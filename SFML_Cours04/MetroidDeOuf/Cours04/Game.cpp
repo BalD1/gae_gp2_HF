@@ -49,18 +49,6 @@ void Game::initEnemies()
 	textures[1] = new sf::Texture();
 	if (!textures[1]->loadFromFile("Assets/Graphs/purple.png"))
 		printf("purple texture could not be loaded in Assets/Graphs/purple.png");
-	/*
-	for (int i = 1; i < 6; i++)
-	{
-		char c[50];
-		sprintf_s(c, "e%d", i);
-		Character* e = new Character(c, i, 5, stride);
-		e->setTexture(textures[0]);
-		e->setWorld(world);
-		e->setGravity(gravity);
-		charactersList.push_back(e);
-	}
-	*/
 }
 
 void Game::initFonts()
@@ -435,6 +423,11 @@ World* Game::getWorld()
 sf::RenderWindow& Game::getWindow()
 {
 	return this->window;
+}
+
+sf::Vector2f Game::getMousePosition()
+{
+	return vectoriToVectorf(sf::Mouse::getPosition(this->window));
 }
 
 void Game::setGameState(GameState _GS)

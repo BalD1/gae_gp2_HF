@@ -12,6 +12,9 @@ Player::Player(std::string _name, float _cx, float _cy, int _stride) :
 	this->spr = new sf::Sprite();
 	this->spr->setTexture(*texture);
 	syncTransform();
+
+	this->currentWeapon = new Weapon();
+	this->currentWeapon->stride = _stride;
 }
 
 Player::Player( std::string _name, float _speed, float _invicibilityCD, float _maxHealth, float _cx, float _cy, int _stride) :
@@ -24,6 +27,9 @@ Player::Player( std::string _name, float _speed, float _invicibilityCD, float _m
 	this->spr = new sf::Sprite();
 	this->spr->setTexture(*texture);
 	syncTransform();
+
+	this->currentWeapon = new Weapon();
+	this->currentWeapon->stride = _stride;
 }
 
 Player::~Player()
@@ -94,7 +100,11 @@ void Player::render(sf::RenderTarget& target)
 	ImGui::End();
 	ImGui::SFML::Render(target);
 
-	Character::render(target);
+	states.transform = getTransform();
+	target.draw(*this->spr, states);
+
+	if (this->currentWeapon != nullptr)
+		currentWeapon->render(target, states);
 }
 
 void Player::update(float dt)
@@ -111,6 +121,12 @@ void Player::update(float dt)
 
 	if (moved)
 		checkIfInDeathZone();
+
+	this->currentWeapon->update(dt);
+	this->currentWeapon->mousePosition = gameRef->getMousePosition();
+	this->currentWeapon->setPosition(cx, rx, cy, ry);
+	this->currentWeapon->setOffset(sf::Vector2f(states.transform.getMatrix()[12] - gameRef->getMousePosition().x,
+												states.transform.getMatrix()[13] - gameRef->getMousePosition().y));
 }
 
 void Player::manageInputs()

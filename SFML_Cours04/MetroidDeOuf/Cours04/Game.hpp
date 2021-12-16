@@ -104,6 +104,7 @@ public:
 	// gets
 	World* getWorld();
 	sf::RenderWindow& getWindow();
+	sf::Vector2f getMousePosition();
 
 	// sets
 	void setGameState(GameState _GS);

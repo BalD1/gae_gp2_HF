@@ -1,6 +1,27 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(491,5): warning MSB8028: Le répertoire intermédiaire (x64\Debug\) contient des fichiers partagés provenant d'un autre projet (Cours04.vcxproj). Cela peut entraîner un comportement de nettoyage et de régénération incorrect.
+﻿D:\Visual Studio\2019\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: Le répertoire intermédiaire (x64\Debug\) contient des fichiers partagés provenant d'un autre projet (Cours04.vcxproj). Cela peut entraîner un comportement de nettoyage et de regénération incorrect.
+  Brick.cpp
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Brick.cpp(8,102): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Brick.cpp(8,60): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Brick.cpp(21,102): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Brick.cpp(21,60): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
   Cours05.cpp
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(44,64): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(44,64): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
           with
           [
               T=unsigned int
@@ -9,7 +30,7 @@ D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours
           [
               T=float
           ]
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(44,44): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(44,44): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
           with
           [
               T=unsigned int
@@ -18,7 +39,7 @@ D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours
           [
               T=float
           ]
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(45,73): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(45,73): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
           with
           [
               T=unsigned int
@@ -27,7 +48,7 @@ D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours
           [
               T=float
           ]
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(45,49): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(45,49): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
           with
           [
               T=unsigned int
@@ -36,27 +57,73 @@ D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours
           [
               T=float
           ]
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(90,57): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(90,46): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(166,37): warning C4244: 'argument' : conversion de 'T' en 'const float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(90,57): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(90,46): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(166,37): warning C4244: 'argument' : conversion de 'T' en 'const float', perte possible de données
           with
           [
               T=int
           ]
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(166,25): warning C4244: 'argument' : conversion de 'T' en 'const float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(166,25): warning C4244: 'argument' : conversion de 'T' en 'const float', perte possible de données
           with
           [
               T=int
           ]
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(138,50): warning C4390: ';' : une instruction contrôlée a été trouvée vide ; est-ce ce que vous souhaitiez ?
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(262,62): warning C4244: '=' : conversion de 'float' en 'T', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(138,50): warning C4390: ';' : une instruction contrôlée a été trouvée vide ; est-ce ce que vous souhaitiez ?
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(262,62): warning C4244: '=' : conversion de 'float' en 'T', perte possible de données
           with
           [
               T=int
           ]
-D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(263,62): warning C4244: '=' : conversion de 'float' en 'T', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Cours05.cpp(263,62): warning C4244: '=' : conversion de 'float' en 'T', perte possible de données
           with
           [
               T=int
           ]
-  Cours04.vcxproj -> D:\Program files (Data)\Win\Users\Student\Documents\GitHub\gae_gp2_HF\SFML_Cours04\Cours05_SFML\x64\Debug\Cours05.exe
+  Entity.cpp
+  Hitbox.cpp
+  Player.cpp
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Player.cpp(8,103): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Player.cpp(8,61): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Player.cpp(19,103): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Player.cpp(19,61): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+  Projectile.cpp
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Projectile.cpp(126,18): warning C4305: '*=' : troncation de 'double' à 'T'
+          with
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Projectile.cpp(137,18): warning C4305: '*=' : troncation de 'double' à 'T'
+          with
+          [
+              T=float
+          ]
+  Shape.cpp
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Shape.cpp(6,23): warning C4244: 'argument' : conversion de 'const int' en 'float', perte possible de données
+  Utility.cpp
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Utility.cpp(83,13): warning C4244: 'return' : conversion de 'double' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Utility.cpp(116,13): warning C4244: 'return' : conversion de 'double' en 'float', perte possible de données
+  Weapon.cpp
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Weapon.cpp(81,14): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Weapon.cpp(92,14): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+  World.cpp
+  Génération de code en cours...
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\Cours04\Entity.cpp(32): warning C4715: 'Entity::getPosition' : les chemins de contrôle ne retournent pas tous une valeur
+  LINK : D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\x64\Debug\Cours05.exe introuvable ou non généré par la dernière édition de liens incrémentielle ; édition de liens complète en cours
+  Cours04.vcxproj -> D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours05_SFML\x64\Debug\Cours05.exe
