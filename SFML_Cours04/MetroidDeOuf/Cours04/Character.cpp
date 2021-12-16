@@ -91,7 +91,7 @@ void Character::manageMovements(float dt)
 	while (ry > 1) { ry--; cy++; }
 	while (ry < 0) { ry++; cy--; }
 
-	syncSprite(dt);
+	syncTransform();
 }
 
 void Character::applyGravity(float dt)
@@ -117,6 +117,13 @@ void Character::manageState()
 		characterState = State::Jumping;
 
 	moved = (!characterState == State::Idle);
+}
+
+void Character::syncTransform()
+{
+	xx = (cx + rx) * stride;
+	yy = (cy + ry) * stride;
+	this->setPosition(xx, yy);
 }
 
 void Character::takeDamages(float rawDamages)
@@ -146,4 +153,11 @@ void Character::update(float dt)
 		manageMovements(dt);
 
 	manageState();
+}
+
+void Character::render(sf::RenderTarget& target)
+{
+	sf::RenderStates states;
+	states.transform *= getTransform();
+	target.draw(*this->spr, states);
 }

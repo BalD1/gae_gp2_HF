@@ -2,13 +2,14 @@
 #include "Entity.hpp"
 #include "World.hpp"
 
-class Character : public Entity
+class Character : public Entity, public sf::Transformable
 {
 private:
 
 
 public:
 
+	sf::Transform		transform;
 	std::string			name = "NONAME";
 	float				maxHealth = 5;
 	float				currentHealth = 5;
@@ -42,6 +43,7 @@ public:
 	void manageMovements(float dt);
 	void applyGravity(float dt);
 	void manageState();
+	void syncTransform();
 
 	bool alive() { return this->currentHealth > 0; };
 	void takeDamages(float rawDamages);
@@ -49,6 +51,7 @@ public:
 	void kill();
 
 	void update(float dt);
+	void render(sf::RenderTarget& target);
 
 };
 

@@ -3,7 +3,7 @@
 
 class Game;
 
-class Player : public Character
+class Player : public Character, public sf::Transform
 {
 private:
 	//vars

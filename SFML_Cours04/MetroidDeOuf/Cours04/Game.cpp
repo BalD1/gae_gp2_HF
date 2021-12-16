@@ -39,8 +39,6 @@ void Game::initWorld()
 	this->world = new World();
 	world->gravity = this->gravity;
 	world->loadMap("Assets/Data/map.txt");
-	for (int i = 11; i < 17; i++)
-		this->world->placeDeathZone(i, 29);
 }
 
 void Game::initEnemies()
@@ -119,8 +117,8 @@ void Game::update()
 	{
 		player->update(dt);
 
-		for (Character* c : charactersList)
-			c->update(dt);
+		for (Enemy* e : enemiesList)
+			e->update(dt);
 	}
 
 	//events
@@ -186,8 +184,16 @@ void Game::checkPressedMouse(sf::Keyboard::Key key)
 		case sf::Mouse::Left:
 			if (!ImGui::IsWindowHovered(ImGuiHoveredFlags_AnyWindow))
 			{
-				sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-				world->placeWall(mousePosition.x / stride, mousePosition.y / stride);
+				if (strcmp(selectedEntity, "wall") == 0)
+				{
+					sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+					world->placeWall(mousePosition.x / stride, mousePosition.y / stride);
+				}
+				else if (strcmp(selectedEntity, "deathZone") == 0)
+				{
+					sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+					world->placeDeathZone(mousePosition.x / stride, mousePosition.y / stride);
+				}
 			}
 		break;
 	}
@@ -223,13 +229,6 @@ void Game::processImGui()
 			audioManager.changeMusicVolume(vol);
 
 		}
-		ImGui::Checkbox("Draw grid", &renderGrid);
-		if (renderGrid)
-		{
-			ImGui::DragFloat("Grid X", &gridSize.x, 1, 0);
-			ImGui::DragFloat("Grid Y", &gridSize.y, 1, 0);
-		}
-		ImGui::Checkbox("Show Death Zones", &world->renderDeathZones);
 	}
 	else if (imIdx == 1)
 	{
@@ -239,7 +238,7 @@ void Game::processImGui()
 
 			charactersImGui((Character*)player, idx, true);
 
-			for (Character* c : charactersList)
+			for (Character* c : enemiesList)
 			{
 				ImGui::PushID(idx);
 
@@ -267,19 +266,33 @@ void Game::processImGui()
 				}
 				if (ImGui::Button("+"))
 				{
-					Character* c = new Character(name, pos[0], pos[1], stride);
+					Enemy* c = new Enemy(name, pos[0], pos[1], stride, *selectedTexture);
 					if (health > 0)
 						c->currentHealth = c->maxHealth = health;
-					c->setTexture(selectedTexture);
 					c->setWorld(world);
 					c->setGravity(gravity);
-					charactersList.push_back(c);
+					enemiesList.push_back(c);
 				}
 				ImGui::TreePop();
 			}
 
 			ImGui::TreePop();
 		}
+	}
+	else if (imIdx == 2)
+	{
+		static int entityIdx = 0;
+		if (ImGui::Combo("Place Entity", &entityIdx, entities, IM_ARRAYSIZE(entities)))
+		{
+			selectedEntity = entities[entityIdx];
+		}
+		ImGui::Checkbox("Draw grid", &renderGrid);
+		if (renderGrid)
+		{
+			ImGui::DragFloat("Grid X", &gridSize.x, 1, 0);
+			ImGui::DragFloat("Grid Y", &gridSize.y, 1, 0);
+		}
+		ImGui::Checkbox("Show Death Zones", &world->renderDeathZones);
 	}
 
 
@@ -319,6 +332,8 @@ void Game::processImGui()
 			imIdx = 0;
 		if (ImGui::Button("Characters"))
 			imIdx = 1;
+		if (ImGui::Button("Map"))
+			imIdx = 2;
 		ImGui::EndMenuBar();
 	}
 
@@ -340,7 +355,7 @@ void Game::charactersImGui(Character* chara, int idx, bool isPlayer)
 			{
 				chara->takeDamages(d);
 				if (chara->currentHealth <= 0)
-					charactersList.erase(charactersList.begin() + idx);
+					enemiesList.erase(enemiesList.begin() + idx);
 			}
 
 		}
@@ -391,8 +406,8 @@ void Game::render()
 		window.draw(mouseShape);
 
 	this->world->render(this->window);
-	for (Character* c : charactersList)
-		c->render(this->window);
+	for (Enemy* e : enemiesList)
+		e->render(this->window);
 	this->player->render(this->window);
 
 	if (renderGrid)

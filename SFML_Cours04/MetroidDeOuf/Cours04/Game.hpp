@@ -2,6 +2,7 @@
 #include "stdafx.hpp"
 #include "AudioManager.hpp"
 #include "Player.hpp"
+#include "Enemy.hpp"
 #include "Character.hpp"
 #include "World.hpp"
 
@@ -35,7 +36,9 @@ private:
 	Player*						player;
 	sf::Texture*				textures[2];
 	const char*					texturesNames[2] = { "redTexture", "purpleTexture"};
-	std::vector<Character*>		charactersList;
+	const char*					entities[3] = {"none", "wall", "deathZone"};
+	const char*					selectedEntity = "";
+	std::vector<Enemy*>			enemiesList;
 
 	World*						world;
 

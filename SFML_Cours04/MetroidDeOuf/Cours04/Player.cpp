@@ -11,7 +11,7 @@ Player::Player(std::string _name, float _cx, float _cy, int _stride) :
 
 	this->spr = new sf::Sprite();
 	this->spr->setTexture(*texture);
-	syncSprite(1);
+	syncTransform();
 }
 
 Player::Player( std::string _name, float _speed, float _invicibilityCD, float _maxHealth, float _cx, float _cy, int _stride) :
@@ -23,7 +23,7 @@ Player::Player( std::string _name, float _speed, float _invicibilityCD, float _m
 
 	this->spr = new sf::Sprite();
 	this->spr->setTexture(*texture);
-	syncSprite(1);
+	syncTransform();
 }
 
 Player::~Player()
@@ -89,11 +89,12 @@ void Player::im()
 
 void Player::render(sf::RenderTarget& target)
 {
-	target.draw(*spr);
 	ImGui::Begin("Player tools");
 	im();
 	ImGui::End();
 	ImGui::SFML::Render(target);
+
+	Character::render(target);
 }
 
 void Player::update(float dt)
