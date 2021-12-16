@@ -14,6 +14,7 @@ Player::Player(std::string _name, float _cx, float _cy, int _stride) :
 	syncTransform();
 
 	this->currentWeapon = new Weapon();
+	this->currentWeapon->worldRef = worldRef;
 	this->currentWeapon->stride = _stride;
 }
 
@@ -41,8 +42,15 @@ void Player::setGame(Game* _gameRef)
 	this->gameRef = _gameRef;
 }
 
+void Player::setWorld(World* _worldRef)
+{
+	this->worldRef = _worldRef;
+	this->currentWeapon->worldRef = worldRef;
+}
+
 void Player::im()
 {
+	ImGui::Text("Position and movements");
 	moved |= (ImGui::DragInt("cx", &cx, 1));
 	moved |= (ImGui::DragInt("cy", &cy, 1));
 	moved |= (ImGui::DragFloat("rx", &rx, 0.05f));
@@ -86,11 +94,18 @@ void Player::im()
 	ImGui::Value("Jump Timer", (float)jumpTimer);
 	ImGui::Value("Is Grounded", (bool)isGrounded);
 	ImGui::Value("State", (State)characterState);
+
+	ImGui::Separator();
+	ImGui::Text("Health");
+	ImGui::Text("HP : %f / %f", currentHealth, maxHealth);
 	if (ImGui::Button("Revive"))
 	{
 		this->currentHealth = this->maxHealth;
 		gameRef->setGameState(Game::GameState::InGame);
 	}
+	ImGui::Separator();
+	ImGui::Text("Weapon");
+	ImGui::DragFloat("Fire rate", &this->currentWeapon->fireCD, 0.5f, 0, 10);
 }
 
 void Player::render(sf::RenderTarget& target)

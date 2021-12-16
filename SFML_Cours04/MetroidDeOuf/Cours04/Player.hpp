@@ -38,6 +38,7 @@ public:
 	~Player();
 
 	void setGame(Game* _gameRef);
+	void setWorld(World* _worldRef);
 
 	void im();
 

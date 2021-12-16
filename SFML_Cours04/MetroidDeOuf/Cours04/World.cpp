@@ -16,6 +16,16 @@ World::~World()
 {
 }
 
+bool World::colidesWithWall(Entity target)
+{
+	for (auto w : entities)
+	{
+		if (target.cx == w->cx && target.cy == w->cy)
+			return true;
+	}
+	return false;
+}
+
 void World::placeDeathZone(int _cx, int _cy)
 {
 	if (_cx > mapLength || _cy > mapLength)

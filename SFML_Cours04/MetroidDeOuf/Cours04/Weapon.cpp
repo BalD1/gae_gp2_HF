@@ -55,6 +55,7 @@ void Weapon::update(float dt)
 
 	for (auto b : bulletsPool)
 		b->update(dt);
+	checkBulletCollision();
 }
 
 void Weapon::render(sf::RenderTarget& target, sf::RenderStates states)
@@ -86,7 +87,21 @@ void Weapon::fire()
 void Weapon::setBullet(Bullet* bullet)
 {
 	bullet->setPosition(this->cx, this->rx, this->cy, this->ry);
-	sf::Vector2f direction = { mousePosition.x - this->offset.x, mousePosition.y - this->offset.y };
+
+	sf::Vector2f direction = { mousePosition.x - ((cx + rx) * stride), mousePosition.y - ((cy + ry) * stride) };
+
 	bullet->setDirection(sf::Vector2f(NormalizeVector(direction)));
 	bullet->setActive(true);
+}
+
+void Weapon::checkBulletCollision()
+{
+	for (auto b : bulletsPool)
+	{
+		if (b->isActive())
+		{
+			if (worldRef->colidesWithWall(*b))
+				b->setActive(false);
+		}
+	}
 }

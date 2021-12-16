@@ -26,6 +26,8 @@ public:
 	World(int _stride = 32);
 	~World();
 
+	bool colidesWithWall(Entity target);
+
 	void placeDeathZone(int _cx, int _cy);
 	void placeWall(int _cx, int _cy);
 	void eraseMap();

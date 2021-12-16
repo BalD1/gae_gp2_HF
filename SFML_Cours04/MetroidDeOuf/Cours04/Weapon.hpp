@@ -13,7 +13,6 @@ private:
 	std::vector<Bullet*>			bulletsPool;
 	int								poolCount = 10;
 
-	float							fireCD = 0.1f;
 	float							CDtimer = 0;
 
 	float							cx;
@@ -24,7 +23,10 @@ private:
 
 public:
 
+	World*							worldRef = nullptr;
+
 	sf::Vector2f					mousePosition;
+	float							fireCD = 0.2f;
 	int								stride = 32;
 
 	Weapon();
@@ -36,6 +38,7 @@ public:
 
 	void fire();
 	void setBullet(Bullet* bullet);
+	void checkBulletCollision();
 
 	void update(float dt);
 	void render(sf::RenderTarget& target, sf::RenderStates states);
