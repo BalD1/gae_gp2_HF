@@ -30,7 +30,7 @@ void Character::setWorld(World* _worldRef)
 }
 
 
-bool Character::isColliding(float _cx, float _cy)
+bool Character::isCollidingWithWorld(float _cx, float _cy)
 {
 	if (_cx <= 0)
 		return true;
@@ -53,18 +53,25 @@ bool Character::isColliding(float _cx, float _cy)
 	return false;
 }
 
+bool Character::isCollidingSelf(float _cx, float _cy)
+{
+	if (cx == _cx && cy == _cy)
+		return true;
+	return false;
+}
+
 void Character::manageMovements(float dt)
 {
 	// x
 	rx += dx * dt;
 	dx *= frct_x * dt;
 
-	if (isColliding(cx - 1, cy) && rx <= 0.01f)
+	if (isCollidingWithWorld(cx - 1, cy) && rx <= 0.01f)
 	{
 		rx = 0.01f;
 		dx = 0;
 	}
-	if ((isColliding(cx + 1, cy) && rx >= 0.99f) || (isColliding(cx + 2, cy) && rx >= 0.99f))
+	if ((isCollidingWithWorld(cx + 1, cy) && rx >= 0.99f) || (isCollidingWithWorld(cx + 2, cy) && rx >= 0.99f))
 	{
 		rx = 0.99f;
 		dx = 0;
@@ -77,12 +84,12 @@ void Character::manageMovements(float dt)
 	ry += dy * dt;
 	dy *= frict_y * dt;
 
-	if ((isColliding(cx, cy -1) && ry <= 0.01f) || (isColliding(cx + 1, cy - 1) && ry <= 0.01f))
+	if ((isCollidingWithWorld(cx, cy -1) && ry <= 0.01f) || (isCollidingWithWorld(cx + 1, cy - 1) && ry <= 0.01f))
 	{
 		ry = 0.01f;
 		dy = 0;
 	}
-	if ((isColliding(cx, cy + 1) && ry >= 0.01f) || (isColliding(cx + 1, cy + 1) && ry >= 0.01f) )
+	if ((isCollidingWithWorld(cx, cy + 1) && ry >= 0.01f) || (isCollidingWithWorld(cx + 1, cy + 1) && ry >= 0.01f) )
 	{
 		ry = 0.01f;
 		dy = 0;
@@ -96,7 +103,7 @@ void Character::manageMovements(float dt)
 
 void Character::applyGravity(float dt)
 {
-	isGrounded = (isColliding(cx, cy + 1) || isColliding(cx + 1, cy + 1));
+	isGrounded = (isCollidingWithWorld(cx, cy + 1) || isCollidingWithWorld(cx + 1, cy + 1));
 	if (ignoreGravity || isGrounded || characterState == State::Jumping)
 	{
 		fallingSpeed = 0;
@@ -128,10 +135,10 @@ void Character::syncTransform()
 
 void Character::takeDamages(float rawDamages)
 {
-	this->currentHealth -= rawDamages;
-	if (currentHealth <= 0)
+	if (invincibility_Timer <= 0)
 	{
-		kill();
+		this->currentHealth -= rawDamages;
+		invincibility_Timer = invincibility_CD;
 	}
 }
 
@@ -140,13 +147,11 @@ void Character::heal(float rawHeal)
 	this->currentHealth = clamp(this->currentHealth + rawHeal, 0, this->maxHealth);
 }
 
-void Character::kill()
-{
-	delete(this);
-}
-
 void Character::update(float dt)
 {
+	if (invincibility_Timer > 0)
+		invincibility_Timer -= dt;
+
 	applyGravity(dt);
 
 	if (moved)

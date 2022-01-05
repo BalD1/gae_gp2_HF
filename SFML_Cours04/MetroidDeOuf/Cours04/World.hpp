@@ -2,6 +2,8 @@
 #include "Entity.hpp"
 #include "DeathZone.hpp"
 
+class Enemy;
+
 class World
 {
 private:
@@ -21,6 +23,7 @@ public:
 	float						gravity = 0.7f;
 
 	std::vector<Entity*>		entities;
+	std::vector<Entity*>		entitiesToDelete;
 	std::vector<DeathZone*>		deathZones;
 
 	World(int _stride = 32);
@@ -31,6 +34,8 @@ public:
 	void placeDeathZone(int _cx, int _cy);
 	void placeWall(int _cx, int _cy);
 	void eraseMap();
+
+	void deleteEntities();
 
 	void render(sf::RenderTarget& target);
 

@@ -13,7 +13,11 @@ private:
 	// vars
 
 	sf::RenderWindow			window;
+	sf::View*					mainView;
 	sf::Event					gameEvent;
+
+	const int					WIDTH = 800;
+	const int					HEIGHT = 600;
 
 	sf::Font					titleFont;
 	sf::Font					baseFont;
@@ -33,7 +37,6 @@ private:
 
 	AudioManager				audioManager;
 
-	Player*						player;
 	sf::Texture*				textures[2];
 	const char*					texturesNames[2] = { "redTexture", "purpleTexture"};
 	const char*					entities[3] = {"none", "wall", "deathZone"};
@@ -58,6 +61,8 @@ private:
 public:
 
 	// vars
+
+	Player*						player;
 
 	sf::Vector2f				windowSize;
 	sf::Vector2f				windowCenter;
@@ -85,6 +90,8 @@ public:
 
 	void update();
 
+	bool checkIfBulletHitsEnemy(int _cx, int _cy, float damages);
+
 	// keys managers
 	void checkPressedKey(sf::Keyboard::Key key);
 	void checkReleasedKey(sf::Keyboard::Key key);
@@ -95,6 +102,7 @@ public:
 	void charactersImGui(Character* chara, int idx, bool isPlayer = false);
 
 	// renderers
+	void moveCamera(float x, float y);
 	void drawGrid();
 	void render();
 

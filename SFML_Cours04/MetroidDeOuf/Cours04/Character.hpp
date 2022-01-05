@@ -39,7 +39,8 @@ public:
 	void setGravity(float _gravity, bool _ignoreGravity = false);
 	void setWorld(World* _worldRef);
 
-	bool isColliding(float _cx, float _cy);
+	bool isCollidingWithWorld(float _cx, float _cy);
+	bool isCollidingSelf(float _cx, float _cy);
 	void manageMovements(float dt);
 	void applyGravity(float dt);
 	void manageState();
@@ -48,7 +49,6 @@ public:
 	bool alive() { return this->currentHealth > 0; };
 	void takeDamages(float rawDamages);
 	void heal(float rawHeal);
-	void kill();
 
 	void update(float dt);
 	void render(sf::RenderTarget& target);

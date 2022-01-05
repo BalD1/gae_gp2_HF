@@ -30,6 +30,7 @@ Player::Player( std::string _name, float _speed, float _invicibilityCD, float _m
 	syncTransform();
 
 	this->currentWeapon = new Weapon();
+	this->currentWeapon->worldRef = worldRef;
 	this->currentWeapon->stride = _stride;
 }
 
@@ -40,6 +41,8 @@ Player::~Player()
 void Player::setGame(Game* _gameRef)
 {
 	this->gameRef = _gameRef;
+	gameRef->moveCamera(xx, yy);
+	this->currentWeapon->gameRef = gameRef;
 }
 
 void Player::setWorld(World* _worldRef)
@@ -135,7 +138,10 @@ void Player::update(float dt)
 		jumpBehaviour();
 
 	if (moved)
+	{
+		gameRef->moveCamera(this->xx, this->yy);
 		checkIfInDeathZone();
+	}
 
 	this->currentWeapon->update(dt);
 	this->currentWeapon->mousePosition = gameRef->getMousePosition();
@@ -222,6 +228,10 @@ void Player::checkIfInDeathZone()
 
 void Player::takeDamages(float rawDamages)
 {
+	if (invincibility_Timer > 0)
+		return;
+
+	invincibility_Timer = invincibility_CD;
 	this->currentHealth -= rawDamages;
 	if (currentHealth <= 0)
 	{

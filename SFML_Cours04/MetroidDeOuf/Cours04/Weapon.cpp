@@ -1,4 +1,5 @@
 #include "Weapon.hpp"
+#include "Game.hpp"
 
 Weapon::Weapon()
 {
@@ -101,6 +102,8 @@ void Weapon::checkBulletCollision()
 		if (b->isActive())
 		{
 			if (worldRef->colidesWithWall(*b))
+				b->setActive(false);
+			if (gameRef->checkIfBulletHitsEnemy(b->cx, b->cy, 10))
 				b->setActive(false);
 		}
 	}

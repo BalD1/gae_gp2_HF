@@ -5,7 +5,9 @@
 
 void Game::initWindow()
 {
-	this->window.create(sf::VideoMode(1280, 960), "MetroidDeOuf", sf::Style::Close | sf::Style::Titlebar);
+	mainView = new sf::View(sf::FloatRect(0, 0, WIDTH, HEIGHT));
+	this->window.create(sf::VideoMode(WIDTH, HEIGHT), "MetroidDeOuf", sf::Style::Close | sf::Style::Titlebar);
+	this->window.setView(*mainView);
 	window.setVerticalSyncEnabled(true);
 	this->window.setFramerateLimit(60);
 
@@ -81,7 +83,7 @@ Game::Game()
 	this->initMusic();
 	this->initGrid();
 
-	mouseShape = SetCircle(3, sf::Color::Magenta, vectoriToVectorf(sf::Mouse::getPosition(window)));
+	mouseShape = SetCircle(3, sf::Color::Magenta, getMousePosition());
 
 	world->worldInitialized = true;
 	//tmp
@@ -95,7 +97,7 @@ Game::~Game()
 
 void Game::update()
 {
-	mouseShape.setPosition(vectoriToVectorf(sf::Mouse::getPosition(window)));
+	mouseShape.setPosition(getMousePosition());
 	//dt
 	elapsedTime = clock.restart();
 	dt = elapsedTime.asSeconds();
@@ -136,6 +138,24 @@ void Game::update()
 	this->processImGui();
 }
 
+bool Game::checkIfBulletHitsEnemy(int _cx, int _cy, float damages)
+{
+	for (int i = 0; i < enemiesList.size(); i++)
+	{
+		if (enemiesList[i]->cx == _cx && enemiesList[i]->cy == _cy)
+		{
+			enemiesList[i]->takeDamages(damages);
+			if (!enemiesList[i]->alive())
+			{
+				delete(enemiesList[i]);
+				enemiesList.erase(enemiesList.begin() + i);
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
 void Game::checkPressedKey(sf::Keyboard::Key key)
 {
 	switch (key)
@@ -174,12 +194,12 @@ void Game::checkPressedMouse(sf::Keyboard::Key key)
 			{
 				if (strcmp(selectedEntity, "wall") == 0)
 				{
-					sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+					sf::Vector2f mousePosition = getMousePosition();
 					world->placeWall(mousePosition.x / stride, mousePosition.y / stride);
 				}
 				else if (strcmp(selectedEntity, "deathZone") == 0)
 				{
-					sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+					sf::Vector2f mousePosition = getMousePosition();
 					world->placeDeathZone(mousePosition.x / stride, mousePosition.y / stride);
 				}
 			}
@@ -200,8 +220,9 @@ void Game::processImGui()
 		ImGui::Checkbox("Debug mouse", &debugMouse);
 		if (debugMouse)
 		{
-			ImGui::Text("Mouse : { x%d y%d }", sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
-			ImGui::Text("Mouse cell : { dx%d dy%d }", sf::Mouse::getPosition(window).x / stride, sf::Mouse::getPosition(window).y / stride);
+			sf::Vector2f mousePos = getMousePosition();
+			ImGui::Text("Mouse : { x%0.0f y%0.0f }", mousePos.x, mousePos.y);
+			ImGui::Text("Mouse cell : { x%0.0f y%0.0f }", mousePos.x / stride, mousePos.y / stride);
 			float rad = mouseShape.getRadius();
 			if (ImGui::SliderFloat("Shape size", &rad, 1, 10))
 				mouseShape.setRadius(rad);
@@ -225,6 +246,7 @@ void Game::processImGui()
 			int idx = 0;
 
 			charactersImGui((Character*)player, idx, true);
+
 
 			for (Character* c : enemiesList)
 			{
@@ -258,6 +280,7 @@ void Game::processImGui()
 					if (health > 0)
 						c->currentHealth = c->maxHealth = health;
 					c->setWorld(world);
+					c->setGame(this);
 					c->setGravity(gravity);
 					enemiesList.push_back(c);
 				}
@@ -374,6 +397,12 @@ void Game::charactersImGui(Character* chara, int idx, bool isPlayer)
 	}
 }
 
+void Game::moveCamera(float x, float y)
+{
+	this->mainView->setCenter(x, y);
+	this->window.setView(*mainView);
+}
+
 void Game::drawGrid()
 {
 	for (int y = 0; y < gridSize.y * stride; y += stride) 
@@ -394,8 +423,12 @@ void Game::render()
 		window.draw(mouseShape);
 
 	this->world->render(this->window);
+	
+	
 	for (Enemy* e : enemiesList)
 		e->render(this->window);
+		
+
 	this->player->render(this->window);
 
 	if (renderGrid)
@@ -427,7 +460,7 @@ sf::RenderWindow& Game::getWindow()
 
 sf::Vector2f Game::getMousePosition()
 {
-	return vectoriToVectorf(sf::Mouse::getPosition(this->window));
+	return window.mapPixelToCoords(sf::Mouse::getPosition(this->window), *mainView);
 }
 
 void Game::setGameState(GameState _GS)

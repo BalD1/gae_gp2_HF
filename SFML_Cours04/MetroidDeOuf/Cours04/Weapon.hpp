@@ -3,6 +3,8 @@
 #include "Bullet.hpp"
 #include "World.hpp"
 
+class Game;
+
 class Weapon
 {
 private:
@@ -24,6 +26,8 @@ private:
 public:
 
 	World*							worldRef = nullptr;
+
+	Game*							gameRef = nullptr;
 
 	sf::Vector2f					mousePosition;
 	float							fireCD = 0.2f;

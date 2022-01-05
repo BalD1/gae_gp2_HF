@@ -1,4 +1,5 @@
 #include "World.hpp"
+#include "Enemy.hpp"
 
 World::World(int _stride)
 {
@@ -68,6 +69,12 @@ void World::eraseMap()
 	for (DeathZone* dz : deathZones)
 		delete(dz);
 	deathZones.clear();
+}
+
+void World::deleteEntities()
+{
+	for (auto e : entitiesToDelete)
+		delete(e);
 }
 
 void World::render(sf::RenderTarget& target)
