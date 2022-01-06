@@ -16,8 +16,8 @@ private:
 	sf::View*					mainView;
 	sf::Event					gameEvent;
 
-	const int					WIDTH = 800;
-	const int					HEIGHT = 600;
+	const int					WIDTH = 1600;
+	const int					HEIGHT = 900;
 
 	sf::Font					titleFont;
 	sf::Font					baseFont;

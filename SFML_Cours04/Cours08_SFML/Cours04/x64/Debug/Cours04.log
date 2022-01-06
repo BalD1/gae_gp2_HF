@@ -1,0 +1,120 @@
+﻿D:\Visual Studio\2019\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: Le répertoire intermédiaire (x64\Debug\) contient des fichiers partagés provenant d'un autre projet (Cours04.vcxproj, Cours05.vcxproj). Cela peut entraîner un comportement de nettoyage et de regénération incorrect.
+  Enemy.cpp
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.hpp(72,21): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(30,35): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(30,30): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(35,36): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(35,31): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(35,89): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(35,84): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(48,35): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(48,28): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(48,92): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(48,84): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(53,35): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(53,28): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(53,92): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(53,84): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(69,58): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(69,37): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(71,36): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+  Game.cpp
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.hpp(72,21): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(8,53): warning C4244: 'argument' : conversion de 'const int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(8,46): warning C4244: 'argument' : conversion de 'const int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(16,64): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(16,44): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(17,73): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(17,49): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(68,52): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(68,44): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(198,65): warning C4244: 'argument' : conversion de 'T' en 'int', perte possible de données
+          with
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(198,39): warning C4244: 'argument' : conversion de 'T' en 'int', perte possible de données
+          with
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(203,70): warning C4244: 'argument' : conversion de 'T' en 'int', perte possible de données
+          with
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(203,44): warning C4244: 'argument' : conversion de 'T' en 'int', perte possible de données
+          with
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(279,46): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(279,38): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(281,41): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(412,38): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(412,26): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+  MetroidDeOuf.cpp
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.hpp(72,21): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+  Player.cpp
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.hpp(72,21): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Player.cpp(153,2): warning C4065: l'instruction switch contient 'default' mais aucune étiquette 'case'
+  World.cpp
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.hpp(72,21): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.cpp(43,37): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.cpp(43,32): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.cpp(60,33): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.cpp(60,28): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.cpp(142,33): warning C4244: 'argument' : conversion de 'int64_t' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.cpp(142,28): warning C4244: 'argument' : conversion de 'int64_t' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.cpp(147,40): warning C4244: 'argument' : conversion de 'int64_t' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.cpp(147,35): warning C4244: 'argument' : conversion de 'int64_t' en 'float', perte possible de données
+  Génération de code en cours...
+  Cours04.vcxproj -> D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\x64\Debug\MetroidDeOuf.exe
