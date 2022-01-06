@@ -157,3 +157,15 @@ void World::loadMap(const char* filePath, bool eraseCurrentMap)
 	worldInitialized = true;
 }
 
+void Dijkstra::compute()
+{
+	g.clear();
+	int maxCellW = 1600 / 32;
+	int maxCellH = 900 / 32;
+	for (int y = 0; y < maxCellH; ++y)
+	{
+		for (int x = 0; x < maxCellW; ++x)
+		{
+		}
+	}
+}

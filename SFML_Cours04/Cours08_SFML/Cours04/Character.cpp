@@ -187,10 +187,12 @@ void IdleState::onEnter()
 
 	c->texture->loadFromFile("Assets/Graphs/idle.png");
 	c->spr->setTexture(*c->texture);
+	cover_TIMER = cover_CD;
 }
 
 void IdleState::onUpdate(float dt)
 {
+	cover_TIMER -= dt;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
 	{
 		c->setState(new WalkState(c));
@@ -202,10 +204,13 @@ void IdleState::onUpdate(float dt)
 		return;
 	}
 
-	if (c->isCollidingWithWorld(c->cx + 2, c->cy) || c->isCollidingWithWorld(c->cx - 2, c->cy))
+	if (cover_TIMER <= 0)
 	{
-		c->setState(new CoverState(c));
-		return;
+		if (c->isCollidingWithWorld(c->cx + 2, c->cy) || c->isCollidingWithWorld(c->cx - 2, c->cy))
+		{
+			c->setState(new CoverState(c));
+			return;
+		}
 	}
 }
 

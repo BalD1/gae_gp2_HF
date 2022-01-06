@@ -16,6 +16,9 @@ public:
 
 class IdleState : public States
 {
+private: 
+	float				cover_CD = 0.2f;
+	float				cover_TIMER = 0.2f;
 public:
 	IdleState(Character* _c) 
 	{ 
