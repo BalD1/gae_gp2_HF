@@ -2,6 +2,66 @@
 #include "Entity.hpp"
 #include "World.hpp"
 
+class Character;
+
+class States
+{
+public:
+	Character* c = nullptr;
+
+	void checkIfCreated();
+	virtual void onEnter() = 0;
+	virtual void onUpdate(float dt) = 0;
+};
+
+class IdleState : public States
+{
+public:
+	IdleState(Character* _c) 
+	{ 
+		c = _c; 
+	};
+
+	virtual void onEnter();
+	virtual void onUpdate(float dt);
+};
+
+class CoverState : public States
+{
+public:
+	CoverState(Character* _c)
+	{
+		c = _c;
+	};
+
+	virtual void onEnter();
+	virtual void onUpdate(float dt);
+};
+
+class WalkState : public States
+{
+public:
+	WalkState(Character* _c) 
+	{ 
+		c = _c; 
+	};
+
+	virtual void onEnter();
+	virtual void onUpdate(float dt);
+};
+
+class RunState : public States
+{
+public:
+	RunState(Character* _c)
+	{
+		c = _c;
+	}
+
+	virtual void onEnter();
+	virtual void onUpdate(float dt);
+};
+
 class Character : public Entity, public sf::Transformable
 {
 private:
@@ -30,6 +90,8 @@ public:
 	enum				State { Idle, Walking, Jumping, Falling };
 	State				characterState = Idle;
 
+	States*				currentState = new IdleState(this);
+
 	World*				worldRef = nullptr;
 
 	Character(std::string _name, float _cx, float _cy, int _stride);
@@ -44,6 +106,7 @@ public:
 	void manageMovements(float dt);
 	void applyGravity(float dt);
 	void manageState();
+	void setState();
 	void syncTransform();
 
 	bool alive() { return this->currentHealth > 0; };
@@ -52,6 +115,8 @@ public:
 
 	void update(float dt);
 	void render(sf::RenderTarget& target);
+
+	void setState(States* newState);
 
 };
 

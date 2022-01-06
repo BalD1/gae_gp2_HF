@@ -5,24 +5,12 @@
 Player::Player(std::string _name, float _cx, float _cy, int _stride) :
 	Character(_name, _cx, _cy, _stride)
 {
-	this->texture = new sf::Texture();
-	if (!texture->loadFromFile("Assets/Graphs/samus.png"))
-		printf("Samus texture could not be loaded in Assets/Graphs/samus.png");
-
-	this->spr = new sf::Sprite();
-	this->spr->setTexture(*texture);
 	syncTransform();
 }
 
 Player::Player( std::string _name, float _speed, float _invicibilityCD, float _maxHealth, float _cx, float _cy, int _stride) :
 	Character(_name, _speed, _invicibilityCD, _maxHealth, _cx, _cy, _stride)
 {
-	this->texture = new sf::Texture();
-	if (!texture->loadFromFile("Assets/Graphs/samus.png"))
-		printf("Samus texture could not be loaded in Assets/Graphs/samus.png");
-
-	this->spr = new sf::Sprite();
-	this->spr->setTexture(*texture);
 	syncTransform();
 }
 
@@ -130,14 +118,6 @@ void Player::update(float dt)
 
 void Player::manageInputs()
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-	{
-		dx = -speed;
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-	{
-		dx = speed;
-	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 		if (characterState != State::Falling)
 			jump();

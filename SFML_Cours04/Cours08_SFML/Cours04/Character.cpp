@@ -4,6 +4,7 @@ Character::Character(std::string _name, float _cx, float _cy, int _stride) :
 	Entity(_cx, _cy, _stride)
 {
 	this->name = _name;
+	setState(new IdleState(this));
 }
 
 Character::Character(std::string _name, float _speed, float _invicibilityCD, float _maxHealth, float _cx, float _cy, int _stride) :
@@ -13,6 +14,8 @@ Character::Character(std::string _name, float _speed, float _invicibilityCD, flo
 	this->speed = _speed;
 	this->invincibility_CD = _invicibilityCD;
 	this->maxHealth = this->currentHealth = _maxHealth;
+
+	setState(new IdleState(this));
 }
 
 Character::~Character()
@@ -32,15 +35,6 @@ void Character::setWorld(World* _worldRef)
 
 bool Character::isCollidingWithWorld(float _cx, float _cy)
 {
-	if (_cx <= 0)
-		return true;
-	if (_cy <= 0)
-		return true;
-	if (_cx >= 1280 / stride)
-		return true;
-	if (_cy >= 960 / stride)
-		return true;
-
 	if (worldRef != nullptr)
 	{
 		for (size_t i = 0; i < worldRef->entities.size(); ++i)
@@ -124,6 +118,7 @@ void Character::manageState()
 		characterState = State::Jumping;
 
 	moved = (!characterState == State::Idle);
+
 }
 
 void Character::syncTransform()
@@ -158,6 +153,8 @@ void Character::update(float dt)
 		manageMovements(dt);
 
 	manageState();
+
+	currentState->onUpdate(dt);
 }
 
 void Character::render(sf::RenderTarget& target)
@@ -165,4 +162,134 @@ void Character::render(sf::RenderTarget& target)
 	sf::RenderStates states;
 	states.transform *= getTransform();
 	target.draw(*this->spr, states);
+}
+
+void Character::setState(States* newState)
+{
+	if (currentState)
+		delete currentState;
+
+	currentState = newState;
+	currentState->onEnter();
+}
+
+void States::checkIfCreated()
+{
+	if (c->texture == nullptr)
+		c->texture = new sf::Texture();
+	if (c->spr == nullptr)
+		c->spr = new sf::Sprite();
+}
+
+void IdleState::onEnter()
+{
+	checkIfCreated();
+
+	c->texture->loadFromFile("Assets/Graphs/idle.png");
+	c->spr->setTexture(*c->texture);
+}
+
+void IdleState::onUpdate(float dt)
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+	{
+		c->setState(new WalkState(c));
+		return;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	{
+		c->setState(new WalkState(c));
+		return;
+	}
+
+	if (c->isCollidingWithWorld(c->cx + 2, c->cy) || c->isCollidingWithWorld(c->cx - 2, c->cy))
+	{
+		c->setState(new CoverState(c));
+		return;
+	}
+}
+
+void WalkState::onEnter()
+{
+	checkIfCreated();
+
+	c->texture->loadFromFile("Assets/Graphs/walk.png");
+	c->spr->setTexture(*c->texture);
+}
+
+void WalkState::onUpdate(float dt)
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+	{
+		c->dx = c->speed * -1;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	{
+		c->dx = c->speed;
+	}
+	if (-0.01f < c->dx && c->dx < 0.01f)
+	{
+		c->setState(new IdleState(c));
+		return;
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+	{
+		c->setState(new RunState(c));
+		return;
+	}
+		
+}
+
+void RunState::onEnter()
+{
+	checkIfCreated();
+
+	c->texture->loadFromFile("Assets/Graphs/run.png");
+	c->spr->setTexture(*c->texture);
+}
+
+void RunState::onUpdate(float dt)
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+	{
+		c->dx = c->speed * -2;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	{
+		c->dx = c->speed * 2;
+	}
+	if (-0.01f < c->dx && c->dx < 0.01f)
+	{
+		c->setState(new IdleState(c));
+		return;
+	}
+
+	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+	{
+		c->setState(new WalkState(c));
+		return;
+	}
+}
+
+void CoverState::onEnter()
+{
+	checkIfCreated();
+
+	c->texture->loadFromFile("Assets/Graphs/cover.png");
+	c->spr->setTexture(*c->texture);
+}
+
+void CoverState::onUpdate(float dt)
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+	{
+		c->setState(new WalkState(c));
+		return;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	{
+		c->setState(new WalkState(c));
+		return;
+	}
 }
