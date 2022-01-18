@@ -166,6 +166,9 @@ void Game::checkPressedKey(sf::Keyboard::Key key)
 		case sf::Keyboard::Space:
 			player->manageEventInputs(key);
 			break;
+		case sf::Keyboard::Return:
+			World::dij.compute(sf::Vector2i(player->cx, player->cy));
+			break;
 
 		default:
 			break;
@@ -204,6 +207,34 @@ void Game::checkPressedMouse(sf::Keyboard::Key key)
 				}
 			}
 		break;
+		case sf::Mouse::Right:
+			sf::Vector2f m = getMousePosition();
+
+			auto& p = World::currentPath;
+			World::currentPath.clear();
+
+			sf::Vector2i start = sf::Vector2i(player->cx, player->cy);
+			sf::Vector2i end = sf::Vector2i(m.x, m.y);
+
+			sf::Vector2i cur = end;
+			World::currentPath.push_back(end);
+			while (cur != start)
+			{
+				auto pos = World::dij.pr.find(cur);
+				if (pos != World::dij.pr.end())
+				{
+					cur = World::dij.pr[cur];
+					World::currentPath.push_back(cur);
+				}
+				else
+				{
+					World::currentPath.clear();
+					break;
+				}
+			}
+			std::reverse(p.begin(), p.end());
+
+			break;
 	}
 }
 

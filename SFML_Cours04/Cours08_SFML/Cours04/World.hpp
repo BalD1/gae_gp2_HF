@@ -1,7 +1,11 @@
 #pragma once
 #include "Entity.hpp"
 #include "DeathZone.hpp"
+#include <vector>
+#include <iostream>
+#include <string>
 #include <unordered_map>
+#include <optional>
 
 namespace std {
 	template <>
@@ -17,10 +21,23 @@ namespace std {
 
 class Dijkstra {
 public:
-	std::unordered_map<sf::Vector2i, bool>			g;
-	std::unordered_map<sf::Vector2i, float>			dist;
 
-	void compute();
+	float length(const sf::Vector2i& s);
+
+	std::vector<Entity*> map;
+
+	std::unordered_map<sf::Vector2i, bool>			grid;
+	std::unordered_map<sf::Vector2i, float>			distance;
+	std::unordered_map<sf::Vector2i, sf::Vector2i>	pr;
+
+	std::vector<sf::Vector2i> queue;
+
+	bool isColliding(int _cx, int _cy);
+
+	void init(const sf::Vector2i& start);
+	void relax(sf::Vector2i& s1, sf::Vector2i& s2);
+	std::optional<sf::Vector2i> findMin(std::vector<sf::Vector2i>& q);
+	void compute(const sf::Vector2i& start);
 };
 
 class Enemy;
@@ -29,7 +46,6 @@ class World
 {
 private:
 
-	static Dijkstra				dij;
 
 	sf::Texture*				wallTexture = nullptr;
 	sf::Texture*				deathzoneTexture = nullptr;
@@ -40,12 +56,16 @@ private:
 
 public:
 
+	static std::vector<sf::Vector2i> currentPath;
+	static Dijkstra				dij;
+
 	bool						worldInitialized = false;
 	bool						renderDeathZones = false;
 
 	float						gravity = 0.7f;
 
 	std::vector<Entity*>		entities;
+	static std::vector<Entity*>		walls;
 	std::vector<Entity*>		entitiesToDelete;
 	std::vector<DeathZone*>		deathZones;
 

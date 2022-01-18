@@ -155,6 +155,32 @@ void Character::update(float dt)
 	manageState();
 
 	currentState->onUpdate(dt);
+
+	if (target != std::nullopt || curPath.size())
+	{
+		if (std::nullopt != target)
+		{
+			sf::Vector2f tgtF(target->x * stride, target->y * stride);
+			if (cx == target->x && cy == target->x)
+			{
+				target = std::nullopt;
+			}
+			else
+			{
+				float diffX = (cx - target->x);
+				float diffY = (cy - target->y);
+				float angle = atan2(diffY, diffX);
+				dx = cos(angle) * 3;
+				dy = sin(angle) * 3;
+			}
+			return;
+		}
+		else
+		{
+			target = curPath[0];
+			curPath.erase(curPath.begin());
+		}
+	}
 }
 
 void Character::render(sf::RenderTarget& target)

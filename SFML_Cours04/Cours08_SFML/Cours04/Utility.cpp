@@ -134,3 +134,8 @@ float clamp(float v, const float min, const float max)
 		v = min;
 	return v;
 }
+
+float fequal(float a, float b)
+{
+	return 0.0f;
+}

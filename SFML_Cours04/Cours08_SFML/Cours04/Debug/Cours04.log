@@ -1,2 +1,242 @@
-﻿  Cours04.cpp
-sfml-graphics-d.lib(sfml-graphics-d-2.dll) : fatal error LNK1112: type d'ordinateur module 'x64' en conflit avec le type d'ordinateur cible 'x86'
+﻿D:\Visual Studio\2019\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: Le répertoire intermédiaire (Debug\) contient des fichiers partagés provenant d'un autre projet (Cours04.vcxproj). Cela peut entraîner un comportement de nettoyage et de regénération incorrect.
+  AudioManager.cpp
+  Character.cpp
+  The contents of <optional> are available only with C++17 or later.
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,7): error C2039: 'optional' n'est pas membre de 'std'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(10): message : voir la déclaration de 'std'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,15): error C2143: erreur de syntaxe : absence de ';' avant '<'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,15): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,67): error C2238: jetons inattendus avant ';'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Character.cpp(63,35): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Character.cpp(63,30): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Character.cpp(68,36): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Character.cpp(68,31): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Character.cpp(68,89): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Character.cpp(68,84): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Character.cpp(81,35): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Character.cpp(81,28): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Character.cpp(81,91): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Character.cpp(81,83): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Character.cpp(86,35): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Character.cpp(86,28): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Character.cpp(86,92): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Character.cpp(86,84): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Character.cpp(100,44): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Character.cpp(100,37): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Character.cpp(100,84): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Character.cpp(100,76): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Character.cpp(209,43): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Character.cpp(209,37): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Character.cpp(209,88): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Character.cpp(209,82): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+  DeathZone.cpp
+  Enemy.cpp
+  The contents of <optional> are available only with C++17 or later.
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,7): error C2039: 'optional' n'est pas membre de 'std'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(10): message : voir la déclaration de 'std'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,15): error C2143: erreur de syntaxe : absence de ';' avant '<'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,15): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,67): error C2238: jetons inattendus avant ';'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.hpp(72,21): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(30,35): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(30,30): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(35,36): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(35,31): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(35,89): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(35,84): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(48,35): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(48,28): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(48,92): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(48,84): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(53,35): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(53,28): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(53,92): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(53,84): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(69,58): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(69,37): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Enemy.cpp(71,36): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+  Game.cpp
+  The contents of <optional> are available only with C++17 or later.
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,7): error C2039: 'optional' n'est pas membre de 'std'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(10): message : voir la déclaration de 'std'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,15): error C2143: erreur de syntaxe : absence de ';' avant '<'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,15): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,67): error C2238: jetons inattendus avant ';'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.hpp(72,21): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(8,53): warning C4244: 'argument' : conversion de 'const int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(8,46): warning C4244: 'argument' : conversion de 'const int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(16,64): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(16,44): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(17,73): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(17,49): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(68,52): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(68,44): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(143,20): warning C4018: '<' : incompatibilité signed/unsigned
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(201,65): warning C4244: 'argument' : conversion de 'T' en 'int', perte possible de données
+          with
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(201,39): warning C4244: 'argument' : conversion de 'T' en 'int', perte possible de données
+          with
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(206,70): warning C4244: 'argument' : conversion de 'T' en 'int', perte possible de données
+          with
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(206,44): warning C4244: 'argument' : conversion de 'T' en 'int', perte possible de données
+          with
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(282,46): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(282,38): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(284,41): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(415,38): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.cpp(415,26): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+  MetroidDeOuf.cpp
+  The contents of <optional> are available only with C++17 or later.
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,7): error C2039: 'optional' n'est pas membre de 'std'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(10): message : voir la déclaration de 'std'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,15): error C2143: erreur de syntaxe : absence de ';' avant '<'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,15): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,67): error C2238: jetons inattendus avant ';'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.hpp(72,21): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+  Entity.cpp
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Entity.cpp(11,13): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Entity.cpp(12,13): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Entity.cpp(19,13): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Entity.cpp(20,13): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+  imgui-SFML.cpp
+  imgui.cpp
+  imgui_draw.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
+  Player.cpp
+  The contents of <optional> are available only with C++17 or later.
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,7): error C2039: 'optional' n'est pas membre de 'std'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(10): message : voir la déclaration de 'std'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,15): error C2143: erreur de syntaxe : absence de ';' avant '<'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,15): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,67): error C2238: jetons inattendus avant ';'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.hpp(72,21): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Player.cpp(133,2): warning C4065: l'instruction switch contient 'default' mais aucune étiquette 'case'
+  Shape.cpp
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Shape.cpp(6,23): warning C4244: 'argument' : conversion de 'const int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Shape.cpp(14,23): warning C4244: 'argument' : conversion de 'const int' en 'float', perte possible de données
+  stdafx.cpp
+  Utility.cpp
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Utility.cpp(83,13): warning C4244: 'return' : conversion de 'double' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Utility.cpp(107,28): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Utility.cpp(107,23): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Utility.cpp(112,28): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Utility.cpp(112,23): warning C4244: 'argument' : conversion de 'T' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Utility.cpp(126,13): warning C4244: 'return' : conversion de 'double' en 'float', perte possible de données
+  World.cpp
+  The contents of <optional> are available only with C++17 or later.
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,7): error C2039: 'optional' n'est pas membre de 'std'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(10): message : voir la déclaration de 'std'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,15): error C2143: erreur de syntaxe : absence de ';' avant '<'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,15): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(38,67): error C2238: jetons inattendus avant ';'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\Game.hpp(72,21): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.cpp(45,37): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.cpp(45,32): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.cpp(62,33): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.cpp(62,28): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.cpp(144,33): warning C4244: 'argument' : conversion de 'int64_t' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.cpp(144,28): warning C4244: 'argument' : conversion de 'int64_t' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.cpp(149,40): warning C4244: 'argument' : conversion de 'int64_t' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.cpp(149,35): warning C4244: 'argument' : conversion de 'int64_t' en 'float', perte possible de données
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.cpp(195,6): error C2039: 'optional' n'est pas membre de 'std'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(10): message : voir la déclaration de 'std'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.cpp(195,14): error C2143: erreur de syntaxe : absence de ';' avant '<'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.cpp(195,14): error C4430: spécificateur de type manquant - int est pris en compte par défaut. Remarque : C++ ne prend pas en charge int par défaut
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.cpp(195,39): error C2039: 'findMin' n'est pas membre de 'Dijkstra'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.hpp(22): message : voir la déclaration de 'Dijkstra'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.cpp(196,1): error C2143: erreur de syntaxe : absence de ';' avant '{'
+D:\GitHub\Cours2eme\gae_gp2_HF\SFML_Cours04\Cours08_SFML\Cours04\World.cpp(196,1): error C2447: '{' : en-tête de fonction manquant (liste formelle à l'ancien format ?)
+  Génération de code en cours...

@@ -31,3 +31,5 @@ sf::Vector2i vectorfToVectori(sf::Vector2f v);
 float catmul(float p0, float p1, float p2, float p3, float t);
 
 float clamp(float v, const float min, const float max);
+
+float fequal(float a, float b);

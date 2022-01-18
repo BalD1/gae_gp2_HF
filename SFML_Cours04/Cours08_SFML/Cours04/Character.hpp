@@ -88,7 +88,10 @@ public:
 
 	bool				moved = false;
 	bool				isGrounded = false;
-	bool				ignoreGravity = false;
+	bool				ignoreGravity = true;
+
+	std::vector<sf::Vector2i>	curPath;
+	std::optional<sf::Vector2i> target;
 
 	enum				State { Idle, Walking, Jumping, Falling };
 	State				characterState = Idle;
