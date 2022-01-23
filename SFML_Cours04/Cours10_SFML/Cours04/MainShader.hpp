@@ -2,11 +2,14 @@
 #include "stdafx.hpp"
 #include "SFML/Graphics/Glsl.hpp"
 #include "SFML/Graphics/Shader.hpp"
+#include "HotReloadShader.hpp"
 
 class MainShader
 {
 private:
 
+	sf::Sprite*						spr = nullptr;
+	sf::Texture*					texture = nullptr;
 	sf::RectangleShape*				rect = nullptr;
 	sf::Shader*						s_mainShader;
 
@@ -21,6 +24,12 @@ private:
 	float							imColTransG[4] = { 0,1,0,0 };
 	float							imColTransB[4] = { 0,0,1,0 };
 	float							imColTransA[4] = { 0,0,0,1 };
+
+	sf::Vector2f					imMovement = { 1,1 };
+	sf::Vector2f					dispClamp = { 10,10 };
+	sf::Vector2f					imBlur = { 0,0 };
+	float							imMovementSpeed = 0;
+	float							imDisplacement = 0;
 	
 
 	sf::Glsl::Vec4					colAdd = sf::Glsl::Vec4(0,0,0,0);
@@ -36,7 +45,15 @@ private:
 
 	sf::Glsl::Mat4					colTrans = sf::Glsl::Mat4(id);
 
+	HotReloadShader					s_reload;
+
 public:
+
+	float							sTime = -5;
+	float							sTimeRange = 5;
+	float							sTimeDirection = 1;
+	float							sTimeSpeed = 0;
+	sf::Vector2f					playerPos;
 
 	MainShader();
 	~MainShader();
@@ -45,6 +62,9 @@ public:
 
 	void im();
 
+	void update(float dt);
 	void render(sf::RenderTarget& target);
+
+	void clamp(float& f, float min, float max);
 };
 

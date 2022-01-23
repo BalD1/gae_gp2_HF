@@ -26,7 +26,7 @@ void Game::closeWindow()
 
 void Game::initPlayer()
 {
-	this->player = new Player("Samus", 1,28, stride);
+	this->player = new Player("Samus", 8,1, stride);
 	this->player->setWorld(world);
 	this->player->setGame(this);
 	this->player->setGravity(gravity);
@@ -106,6 +106,9 @@ void Game::update()
 	{
 		player->update(dt);
 	}
+
+	m_shader->playerPos = { this->player->xx, this->player->yy };
+	m_shader->update(dt);
 
 	//events
 	while (this->window.pollEvent(this->gameEvent))
